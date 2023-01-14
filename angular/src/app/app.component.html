@@ -1,8 +1,25 @@
-<div class="header">
+<!-- banner bg main start -->
+<div class="banner_bg_main">
+  <!-- header section start -->
+  <div class="header_section padding_10">
+    <a *ngIf="userLogged !== true" routerLink="sign-in" routerLinkActive="active">
+      <i class="fa fa-user" aria-hidden="true"></i>
+      <span class="padding_10">Zaloguj się</span></a>
 
+    <a *ngIf="userLogged === true" routerLink="" routerLinkActive="active" (click)="logOut()">
+      <i class="fa fa-power-off" aria-hidden="true"></i>
+      <span class="padding_10">Wyloguj się</span></a>
+  </div>
+  <!-- header section end -->
+  <!-- banner section start -->
+  <div class="banner_section layout_padding">
+  </div>
+  <!-- banner section end -->
 </div>
-<div class="container">
+<!-- banner bg main end -->
+<div class="router_section">
   <router-outlet></router-outlet>
 </div>
-<div class="footer">
+<div class="footer_section">
+  <p class="footer_text">2023</p>
 </div>

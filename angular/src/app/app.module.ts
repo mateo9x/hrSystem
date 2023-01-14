@@ -14,10 +14,12 @@ import {AppInterceptor} from "./components/authentication/app-interceptor";
 import {AnonymousUserGuard} from "./components/authentication/anonymous-user-guard";
 import {LoginGuard} from "./components/authentication/login-guard";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {InfoComponent} from "./components/info/info.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    InfoComponent,
     SignInComponent,
     PageNotFoundComponent
   ],

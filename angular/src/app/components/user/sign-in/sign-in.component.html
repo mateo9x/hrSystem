@@ -1,14 +1,30 @@
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>login</mat-label>
-  <input matInput [(ngModel)]="username">
-</mat-form-field>
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>hasło</mat-label>
-  <input matInput [(ngModel)]="password">
-</mat-form-field>
-<mat-checkbox class="example-margin"
-              [(ngModel)]="rememberMe">
-</mat-checkbox>
-<button mat-raised-button color="primary" (click)="signInUser()">Zaloguj się</button>
-<button mat-raised-button color="primary" (click)="signUp()">Zarejestruj się</button>
-<a href (click)="resetPassword()">Nie pamiętasz hasła?</a>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <h2 class="active"> Zaloguj się </h2>
+
+    <form>
+      <mat-form-field class="fadeIn second" appearance="fill">
+        <mat-label>login</mat-label>
+        <input matInput [(ngModel)]="username">
+      </mat-form-field>
+      <mat-form-field class="fadeIn third" appearance="fill">
+        <mat-label>hasło</mat-label>
+        <input matInput [(ngModel)]="password">
+      </mat-form-field>
+      <mat-checkbox class="fadeIn third"
+                    [(ngModel)]="rememberMe">
+      </mat-checkbox>
+      <button (click)="signInUser()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Zaloguj się
+      </button>
+    </form>
+
+    <div id="formFooter">
+      <button mat-raised-button color="primary" (click)="signUp()" class="fadeIn fourth submit-button"
+              [disabled]="username === null && password === null">Zarejestruj się
+      </button>
+      <br>
+      <a (click)="resetPassword()" class="fadeIn fourth underlineHover">Nie pamiętasz hasła?</a>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<form class="form" #form="ngForm" novalidate>
+
+  <h1 class="input-data" style="margin-bottom:3%">Rejestracja</h1>
+
+  <div class="input-data">
+    <label>Imię</label>
+    <input type="text" name="firstName" [(ngModel)]="user.firstName"/>
+  </div>
+  <div class="input-data">
+    <label>Nazwisko</label>
+    <input type="text" name="lastName" [(ngModel)]="user.lastName"/>
+  </div>
+  <div class="input-data">
+    <label>E-mail</label>
+    <input type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
+           required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
+    <span *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+  </div>
+  <div class="input-data">
+    <label>Hasło</label>
+    <input type="password" name="password" style="display:inline-block" [(ngModel)]="user.password"
+           min="5" required #password="ngModel"/>
+    <span *ngIf="password.errors">Hasło musi mieć min 5 znaków</span>
+  </div>
+  <div class="input-data">
+    <label>Potwierdź hasło</label>
+    <input type="password" name="password2"
+           [(ngModel)]="user.password2" #password2="ngModel" min="5"/>
+    <span *ngIf="password2.errors || user.password && user.password !== user.password2 ">Hasło muszą do siebie pasować</span>
+  </div>
+  <div class="input-data">
+    <label>Ulica</label>
+    <input type="text" name="street" [(ngModel)]="user.street"/>
+  </div>
+  <div class="input-data">
+    <label>Nr domu</label>
+    <input type="text" name="streetNumber" [(ngModel)]="user.streetNumber"/>
+  </div>
+  <div class="input-data">
+    <label>Miasto</label>
+    <input type="text" name="city" [(ngModel)]="user.city"/>
+  </div>
+  <div class="buttons">
+    <button type="submit" name="signup_submit" class="submit-button" (click)="clear()"
+            style="margin-right:10%">Wyczyść
+    </button>
+    <button type="submit" name="clear_submit" class="submit-button" (click)="register()"
+            [disabled]="form.invalid || user.password != user.password2">Zarejestruj
+    </button>
+  </div>
+</form>

@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
   }
 
   signUp() {
-    this.router.navigate(['sign-up-user']);
+    this.router.navigate(['sign-up']);
   }
 
   resetPassword() {

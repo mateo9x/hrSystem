@@ -9,7 +9,7 @@ import {AppComponent} from "../../../app.component";
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  username: string;
+  email: string;
   password: string;
   rememberMe: boolean;
 
@@ -21,9 +21,9 @@ export class SignInComponent implements OnInit {
   }
 
   signInUser() {
-    if (this.username !== undefined && this.password !== undefined) {
+    if (this.email !== undefined && this.password !== undefined) {
       const userObj = {
-        username: this.username,
+        email: this.email,
         password: this.password,
         rememberMe: this.rememberMe
       }

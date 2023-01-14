@@ -1,4 +1,4 @@
-# HRSystem
+# HR System
 Application made for people working in HR and also for workers to manage their time
 in their jobs.
 Application made for my personal skills development.  

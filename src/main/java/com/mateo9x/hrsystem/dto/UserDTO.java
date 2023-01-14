@@ -1,4 +1,4 @@
-package com.mateo9x.employeemanagement.dto;
+package com.mateo9x.hrsystem.dto;
 
 import jakarta.validation.constraints.Size;
 

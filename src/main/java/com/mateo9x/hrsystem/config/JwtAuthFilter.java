@@ -1,6 +1,6 @@
-package com.mateo9x.employeemanagement.config;
+package com.mateo9x.hrsystem.config;
 
-import com.mateo9x.employeemanagement.authentication.UserDetailsService;
+import com.mateo9x.hrsystem.authentication.UserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;

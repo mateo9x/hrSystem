@@ -1,4 +1,4 @@
-package com.mateo9x.employeemanagement.config;
+package com.mateo9x.hrsystem.config;
 
 import java.util.List;
 

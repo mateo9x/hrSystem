@@ -1,6 +1,6 @@
-package com.mateo9x.employeemanagement.authentication;
+package com.mateo9x.hrsystem.authentication;
 
-import com.mateo9x.employeemanagement.domain.User;
+import com.mateo9x.hrsystem.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

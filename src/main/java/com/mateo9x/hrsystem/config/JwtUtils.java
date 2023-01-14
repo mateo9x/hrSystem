@@ -1,4 +1,4 @@
-package com.mateo9x.employeemanagement.config;
+package com.mateo9x.hrsystem.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

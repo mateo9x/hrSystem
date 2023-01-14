@@ -1,7 +1,7 @@
-package com.mateo9x.employeemanagement.mapper;
+package com.mateo9x.hrsystem.mapper;
 
-import com.mateo9x.employeemanagement.domain.User;
-import com.mateo9x.employeemanagement.dto.UserDTO;
+import com.mateo9x.hrsystem.domain.User;
+import com.mateo9x.hrsystem.dto.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

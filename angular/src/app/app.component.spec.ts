@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'employeeManagementAngular'`, () => {
+  it(`should have as title 'hrSystemAngular'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('employeeManagementAngular');
+    expect(app.title).toEqual('hrSystemAngular');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('employeeManagementAngular app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('hrSystemAngular app is running!');
   });
 });

@@ -1,6 +1,6 @@
-package com.mateo9x.employeemanagement.authentication;
+package com.mateo9x.hrsystem.authentication;
 
-import com.mateo9x.employeemanagement.repository.UserRepository;
+import com.mateo9x.hrsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,7 +1,7 @@
-package com.mateo9x.employeemanagement.authentication;
+package com.mateo9x.hrsystem.authentication;
 
-import com.mateo9x.employeemanagement.config.AdditionalAppProperties;
-import com.mateo9x.employeemanagement.config.JwtUtils;
+import com.mateo9x.hrsystem.config.AdditionalAppProperties;
+import com.mateo9x.hrsystem.config.JwtUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

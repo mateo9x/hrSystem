@@ -1,4 +1,4 @@
-package com.mateo9x.employeemanagement.domain;
+package com.mateo9x.hrsystem.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;

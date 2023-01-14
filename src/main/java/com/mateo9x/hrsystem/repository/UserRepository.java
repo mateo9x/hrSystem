@@ -1,6 +1,6 @@
-package com.mateo9x.employeemanagement.repository;
+package com.mateo9x.hrsystem.repository;
 
-import com.mateo9x.employeemanagement.domain.User;
+import com.mateo9x.hrsystem.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

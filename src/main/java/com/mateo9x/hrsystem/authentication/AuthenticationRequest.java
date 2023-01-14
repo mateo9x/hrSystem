@@ -1,4 +1,4 @@
-package com.mateo9x.employeemanagement.authentication;
+package com.mateo9x.hrsystem.authentication;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

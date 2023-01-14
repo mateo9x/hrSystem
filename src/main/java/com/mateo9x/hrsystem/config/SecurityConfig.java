@@ -1,6 +1,6 @@
-package com.mateo9x.employeemanagement.config;
+package com.mateo9x.hrsystem.config;
 
-import com.mateo9x.employeemanagement.authentication.UserDetailsService;
+import com.mateo9x.hrsystem.authentication.UserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

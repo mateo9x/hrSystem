@@ -20,4 +20,8 @@ public class AdditionalAppProperties {
     @NotNull
     @Value("${jwt.expirationTime.rememberMe}")
     private Integer jwtExpirationTimeRememberMe;
+
+    @NotNull
+    @Value("${frontend.url}")
+    private String frontendUrl;
 }

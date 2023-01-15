@@ -1,4 +1,4 @@
-# HRSystem
+# HR System
 Application made for people working in HR and also for workers to manage their time
 in their jobs.
 Application made for my personal skills development.  
@@ -39,5 +39,6 @@ Spring:
 > ${DATABASE_PASSWORD},   
 > ${GMAIL_USER},  
 > ${GMAIL_PASSWORD}
+> ${FRONTEND_URL}
 >
 > Then simply run :)

@@ -3,18 +3,18 @@ package com.mateo9x.hrsystem.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "users")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "first_name")
@@ -46,13 +46,14 @@ public class User {
     private String streetNumber;
 
     @Column(name = "postal_code")
+    @Size(min= 6, max=6)
     private String postalCode;
 
     @Column(name = "city")
     private String city;
 
     @Column(name = "phone_number")
-    @Size(min = 9, max = 9)
+    @Range(min = 9, max = 9)
     private Integer phoneNumber;
 
 }

@@ -1,9 +1,15 @@
 package com.mateo9x.hrsystem.dto;
 
 import jakarta.validation.constraints.Size;
+import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
 import java.util.List;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class UserDTO {
 
     private Long id;
@@ -27,10 +33,11 @@ public class UserDTO {
 
     private String streetNumber;
 
+    @Size(min= 6, max=6)
     private String postalCode;
 
     private String city;
 
-    @Size(min = 9, max = 9)
+    @Range(min = 9, max = 9)
     private Integer phoneNumber;
 }

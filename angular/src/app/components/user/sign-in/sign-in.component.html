@@ -2,25 +2,27 @@
   <div id="formContent">
     <h2 class="active"> Zaloguj się </h2>
 
-    <form>
+    <form class="form" #form="ngForm" novalidate>
       <mat-form-field class="fadeIn second" appearance="fill">
-        <mat-label>login</mat-label>
-        <input matInput [(ngModel)]="username">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
       </mat-form-field>
       <mat-form-field class="fadeIn third" appearance="fill">
-        <mat-label>hasło</mat-label>
-        <input matInput [(ngModel)]="password">
+        <mat-label>Hasło</mat-label>
+        <input matInput [(ngModel)]="password" name="password" type="password" required>
       </mat-form-field>
-      <mat-checkbox class="fadeIn third"
-                    [(ngModel)]="rememberMe">
+      <mat-checkbox class="fadeIn third" color="primary"
+                    [(ngModel)]="rememberMe" name="rememberMe">Zapamiętaj mnie!
       </mat-checkbox>
-      <button (click)="signInUser()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Zaloguj się
-      </button>
     </form>
 
+    <button mat-raised-button color="primary" (click)="signInUser()" class="fadeIn fourth" style="margin-bottom:5%"
+            [disabled]="form.invalid">
+      Zaloguj się
+    </button>
+
     <div id="formFooter">
-      <button mat-raised-button color="primary" (click)="signUp()" class="fadeIn fourth submit-button"
-              [disabled]="username === null && password === null">Zarejestruj się
+      <button mat-raised-button color="primary" (click)="signUp()" class="fadeIn fourth">Zarejestruj się
       </button>
       <br>
       <a (click)="resetPassword()" class="fadeIn fourth underlineHover">Nie pamiętasz hasła?</a>

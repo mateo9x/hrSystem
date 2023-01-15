@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {User} from 'src/app/components/user/user.model';
-import {UserService} from 'src/app/components/user/user.service';
+import {User} from 'src/app/models/user.model';
+import {UserService} from 'src/app/services/user.service';
+import {SnackBarService} from "../../../services/material/snackbar.service";
 
 @Component({
   selector: 'sign-up',
@@ -15,7 +16,7 @@ export class SignUpComponent implements OnInit {
   loading: boolean;
   users: User[];
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
@@ -33,18 +34,14 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
-    this.userService.saveUser(this.user).subscribe((response) => {
-      if (response !== null) {
-        // this.toastService.createSuccessToast('Utworzono użytkownika pomyślnie');
-        this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
-        });
+    this.userService.createUser(this.user).subscribe({
+      next: () => {
+        this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie');
         this.router.navigate(['']);
-      } else {
-        // this.toastService.createErrorToast('Użytkownik o takim loginie/e-mail-u już istnieje!');
+      },
+      error: (errorResponse) => {
+        this.snackBarService.openSnackBar(errorResponse.error.message);
       }
-
-    }, (error) => {
-      // this.toastService.createErrorToast('Użytkownik nie został utworzony');
     });
   }
 

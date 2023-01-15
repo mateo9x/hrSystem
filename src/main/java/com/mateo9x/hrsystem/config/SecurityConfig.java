@@ -31,14 +31,16 @@ public class SecurityConfig {
         return http
                 .cors()
                 .and()
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf()
+                .disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/authenticate")
-                        .permitAll()
-                        .requestMatchers("/api/**")
+                        .requestMatchers("/authenticate/**", "/api/users/create-user/**",
+                                "/api/users/reset-password/**", "api/users/email/**",
+                                "/api/users/password/token/**", "/api/users/token-user/**")
                         .permitAll()
                         .anyRequest()
-                        .authenticated())
+                        .authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)

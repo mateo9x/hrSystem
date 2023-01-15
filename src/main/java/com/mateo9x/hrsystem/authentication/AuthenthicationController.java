@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthenthicationController {
@@ -31,7 +31,7 @@ public class AuthenthicationController {
 
     private final AdditionalAppProperties appProperties;
 
-    @PostMapping("/authenticate")
+    @PostMapping("authenticate")
     public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response) {
         try {
             authenticationManager

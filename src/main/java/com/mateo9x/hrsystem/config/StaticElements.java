@@ -33,8 +33,8 @@ public class StaticElements implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*").allowedMethods("*").maxAge(3600)
-                .allowCredentials(false);
+        registry.addMapping("/**").allowedMethods("*").maxAge(3600)
+                .allowCredentials(true).allowedOrigins("http://localhost:4200");
     }
 
     @Override

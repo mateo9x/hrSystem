@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
@@ -52,10 +52,6 @@ export class UserService {
 
   public getByUserToken(user: User) {
     return this.http.post<User>(`${this.userUrl}/token-user`, user);
-  }
-
-  public doesUserWithEmailExists(email: String): Observable<boolean> {
-    return this.http.get<any>(`${this.userUrl}/mail/${email}`);
   }
 
 }

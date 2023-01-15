@@ -2,7 +2,6 @@ package com.mateo9x.hrsystem.dto;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.validator.constraints.Range;
 
 import java.util.List;
 
@@ -38,6 +37,6 @@ public class UserDTO {
 
     private String city;
 
-    @Range(min = 9, max = 9)
-    private Integer phoneNumber;
+    @Size(min = 9, max = 9)
+    private String phoneNumber;
 }

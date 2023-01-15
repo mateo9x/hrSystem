@@ -21,8 +21,7 @@ export class SignInComponent implements OnInit {
   }
 
   signInUser() {
-    if (this.email !== undefined && this.password !== undefined) {
-      const userObj = {
+      const authenticateRequest = {
         email: this.email,
         password: this.password,
         rememberMe: this.rememberMe
@@ -31,7 +30,7 @@ export class SignInComponent implements OnInit {
       if (sessionStorage.getItem('id_token') !== null) {
         // this.toastService.createErrorToast('Jesteś już zalogowany!');
       } else {
-        this.userService.signinUser(userObj).subscribe((response) => {
+        this.userService.signinUser(authenticateRequest).subscribe((response) => {
           // this.toastService.createSuccessToast('Zalogowano pomyślnie');
           this.appComponent.userLogged = true;
           sessionStorage.setItem('id_token', response.token);
@@ -40,7 +39,6 @@ export class SignInComponent implements OnInit {
         });
       }
     }
-  }
 
   signUp() {
     this.router.navigate(['sign-up']);

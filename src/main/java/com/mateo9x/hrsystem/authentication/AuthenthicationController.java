@@ -2,9 +2,11 @@ package com.mateo9x.hrsystem.authentication;
 
 import com.mateo9x.hrsystem.config.AdditionalAppProperties;
 import com.mateo9x.hrsystem.config.JwtUtils;
+import com.mateo9x.hrsystem.exceptions.AuthenthicationException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +34,7 @@ public class AuthenthicationController {
     private final AdditionalAppProperties appProperties;
 
     @PostMapping("authenticate")
-    public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response) {
+    public ResponseEntity<JWTToken> authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response) {
         try {
             authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword(),
@@ -45,16 +47,21 @@ public class AuthenthicationController {
                 cookie.setHttpOnly(true);
                 cookie.setPath("/"); // Global
                 response.addCookie(cookie);
-                return ResponseEntity.ok(jwt);
+                return ResponseEntity.ok().body(new JWTToken(jwt));
             }
-            return ResponseEntity.status(400).body("Error authenticating");
+            throw new AuthenthicationException("Błąd uwierzytelniania!");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return ResponseEntity.status(400).body("" + e.getMessage());
+            throw new AuthenthicationException(e.getMessage());
         }
     }
 
     private Integer getExpirationTime(Boolean rememberMe) {
         return rememberMe ? appProperties.getJwtExpirationTimeRememberMe() : appProperties.getJwtExpirationTime();
+    }
+
+    @Value
+    static class JWTToken {
+        String token;
     }
 }

@@ -17,7 +17,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping("/users/create-user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody @Valid UserDTO userDTO) {
         return ResponseEntity.ok(userService.save(userDTO));
     }

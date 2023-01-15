@@ -1,4 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
+import {CookieService} from "ngx-cookie-service";
+import {SnackBarService} from "./services/material/snackbar.service";
 
 @Component({
   selector: 'app-root',
@@ -12,15 +14,17 @@ export class AppComponent implements OnInit {
   userLogged = false;
   categories: any[] = [];
 
-  constructor() {
+  constructor(private cookieService: CookieService, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
+    this.cookieService.set('hrSystem', 'hrSystem');
   }
 
   logOut() {
-    sessionStorage.removeItem('id_token');
+    this.cookieService.delete('jwt');
     this.userLogged = false;
+    this.snackBarService.openSnackBar('Wylogowano pomyślnie');
   }
 
   displayCategory(categoryId: number) {

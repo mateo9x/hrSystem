@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Range;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "first_name")
@@ -46,6 +46,7 @@ public class User {
     private String streetNumber;
 
     @Column(name = "postal_code")
+    @Size(min= 6, max=6)
     private String postalCode;
 
     @Column(name = "city")

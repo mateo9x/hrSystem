@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO save(UserDTO userDTO) {
         log.info("Request to save User: {}", userDTO);
         if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
-            throw new UserException("User with this email already exists");
+            throw new UserException("Użytkownik z podanym adresem e-mail już istnieje!");
         }
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User savedUser = userRepository.save(userMapper.toEntity(userDTO));

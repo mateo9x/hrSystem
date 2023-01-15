@@ -41,10 +41,10 @@
     <input type="text" name="city" [(ngModel)]="user.city"/>
   </div>
   <div class="buttons">
-    <button type="submit" name="signup_submit" class="submit-button" (click)="clear()"
+    <button mat-raised-button color="primary" name="signup_submit" (click)="clear()"
             style="margin-right:10%">Wyczyść
     </button>
-    <button type="submit" name="clear_submit" class="submit-button" (click)="register()"
+    <button mat-raised-button color="primary" name="clear_submit" (click)="register()"
             [disabled]="form.invalid || user.password != user.password2">Zarejestruj
     </button>
   </div>

@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
+import {CookieService} from "ngx-cookie-service";
+import {SnackBarService} from "../../../services/material/snackbar.service";
 
 @Component({
   selector: 'sign-in',
@@ -11,34 +13,45 @@ import {AppComponent} from "../../../app.component";
 export class SignInComponent implements OnInit {
   email: string;
   password: string;
-  rememberMe: boolean;
+  rememberMe = false;
+  cookieJWT: string;
 
   constructor(private userService: UserService, private router: Router,
-              @Inject(AppComponent) private appComponent: AppComponent) {
+              @Inject(AppComponent) private appComponent: AppComponent,
+              private cookieService: CookieService, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
+    this.cookieJWT = this.cookieService.get('jwt');
   }
 
   signInUser() {
-      const authenticateRequest = {
-        email: this.email,
-        password: this.password,
-        rememberMe: this.rememberMe
-      }
-
-      if (sessionStorage.getItem('id_token') !== null) {
-        // this.toastService.createErrorToast('Jesteś już zalogowany!');
-      } else {
-        this.userService.signinUser(authenticateRequest).subscribe((response) => {
-          // this.toastService.createSuccessToast('Zalogowano pomyślnie');
-          this.appComponent.userLogged = true;
-          sessionStorage.setItem('id_token', response.token);
-        }, (error) => {
-          // this.toastService.createErrorToast('Nie poprawne dane logowania!');
-        });
-      }
+    const authenticateRequest = {
+      email: this.email,
+      password: this.password,
+      rememberMe: this.rememberMe
     }
+
+    if (this.cookieJWT.length > 0) {
+      this.snackBarService.openSnackBar('Jesteś już zalogowany!');
+    } else {
+      this.userService.signinUser(authenticateRequest).subscribe({
+        next: (successResponse) => {
+          this.cookieService.set('jwt', successResponse.token);
+          this.snackBarService.openSnackBar('Zalogowano pomyślnie');
+          this.appComponent.userLogged = true;
+          this.router.navigate(['']);
+        },
+        error: (errorResponse) => {
+          if (errorResponse.error) {
+            this.snackBarService.openSnackBar(errorResponse.error.message);
+          } else {
+            this.snackBarService.openSnackBar('Uwierzytelnienie nie udane');
+          }
+        }
+      })
+    }
+  }
 
   signUp() {
     this.router.navigate(['sign-up']);

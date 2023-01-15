@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import {APP_BASE_URL} from "../app.service";
 
@@ -10,7 +9,6 @@ import {APP_BASE_URL} from "../app.service";
 export class UserService {
 
   private userUrl = APP_BASE_URL + '/api/users';
-  private mailSenderUrl = APP_BASE_URL + '/api/mail';
 
   constructor(private http: HttpClient) { }
 
@@ -18,8 +16,8 @@ export class UserService {
     return this.http.get<User>(`${this.userUrl}/${id}`);
   }
 
-  public saveUser(user: User) {
-    return this.http.post<User>(`${this.userUrl}`, user);
+  public createUser(user: User) {
+    return this.http.post<User>(`${this.userUrl}/create-user`, user);
   }
 
   public updateUserPassword(user: User) {
@@ -32,18 +30,6 @@ export class UserService {
 
   public signinUser(user: any) {
     return this.http.post<any>(`${APP_BASE_URL}/authenticate`, user);
-  }
-
-  public isUserLogged() {
-    return this.http.get<User>(`${APP_BASE_URL}/is-user-logged`);
-  }
-
-  public getUserLogged(): Observable<User> {
-    return this.http.get<User>(`${this.userUrl}/logged`);
-  }
-
-  public newUserWelcomeMail(user: User) {
-    return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);
   }
 
   public resetPassword(mail: String) {

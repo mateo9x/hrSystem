@@ -39,6 +39,8 @@ Spring:
 > ${DATABASE_PASSWORD},   
 > ${GMAIL_USER},  
 > ${GMAIL_PASSWORD}
-> ${FRONTEND_URL}
+> ${FRONTEND_URL}  
+> 
+> Then simply run: 
 >
-> Then simply run :)
+>./mvnw spring-boot:run

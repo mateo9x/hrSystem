@@ -36,11 +36,14 @@ public class AuthenthicationController {
     @PostMapping("authenticate")
     public ResponseEntity<JWTToken> authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response) {
         try {
-            authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword(),
-                            new ArrayList<>()));
             final UserDetails user = userDetailsService.loadUserByUsername(request.getEmail());
             if (user != null) {
+                if (user.getAuthorities() == null) {
+                    throw new AuthenthicationException("Brak nadanych roli dla tego użytkownika. Skontaktuj się z przełożonym w celu nadania uprawnień do aplikacji");
+                }
+                authenticationManager
+                        .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword(),
+                                new ArrayList<>()));
                 String jwt = jwtUtils.generateToken(user);
                 Cookie cookie = new Cookie("jwt", jwt);
                 cookie.setMaxAge(getExpirationTime(request.getRememberMe()));

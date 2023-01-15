@@ -1,10 +1,12 @@
 export class User {
   id: number;
   firstName: string;
-  lastName: string;
+  lastNamse: string;
   email: string;
   password: string;
   password2: string;
+  xd: string;
+  xdd: string;
   pesel: string;
   roles: any[];
   street?: string;

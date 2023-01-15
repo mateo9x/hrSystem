@@ -8,13 +8,33 @@
 
 .header_section {
   width: 100%;
-  text-align: right;
   background-color: #3f51b5;
+  max-height: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 
-.header_section > a {
-  color: white;
+.header_left_section {
+  text-align: left;
+}
+
+img {
+  position: relative;
+  cursor: pointer;
+}
+
+.header_right_section {
   text-align: right;
+}
+
+.header_right_section > a {
+  color: white;
+  text-decoration: none !important;
+}
+
+.header_right_section > a:after {
+  background-color: white !important;
 }
 
 .containt_main {

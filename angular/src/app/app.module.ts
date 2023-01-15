@@ -45,7 +45,7 @@ import {NewPasswordComponent} from "./components/user/new-password/new-password.
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
-        duration: 3500,
+        duration: 4500,
         horizontalPosition: "center",
         verticalPosition: "top"
       }

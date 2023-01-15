@@ -17,6 +17,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {InfoComponent} from "./components/info/info.component";
 import {SignUpComponent} from "./components/user/sign-up/sign-up.component";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
+import {ResetPasswordComponent} from "./components/user/reset-password/reset-password.component";
+import {NewPasswordComponent} from "./components/user/new-password/new-password.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
     InfoComponent,
     SignInComponent,
     SignUpComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ResetPasswordComponent,
+    NewPasswordComponent
   ],
   imports: [
     BrowserModule,

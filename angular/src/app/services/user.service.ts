@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import {APP_BASE_URL} from "../app.service";
+import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,15 @@ export class UserService {
   }
 
   public resetPassword(mail: String) {
-    return this.http.get<any>(`${this.userUrl}/resetPassword/${mail}`);
+    return this.http.get<any>(`${this.userUrl}/reset-password/${mail}`);
   }
 
-  public getByUserToken(user: User) {
-    return this.http.post<User>(`${this.userUrl}/token-user`, user);
+  public getByUserToken(token: String) {
+    return this.http.get<User>(`${this.userUrl}/token-user/${token}`);
+  }
+
+  public doesUserWithEmailExists(email: String): Observable<boolean> {
+    return this.http.get<any>(`${this.userUrl}/email/${email}`);
   }
 
 }

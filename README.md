@@ -39,5 +39,6 @@ Spring:
 > ${DATABASE_PASSWORD},   
 > ${GMAIL_USER},  
 > ${GMAIL_PASSWORD}
+> ${FRONTEND_URL}
 >
 > Then simply run :)

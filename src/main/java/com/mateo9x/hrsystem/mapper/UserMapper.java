@@ -18,7 +18,7 @@ public class UserMapper {
         }
         return User.builder()
                 .id(userDTO.getId())
-                .email(userDTO.getEmail())
+                .email(userDTO.getEmail().toLowerCase())
                 .password(userDTO.getPassword())
                 .roles(convertArrayRolesToString(userDTO.getRoles()))
                 .firstName(userDTO.getFirstName())
@@ -29,6 +29,7 @@ public class UserMapper {
                 .postalCode(userDTO.getPostalCode())
                 .city(userDTO.getCity())
                 .phoneNumber(userDTO.getPhoneNumber())
+                .resetToken(userDTO.getResetToken())
                 .build();
     }
 
@@ -49,6 +50,7 @@ public class UserMapper {
                 .postalCode(user.getPostalCode())
                 .city(user.getCity())
                 .phoneNumber(user.getPhoneNumber())
+                .resetToken(user.getResetToken())
                 .build();
     }
 

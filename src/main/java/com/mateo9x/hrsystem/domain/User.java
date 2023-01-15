@@ -3,7 +3,6 @@ package com.mateo9x.hrsystem.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "users")
@@ -53,7 +52,7 @@ public class User {
     private String city;
 
     @Column(name = "phone_number")
-    @Range(min = 9, max = 9)
-    private Integer phoneNumber;
+    @Size(min = 9, max = 9)
+    private String phoneNumber;
 
 }

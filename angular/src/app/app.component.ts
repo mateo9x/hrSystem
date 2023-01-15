@@ -12,23 +12,25 @@ import {SnackBarService} from "./services/material/snackbar.service";
 export class AppComponent implements OnInit {
 
   userLogged = false;
-  categories: any[] = [];
 
   constructor(private cookieService: CookieService, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
     this.cookieService.set('hrSystem', 'hrSystem');
+    console.log(sessionStorage)
+    console.log(localStorage)
+    console.log(this.cookieService.get('jwt'))
+    if (this.cookieService.get('jwt')) {
+      console.log('asd')
+      this.userLogged = true;
+    }
   }
 
   logOut() {
     this.cookieService.delete('jwt');
     this.userLogged = false;
     this.snackBarService.openSnackBar('Wylogowano pomyślnie');
-  }
-
-  displayCategory(categoryId: number) {
-
   }
 
 }

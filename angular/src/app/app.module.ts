@@ -19,6 +19,9 @@ import {SignUpComponent} from "./components/user/sign-up/sign-up.component";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 import {ResetPasswordComponent} from "./components/user/reset-password/reset-password.component";
 import {NewPasswordComponent} from "./components/user/new-password/new-password.component";
+import {SideMenuComponent} from "./components/side-menu/side-menu.component";
+import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import {NewPasswordComponent} from "./components/user/new-password/new-password.
     SignUpComponent,
     PageNotFoundComponent,
     ResetPasswordComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import {NewPasswordComponent} from "./components/user/new-password/new-password.
     BrowserAnimationsModule,
     FormsModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatIconModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},

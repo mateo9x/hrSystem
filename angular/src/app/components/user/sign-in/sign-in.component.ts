@@ -37,10 +37,15 @@ export class SignInComponent implements OnInit {
     } else {
       this.userService.signinUser(authenticateRequest).subscribe({
         next: (successResponse) => {
-          this.cookieService.set('jwt', successResponse.token, this.rememberMe ? 259200 : 3600);
-          this.snackBarService.openSnackBar('Zalogowano pomyślnie');
-          this.appComponent.userLogged = true;
-          this.router.navigate(['']);
+          // if rememberMe 3 days cookie age, else 1 day
+          this.userService.getUserByEmail(authenticateRequest.email).subscribe({
+            next: (getUserByEmailResponse) => {
+              this.cookieService.set('jwt', successResponse.token, this.rememberMe ? 3 : 1);
+              this.snackBarService.openSnackBar('Zalogowano pomyślnie');
+              this.appComponent.userLogged = getUserByEmailResponse;
+              this.router.navigate(['']);
+            }
+          })
         },
         error: (errorResponse) => {
           if (errorResponse.error) {

@@ -8,6 +8,8 @@ public interface UserService {
 
     Boolean doesUserWithEmailExists(String email);
 
+    UserDTO findByEmail(String email);
+
     void sendMailForResetPasswordProcedure(String email);
 
     UserDTO findByResetToken(String token);

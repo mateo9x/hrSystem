@@ -1,61 +1,37 @@
-import {
-  Component,
-  OnInit,
-  QueryList,
-  ViewChild, ViewChildren,
-  ViewContainerRef
-} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SideMenuModel, SideMenuService} from "../../services/side-menu/side-menu.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {MatSort} from "@angular/material/sort";
-import {MatPaginator} from "@angular/material/paginator";
+import {Router} from "@angular/router";
+import {UserService} from "../../services/user.service";
+import {User} from "../../models/user.model";
+import {SnackBarService} from "../../services/material/snackbar.service";
 
 @Component({
   selector: 'side-menu',
   templateUrl: './side-menu.component.html',
-  styleUrls: ['./side-menu.component.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
-    ]),
-  ]
+  styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChildren('detailRows', { read: ViewContainerRef })
-  detailRowHosts: QueryList<ViewContainerRef>;
-
-  columnsToDisplay = ['label'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement: any | null;
   tabs: SideMenuModel[] = [];
+  @Input() userLogged: User;
 
-  constructor(private sideMenuService: SideMenuService) {}
+  constructor(private sideMenuService: SideMenuService, private router: Router,
+              private userService: UserService, private snackBarService: SnackBarService) {
+  }
 
   ngOnInit() {
     this.tabs = this.sideMenuService.getSideMenuTabs();
-    console.log(this.tabs)
   }
 
-  loadComponent(element: any, index: number): void {
-    const target = this.detailRowHosts.toArray()[index];
-    target.clear();
-    this.expandedElement = this.expandedElement === element ? null : element;
+  expandRow(tab: SideMenuModel) {
+    tab.expanded = !tab.expanded;
   }
 
-  getChildRowsForParentRow(element: any) {
-    console.log('element', element);
+  openSelectedRoutingComponent(subTab: SideMenuModel) {
+    this.router.navigate([subTab.routing]);
   }
 
-  getLabel(element: any) {
-    console.log('element', element);
+  showInfoSideMenuDialog() {
+    this.snackBarService.openSnackBar('W celu uzyskania dostępu do funkcjonalności aplikacji, zaloguj się');
   }
-
 
 }

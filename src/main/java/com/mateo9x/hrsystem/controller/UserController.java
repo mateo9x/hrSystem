@@ -19,9 +19,14 @@ public class UserController {
         return ResponseEntity.ok(userService.save(userDTO));
     }
 
-    @GetMapping("/users/email/{email}")
+    @GetMapping("/users/email/exists/{email}")
     public ResponseEntity<Boolean> doesUserWithEmailExists(@PathVariable String email) {
         return ResponseEntity.ok(userService.doesUserWithEmailExists(email));
+    }
+
+    @GetMapping("/users/email/{email}")
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.findByEmail(email));
     }
 
     @GetMapping("/users/reset-password/{email}")

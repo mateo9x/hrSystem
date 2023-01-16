@@ -150,5 +150,8 @@ mat-form-field {
 mat-checkbox {
   display: block;
   text-align: center;
-  margin:auto;
+}
+
+::ng-deep .mat-mdc-checkbox label {
+  margin: auto;
 }

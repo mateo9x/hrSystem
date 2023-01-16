@@ -32,7 +32,7 @@ import {MatIconModule} from "@angular/material/icon";
     PageNotFoundComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
-    SideMenuComponent
+    SideMenuComponents
   ],
   imports: [
     BrowserModule,

@@ -29,10 +29,6 @@ export class UserService {
     return this.http.put<boolean>(`${this.userUrl}/password/token`, user);
   }
 
-  public signinUser(user: any) {
-    return this.http.post<any>(`${APP_BASE_URL}/authenticate`, user);
-  }
-
   public resetPassword(mail: String) {
     return this.http.get<any>(`${this.userUrl}/reset-password/${mail}`);
   }
@@ -45,8 +41,8 @@ export class UserService {
     return this.http.get<any>(`${this.userUrl}/email/exists/${email}`);
   }
 
-  public getUserByEmail(email: String) {
-    return this.http.get<User>(`${this.userUrl}/email/${email}`);
+  public getUserByJWTToken() {
+    return this.http.get<User>(`${this.userUrl}/jwt-token`);
   }
 
 }

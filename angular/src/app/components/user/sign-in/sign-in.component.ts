@@ -2,8 +2,8 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
-import {CookieService} from "ngx-cookie-service";
 import {SnackBarService} from "../../../services/material/snackbar.service";
+import {AuthenticationRequest, AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'sign-in',
@@ -11,38 +11,29 @@ import {SnackBarService} from "../../../services/material/snackbar.service";
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  email: string;
-  password: string;
-  rememberMe = false;
+  request: AuthenticationRequest = new AuthenticationRequest();
   cookieJWT: string;
 
   constructor(private userService: UserService, private router: Router,
               @Inject(AppComponent) private appComponent: AppComponent,
-              private cookieService: CookieService, private snackBarService: SnackBarService) {
+              private snackBarService: SnackBarService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
-    this.cookieJWT = this.cookieService.get('jwt');
+    this.cookieJWT = localStorage.getItem('jwt');
   }
 
   signInUser() {
-    const authenticateRequest = {
-      email: this.email,
-      password: this.password,
-      rememberMe: this.rememberMe
-    }
-
-    if (this.cookieJWT.length > 0) {
+    if (this.cookieJWT) {
       this.snackBarService.openSnackBar('Jesteś już zalogowany!');
     } else {
-      this.userService.signinUser(authenticateRequest).subscribe({
+      this.authenticationService.signinUser(this.request).subscribe({
         next: (successResponse) => {
-          // if rememberMe 3 days cookie age, else 1 day
-          this.userService.getUserByEmail(authenticateRequest.email).subscribe({
-            next: (getUserByEmailResponse) => {
-              this.cookieService.set('jwt', successResponse.token, this.rememberMe ? 3 : 1);
+          this.userService.getUserByJWTToken().subscribe({
+            next: (getUserByJWTTokenResponse) => {
+              localStorage.setItem('jwt', JSON.stringify(successResponse.token));
               this.snackBarService.openSnackBar('Zalogowano pomyślnie');
-              this.appComponent.userLogged = getUserByEmailResponse;
+              this.appComponent.userLogged = getUserByJWTTokenResponse;
               this.router.navigate(['']);
             }
           })

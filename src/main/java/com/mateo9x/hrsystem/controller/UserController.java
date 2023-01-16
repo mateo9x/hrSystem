@@ -1,11 +1,17 @@
 package com.mateo9x.hrsystem.controller;
 
+import com.mateo9x.hrsystem.config.JwtUtils;
 import com.mateo9x.hrsystem.dto.UserDTO;
 import com.mateo9x.hrsystem.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @RequestMapping("/api")
 @AllArgsConstructor
@@ -13,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtils jwtUtils;
 
     @PostMapping("/users/create-user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody @Valid UserDTO userDTO) {
@@ -24,9 +31,18 @@ public class UserController {
         return ResponseEntity.ok(userService.doesUserWithEmailExists(email));
     }
 
-    @GetMapping("/users/email/{email}")
-    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(userService.findByEmail(email));
+    @GetMapping("/users/jwt-token")
+    public ResponseEntity<UserDTO> getUserByJWTToken(HttpServletRequest request) {
+        String email = null;
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("jwt") && isNotBlank(cookie.getValue())) {
+                email = jwtUtils.extractEmailFromToken(cookie.getValue());
+            }
+        }
+        if (isNotBlank(email)) {
+            return ResponseEntity.ok(userService.findByEmail(email));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/users/reset-password/{email}")

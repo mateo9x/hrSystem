@@ -12,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ import java.util.ArrayList;
 @RequestMapping("/")
 @RequiredArgsConstructor
 @Slf4j
-public class AuthenthicationController {
+public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
 
@@ -57,6 +54,16 @@ public class AuthenthicationController {
             log.error(e.getMessage(), e);
             throw new AuthenthicationException(e.getMessage());
         }
+    }
+
+    @PostMapping("logout-user")
+    public ResponseEntity<Boolean> logoutUser(HttpServletResponse response) {
+        Cookie cookie = new Cookie("jwt", null);
+        cookie.setMaxAge(0);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return ResponseEntity.ok(Boolean.TRUE);
     }
 
     private Integer getExpirationTime(Boolean rememberMe) {

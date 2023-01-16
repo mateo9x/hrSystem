@@ -30,9 +30,8 @@ Angular:
 
 Spring:
 
-> Unzip Images.rar and paste them where do you prefer.
 >
-> Then set all the properties:
+> Set all the properties:
 >
 > ${DATABASE_URL},  
 > ${DATABASE_USER},  

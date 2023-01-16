@@ -5,14 +5,14 @@
     <form class="form" #form="ngForm" novalidate>
       <mat-form-field class="fadeIn second" appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <input matInput [(ngModel)]="request.email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
       </mat-form-field>
       <mat-form-field class="fadeIn third" appearance="fill">
         <mat-label>Hasło</mat-label>
-        <input matInput [(ngModel)]="password" name="password" type="password" required>
+        <input matInput [(ngModel)]="request.password" name="password" type="password" required>
       </mat-form-field>
       <mat-checkbox class="fadeIn third" color="primary"
-                    [(ngModel)]="rememberMe" name="rememberMe">Zapamiętaj mnie!
+                    [(ngModel)]="request.rememberMe" name="rememberMe">Zapamiętaj mnie!
       </mat-checkbox>
     </form>
 

@@ -1,7 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {CookieService} from "ngx-cookie-service";
 import {SnackBarService} from "./services/material/snackbar.service";
 import {User} from "./models/user.model";
+import {AuthenticationService} from "./services/authentication.service";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -13,18 +14,33 @@ import {User} from "./models/user.model";
 export class AppComponent implements OnInit {
 
   userLogged: User = null;
+  cookieJWT: string;
 
-  constructor(private cookieService: CookieService, private snackBarService: SnackBarService) {
+  constructor(private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
-    this.cookieService.set('hrSystem', 'hrSystem');
+    this.cookieJWT = localStorage.getItem('jwt');
+    if (this.cookieJWT) {
+      this.userService.getUserByJWTToken().subscribe( {
+        next: (getUserByJWTTokenResponse) => {
+          this.userLogged = getUserByJWTTokenResponse;
+        }
+      })
+    }
   }
 
   logOut() {
-    this.cookieService.delete('jwt');
-    this.snackBarService.openSnackBar('Wylogowano pomyślnie');
-    this.userLogged = null;
+    this.authenticationService.logoutUser().subscribe({
+      next: (userLoggedOut) => {
+        if (userLoggedOut) {
+          localStorage.removeItem('jwt');
+          this.snackBarService.openSnackBar('Wylogowano pomyślnie');
+          this.userLogged = null;
+        }
+      }
+    })
   }
 
 }

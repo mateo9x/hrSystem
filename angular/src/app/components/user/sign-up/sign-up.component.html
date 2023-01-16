@@ -46,9 +46,10 @@
       <mat-label>Potwierdź hasło</mat-label>
       <input matInput type="password" name="password2"
              [(ngModel)]="user.password2" #password2="ngModel" min="5"/>
+    </mat-form-field>
       <span
         *ngIf="password2.errors || user.password && user.password !== user.password2 ">Hasło muszą do siebie pasować</span>
-    </mat-form-field>
+
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
@@ -80,7 +81,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Numer telefonu</mat-label>
       <input matInput type="text" name="phoneNumber" style="display:inline-block" [(ngModel)]="user.phoneNumber"
-             onkeypress='return event.charCode >= 48 && event.charCode <= 57' required pattern="[0-9]{9}"
+             onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="[0-9]{9}"
              #phoneNumber="ngModel"/>
     </mat-form-field>
   </div>

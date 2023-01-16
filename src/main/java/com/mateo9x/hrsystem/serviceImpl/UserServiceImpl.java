@@ -43,6 +43,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO findByEmail(String email) {
+        log.info("Request to get User by email: {}", email);
+        User user = userRepository.findByEmail(email).orElse(null);
+        return userMapper.toDTO(user);
+    }
+
+    @Override
     public void sendMailForResetPasswordProcedure(String mail) {
         UUID uuid = UUID.randomUUID();
         Optional<User> user = userRepository.findByEmail(mail);

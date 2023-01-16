@@ -42,7 +42,11 @@ export class UserService {
   }
 
   public doesUserWithEmailExists(email: String): Observable<boolean> {
-    return this.http.get<any>(`${this.userUrl}/email/${email}`);
+    return this.http.get<any>(`${this.userUrl}/email/exists/${email}`);
+  }
+
+  public getUserByEmail(email: String) {
+    return this.http.get<User>(`${this.userUrl}/email/${email}`);
   }
 
 }

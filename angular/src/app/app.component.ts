@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {SnackBarService} from "./services/material/snackbar.service";
+import {User} from "./models/user.model";
 
 @Component({
   selector: 'app-root',
@@ -11,26 +12,19 @@ import {SnackBarService} from "./services/material/snackbar.service";
 @HostListener('mouseover', ['$event'])
 export class AppComponent implements OnInit {
 
-  userLogged = false;
+  userLogged: User = null;
 
   constructor(private cookieService: CookieService, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
     this.cookieService.set('hrSystem', 'hrSystem');
-    console.log(sessionStorage)
-    console.log(localStorage)
-    console.log(this.cookieService.get('jwt'))
-    if (this.cookieService.get('jwt')) {
-      console.log('asd')
-      this.userLogged = true;
-    }
   }
 
   logOut() {
     this.cookieService.delete('jwt');
-    this.userLogged = false;
     this.snackBarService.openSnackBar('Wylogowano pomyślnie');
+    this.userLogged = null;
   }
 
 }

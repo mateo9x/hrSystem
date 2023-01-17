@@ -26,7 +26,7 @@ export class SideMenuService {
       {
         label: 'Administracja', expanded: false, routing: null, roles: ['ROLE_ADMIN'],
         childs: [
-          {label: 'Uprawnienia użytkowników', expanded: false, routing: null, roles: ['ROLE_ADMIN'], childs: null}
+          {label: 'Użytkownicy', expanded: false, routing: 'users', roles: ['ROLE_ADMIN'], childs: null}
         ]
       }
     ]

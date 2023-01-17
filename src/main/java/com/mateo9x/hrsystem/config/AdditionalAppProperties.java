@@ -24,4 +24,8 @@ public class AdditionalAppProperties {
     @NotNull
     @Value("${frontend.url}")
     private String frontendUrl;
+
+    @NotNull
+    @Value("${local.running.app}")
+    private Boolean localRunningApp;
 }

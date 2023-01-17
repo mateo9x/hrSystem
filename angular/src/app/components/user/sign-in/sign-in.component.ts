@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
 import {SnackBarService} from "../../../services/material/snackbar.service";
 import {AuthenticationRequest, AuthenticationService} from "../../../services/authentication.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'sign-in',
@@ -16,22 +17,23 @@ export class SignInComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router,
               @Inject(AppComponent) private appComponent: AppComponent,
-              private snackBarService: SnackBarService, private authenticationService: AuthenticationService) {
+              private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
+              private cookieService: CookieService) {
   }
 
   ngOnInit() {
-    this.cookieJWT = localStorage.getItem('jwt');
+    this.cookieJWT = this.cookieService.get('jwt');
   }
 
   signInUser() {
-    if (this.cookieJWT) {
+    if (this.cookieJWT && this.cookieJWT.length > 0) {
       this.snackBarService.openSnackBar('Jesteś już zalogowany!');
     } else {
       this.authenticationService.signinUser(this.request).subscribe({
         next: (successResponse) => {
           this.userService.getUserByJWTToken().subscribe({
             next: (getUserByJWTTokenResponse) => {
-              localStorage.setItem('jwt', JSON.stringify(successResponse.token));
+              this.cookieService.set('jwt', successResponse.token);
               this.snackBarService.openSnackBar('Zalogowano pomyślnie');
               this.appComponent.userLogged = getUserByJWTTokenResponse;
               this.router.navigate(['']);

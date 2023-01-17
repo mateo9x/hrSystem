@@ -44,7 +44,8 @@ public class AuthenticationController {
                 String jwt = jwtUtils.generateToken(user);
                 Cookie cookie = new Cookie("jwt", jwt);
                 cookie.setMaxAge(getExpirationTime(request.getRememberMe()));
-                cookie.setHttpOnly(true);
+                cookie.setHttpOnly(!appProperties.getLocalRunningApp());
+                cookie.setSecure(!appProperties.getLocalRunningApp());
                 cookie.setPath("/"); // Global
                 response.addCookie(cookie);
                 return ResponseEntity.ok().body(new JWTToken(jwt));

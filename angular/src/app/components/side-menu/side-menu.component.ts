@@ -36,7 +36,9 @@ export class SideMenuComponent implements OnInit, OnChanges {
   }
 
   openSelectedRoutingComponent(subTab: SideMenuModel) {
-    this.router.navigate([subTab.routing]);
+    if (subTab.routing) {
+      this.router.navigate([subTab.routing]);
+    }
   }
 
   showInfoSideMenuDialog() {
@@ -46,7 +48,6 @@ export class SideMenuComponent implements OnInit, OnChanges {
   filterTabsForUserRoles(tabs: SideMenuModel[]) {
     let tabsFiltered: any[] = [];
     if (this.userLogged.roles.length > 0) {
-      console.log(this.userLogged.roles)
       this.userLogged.roles.forEach((role) => {
         tabs.forEach((tab) => {
           if (tab.roles.includes(role)) {

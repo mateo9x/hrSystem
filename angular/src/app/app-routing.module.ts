@@ -6,13 +6,15 @@ import {InfoComponent} from "./components/info/info.component";
 import {SignUpComponent} from "./components/user/sign-up/sign-up.component";
 import {ResetPasswordComponent} from "./components/user/reset-password/reset-password.component";
 import {NewPasswordComponent} from "./components/user/new-password/new-password.component";
+import {UsersComponent} from "./components/admin/users/users.component";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'reset-password', component: ResetPasswordComponent},
-  { path: 'new-password', component: NewPasswordComponent},
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'new-password', component: NewPasswordComponent },
+  { path: 'users', component: UsersComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

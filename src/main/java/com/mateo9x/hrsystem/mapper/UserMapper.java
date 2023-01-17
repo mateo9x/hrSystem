@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserMapper {
@@ -56,7 +57,7 @@ public class UserMapper {
 
     private String convertArrayRolesToString(List<String> roles) {
         if (CollectionUtils.isNotEmpty(roles)) {
-            return StringUtils.join(";", roles);
+            return roles.stream().collect(Collectors.joining(";"));
         }
         return null;
     }

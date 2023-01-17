@@ -6,7 +6,7 @@ export class User {
   password: string;
   password2: string;
   pesel: string;
-  roles: any[];
+  roles: any;
   street?: string;
   streetNumber?: string;
   postalCode?: string;

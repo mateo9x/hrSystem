@@ -9,7 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {PageNotFoundComponent} from "./components/handlers/page-not-found/page-not-found.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppInterceptor} from "./components/authentication/app-interceptor";
 import {AnonymousUserGuard} from "./components/authentication/anonymous-user-guard";
 import {LoginGuard} from "./components/authentication/login-guard";
@@ -22,6 +22,13 @@ import {NewPasswordComponent} from "./components/user/new-password/new-password.
 import {SideMenuComponent} from "./components/side-menu/side-menu.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
+import {UsersComponent} from "./components/admin/users/users.component";
+import {MatSortModule} from "@angular/material/sort";
+import {UserEditDialogComponent} from "./components/admin/users/user-edit-dialog/user-edit-dialog.component";
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from "./components/confirmation-dialog/confirmation-dialog.component";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -32,7 +39,10 @@ import {MatIconModule} from "@angular/material/icon";
     PageNotFoundComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    UsersComponent,
+    UserEditDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,12 @@ import {MatIconModule} from "@angular/material/icon";
     MatCheckboxModule,
     MatSnackBarModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatSortModule,
+    MatDialogModule,
+    MatOptionModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
@@ -56,7 +71,8 @@ import {MatIconModule} from "@angular/material/icon";
         verticalPosition: "top"
       }
     },
-    LoginGuard, AnonymousUserGuard,],
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    LoginGuard, AnonymousUserGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

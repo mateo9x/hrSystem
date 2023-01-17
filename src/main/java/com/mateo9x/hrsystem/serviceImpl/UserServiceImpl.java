@@ -12,8 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,12 +28,14 @@ public class UserServiceImpl implements UserService {
     private final MailService mailService;
 
     @Override
-    public UserDTO save(UserDTO userDTO) {
+    public UserDTO save(UserDTO userDTO, Boolean firstCreate) {
         log.info("Request to save User: {}", userDTO);
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+        if (firstCreate && userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new UserException("Użytkownik z podanym adresem e-mail już istnieje!");
         }
-        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        if (firstCreate) {
+            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        }
         User savedUser = userRepository.save(userMapper.toEntity(userDTO));
         return userMapper.toDTO(savedUser);
     }
@@ -82,6 +86,18 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream().filter(user -> !user.getEmail().equals("admin@admin.com"))
+                .map(userMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return userRepository.findById(id).isEmpty();
     }
 
     private boolean doesBothPasswordMatches(UserDTO userDTO, User userSavedOnBase) {

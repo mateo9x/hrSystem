@@ -43,3 +43,9 @@ a:hover:after{
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.cdk-overlay-container {
+  left: auto !important;
+  right: 0!important;
+  width: 80% !important;
+}

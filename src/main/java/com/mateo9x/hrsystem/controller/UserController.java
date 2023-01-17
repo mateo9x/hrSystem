@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @RequestMapping("/api")
@@ -23,7 +25,12 @@ public class UserController {
 
     @PostMapping("/users/create-user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody @Valid UserDTO userDTO) {
-        return ResponseEntity.ok(userService.save(userDTO));
+        return ResponseEntity.ok(userService.save(userDTO, true));
+    }
+
+    @PutMapping("/users/update-user")
+    public ResponseEntity<UserDTO> updateUser(@RequestBody @Valid UserDTO userDTO) {
+        return ResponseEntity.ok(userService.save(userDTO, false));
     }
 
     @GetMapping("/users/email/exists/{email}")
@@ -59,5 +66,15 @@ public class UserController {
     @PutMapping("/users/password/token")
     public ResponseEntity<Boolean> updatePasswordByToken(@Valid @RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(userService.updateUserPasswordFromToken(userDTO));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Boolean> deleteUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.deleteUserById(id));
     }
 }

@@ -21,6 +21,10 @@ export class UserService {
     return this.http.post<User>(`${this.userUrl}/create-user`, user);
   }
 
+  public updateUser(user: User) {
+    return this.http.put<User>(`${this.userUrl}/update-user`, user);
+  }
+
   public updateUserPassword(user: User) {
     return this.http.put<boolean>(`${this.userUrl}/password`, user);
   }
@@ -43,6 +47,14 @@ export class UserService {
 
   public getUserByJWTToken() {
     return this.http.get<User>(`${this.userUrl}/jwt-token`);
+  }
+
+  public getAllUsers() {
+    return this.http.get<User[]>(`${this.userUrl}`);
+  }
+
+  public deleteUser(id: number) {
+    return this.http.delete<boolean>(`${this.userUrl}/${id}`);
   }
 
 }

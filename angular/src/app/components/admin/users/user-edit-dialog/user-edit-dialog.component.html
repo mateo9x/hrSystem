@@ -1,0 +1,99 @@
+<form class="form" #form="ngForm" novalidate>
+
+  <h1 class="input-data">Edycja użytkownika</h1>
+
+  <div class="left-right-column-container">
+
+    <div class="left-column">
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Imię</mat-label>
+          <input matInput [(ngModel)]="user.firstName" name="firstName" type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput [(ngModel)]="user.lastName" name="lastName" type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email" required/>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Pesel</mat-label>
+          <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel" required/>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill" >
+          <mat-label>Role użytkownika</mat-label>
+          <mat-select [formControl]="selectedRoles" multiple>
+            <mat-option *ngFor="let role of roles" [value]="role.value" >{{role.label}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="right-column">
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Ulica</mat-label>
+          <input matInput type="text" name="street" [(ngModel)]="user.street"/>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Nr domu</mat-label>
+          <input matInput type="text" name="streetNumber" [(ngModel)]="user.streetNumber"/>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Kod Pocztowy</mat-label>
+          <input matInput type="text" name="postalCode" style="display:inline-block" [(ngModel)]="user.postalCode"
+                 pattern="[0-9]{2}-[0-9]{3}" #postalCode="ngModel"/>
+        </mat-form-field>
+        <span *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Miasto</mat-label>
+          <input matInput type="text" name="city" [(ngModel)]="user.city"/>
+        </mat-form-field>
+      </div>
+
+      <div class="input-data">
+        <mat-form-field appearance="fill">
+          <mat-label>Numer telefonu</mat-label>
+          <input matInput type="text" name="phoneNumber" style="display:inline-block" [(ngModel)]="user.phoneNumber"
+                 onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="[0-9]{9}"
+                 #phoneNumber="ngModel"/>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="cancel()" name="cancel" class="button">Anuluj</button>
+    <button mat-raised-button color="primary" (click)="saveUser()" [disabled]="form.invalid" name="save" class="button">
+      Zapisz
+    </button>
+  </div>
+
+</form>

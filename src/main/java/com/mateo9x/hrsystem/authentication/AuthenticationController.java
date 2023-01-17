@@ -61,7 +61,8 @@ public class AuthenticationController {
     public ResponseEntity<Boolean> logoutUser(HttpServletResponse response) {
         Cookie cookie = new Cookie("jwt", null);
         cookie.setMaxAge(0);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(!appProperties.getLocalRunningApp());
+        cookie.setSecure(!appProperties.getLocalRunningApp());
         cookie.setPath("/");
         response.addCookie(cookie);
         return ResponseEntity.ok(Boolean.TRUE);

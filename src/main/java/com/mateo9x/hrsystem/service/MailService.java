@@ -6,5 +6,7 @@ public interface MailService {
 
     void sendResetPasswordToken(UserDTO userDTO);
 
+    void sendMessageToUserAboutAttendanceWorkReportForToday(UserDTO userDTO);
+
 
 }

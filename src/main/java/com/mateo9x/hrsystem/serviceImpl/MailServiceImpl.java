@@ -45,7 +45,7 @@ public class MailServiceImpl implements MailService {
         try {
             javaMailSender.send(message);
         } catch (Exception e) {
-            log.error("Nie udało się wysłać maila resetującego hasła: {}", e.getMessage());
+            log.error("Nie udało się wysłać maila z przypomnieniem o potwierdzeniu obecności w pracy: {}", e.getMessage());
         }
     }
 

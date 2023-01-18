@@ -11,10 +11,10 @@ export class SideMenuService {
   public getSideMenuTabs(): SideMenuModel[] {
     return [
       {
-        label: 'RCP', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_WORKER'],
+        label: 'RCP', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR', 'ROLE_WORKER'],
         childs: [
-          {label: 'Zgłoszenie obecności w pracy', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_WORKER'], childs: null},
-          {label: 'Planowane urlopy', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_WORKER'], childs: null}
+          {label: 'Zgłoszenie obecności w pracy', expanded: false, routing: 'attendance-work-report', roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR', 'ROLE_WORKER'], childs: null},
+          {label: 'Planowane urlopy', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR', 'ROLE_WORKER'], childs: null}
         ]
       },
       {

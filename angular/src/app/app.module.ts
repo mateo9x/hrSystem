@@ -29,6 +29,9 @@ import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dia
 import {ConfirmationDialogComponent} from "./components/confirmation-dialog/confirmation-dialog.component";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+import {
+  AttendanceWorkReportComponent
+} from "./components/work-time-report/attendance-work-report/attendance-work-report.component";
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import {MatSelectModule} from "@angular/material/select";
     SideMenuComponent,
     UsersComponent,
     UserEditDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    AttendanceWorkReportComponent
   ],
   imports: [
     BrowserModule,

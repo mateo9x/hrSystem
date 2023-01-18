@@ -7,6 +7,9 @@ import {SignUpComponent} from "./components/user/sign-up/sign-up.component";
 import {ResetPasswordComponent} from "./components/user/reset-password/reset-password.component";
 import {NewPasswordComponent} from "./components/user/new-password/new-password.component";
 import {UsersComponent} from "./components/admin/users/users.component";
+import {
+  AttendanceWorkReportComponent
+} from "./components/work-time-report/attendance-work-report/attendance-work-report.component";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
@@ -15,6 +18,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'new-password', component: NewPasswordComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'attendance-work-report', component: AttendanceWorkReportComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

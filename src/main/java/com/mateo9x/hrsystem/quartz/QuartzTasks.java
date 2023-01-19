@@ -29,7 +29,7 @@ public class QuartzTasks {
     }
 
     private void sendEmailIfUserDidntSubmittedTodayAttendantWorkReport(UserDTO userDTO, List<AttendanceWorkReportDTO> allAttendancesForToday) {
-        if (doesTodayAttendancesContainsUser(userDTO, allAttendancesForToday)) {
+        if (!doesTodayAttendancesContainsUser(userDTO, allAttendancesForToday)) {
             mailService.sendMessageToUserAboutAttendanceWorkReportForToday(userDTO);
         }
     }

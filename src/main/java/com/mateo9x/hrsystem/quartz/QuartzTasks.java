@@ -19,7 +19,7 @@ public class QuartzTasks {
     private final UserService userService;
     private final AttendanceWorkReportService attendanceWorkReportService;
 
-    @Scheduled(cron = "0 0 10 * * *")
+    @Scheduled(cron = "0 0 10 * * 2-6")
     public void sendEmailToUsersWhichDidntAttendantTodayTheirWorkReport() {
         List<UserDTO> allUsersWithRoleWorker = userService.getAllUsers().stream()
                 .filter(user -> user.getRoles().contains("ROLE_WORKER")).toList();

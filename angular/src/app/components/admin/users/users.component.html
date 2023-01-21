@@ -5,12 +5,12 @@
 
 <div class="button-container">
   <button mat-raised-button color="primary" (click)="editUser()"
-          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === -1" class="button">
+          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined" class="button">
     Edytuj użytkownika
   </button>
   <button
     mat-raised-button color="primary"
-    [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === -1"
+    [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
     (click)="deleteUser(selectedRow)"
     class="button">
     Usuń użytkownika

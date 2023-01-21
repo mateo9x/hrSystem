@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
+    console.log(this.selectedRow)
   }
 
   getUsers() {
@@ -47,13 +48,13 @@ export class UsersComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.selectedRow = -1;
+    this.selectedRow = undefined;
   }
 
   selectRow(row: any) {
     if (this.selectedRow === row) {
-      this.selectedRow = -1;
-      row = -1;
+      this.selectedRow = undefined;
+      row = undefined;
     } else {
       this.selectedRow = row;
     }

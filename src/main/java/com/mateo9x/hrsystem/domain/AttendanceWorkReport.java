@@ -1,6 +1,7 @@
 package com.mateo9x.hrsystem.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,12 +19,15 @@ public class AttendanceWorkReport {
 
     @JoinColumn(name = "user_id")
     @OneToOne
+    @NotNull
     private User user;
 
     @Column(name = "date")
+    @NotNull
     private LocalDate date;
 
     @Column(name = "remote_work")
+    @NotNull
     private Boolean remoteWork;
 
 }

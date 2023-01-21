@@ -1,6 +1,7 @@
 package com.mateo9x.hrsystem.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -17,22 +18,28 @@ public class User {
     private Long id;
 
     @Column(name = "first_name")
+    @NotBlank
     private String firstName;
 
     @Column(name = "last_name")
+    @NotBlank
     private String lastName;
 
     @Column(name = "email")
+    @NotBlank
     private String email;
 
     @Column(name = "pesel")
     @Size(min = 11, max = 11)
+    @NotBlank
     private String pesel;
 
     @Column(name = "roles")
     private String roles;
 
     @Column(name = "password")
+    @NotBlank
+    @Size(min = 5)
     private String password;
 
     @Column(name = "reset_token")

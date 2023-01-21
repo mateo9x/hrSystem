@@ -10,6 +10,7 @@ import {UsersComponent} from "./components/admin/users/users.component";
 import {
   AttendanceWorkReportComponent
 } from "./components/work-time-report/attendance-work-report/attendance-work-report.component";
+import {LoginGuard} from "./components/authentication/login-guard";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
@@ -17,8 +18,8 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'new-password', component: NewPasswordComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'attendance-work-report', component: AttendanceWorkReportComponent },
+  { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
+  { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

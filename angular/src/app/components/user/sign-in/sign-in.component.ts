@@ -34,6 +34,7 @@ export class SignInComponent implements OnInit {
           this.userService.getUserByJWTToken().subscribe({
             next: (getUserByJWTTokenResponse) => {
               this.cookieService.set('jwt', successResponse.token);
+              this.cookieService.set('user', JSON.stringify(getUserByJWTTokenResponse));
               this.snackBarService.openSnackBar('Zalogowano pomyślnie');
               this.appComponent.userLogged = getUserByJWTTokenResponse;
               this.router.navigate(['']);

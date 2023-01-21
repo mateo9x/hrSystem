@@ -11,7 +11,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {PageNotFoundComponent} from "./components/handlers/page-not-found/page-not-found.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppInterceptor} from "./components/authentication/app-interceptor";
-import {AnonymousUserGuard} from "./components/authentication/anonymous-user-guard";
 import {LoginGuard} from "./components/authentication/login-guard";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {InfoComponent} from "./components/info/info.component";
@@ -76,7 +75,7 @@ import {
       }
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    LoginGuard, AnonymousUserGuard],
+    LoginGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

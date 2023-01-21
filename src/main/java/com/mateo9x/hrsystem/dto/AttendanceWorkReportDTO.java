@@ -1,5 +1,6 @@
 package com.mateo9x.hrsystem.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +16,11 @@ public class AttendanceWorkReportDTO {
 
     private Long id;
 
+    @NotNull
     private Long userId;
 
     private LocalDate date;
 
+    @NotNull
     private Boolean remoteWork;
 }

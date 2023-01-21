@@ -26,28 +26,31 @@ export class SignInComponent implements OnInit {
   }
 
   signInUser() {
-    if (this.cookieJWT && this.cookieJWT.length > 0) {
-      this.snackBarService.openSnackBar('Jesteś już zalogowany!');
-    } else {
-      this.authenticationService.signinUser(this.request).subscribe({
-        next: (successResponse) => {
-          this.userService.getUserByJWTToken().subscribe({
-            next: (getUserByJWTTokenResponse) => {
-              this.cookieService.set('jwt', successResponse.token);
-              this.snackBarService.openSnackBar('Zalogowano pomyślnie');
-              this.appComponent.userLogged = getUserByJWTTokenResponse;
-              this.router.navigate(['']);
+    if (this.request.email && this.request.password) {
+      if (this.cookieJWT && this.cookieJWT.length > 0) {
+        this.snackBarService.openSnackBar('Jesteś już zalogowany!');
+      } else {
+        this.authenticationService.signinUser(this.request).subscribe({
+          next: (successResponse) => {
+            this.userService.getUserByJWTToken().subscribe({
+              next: (getUserByJWTTokenResponse) => {
+                this.cookieService.set('jwt', successResponse.token);
+                this.cookieService.set('user', JSON.stringify(getUserByJWTTokenResponse));
+                this.snackBarService.openSnackBar('Zalogowano pomyślnie');
+                this.appComponent.userLogged = getUserByJWTTokenResponse;
+                this.router.navigate(['']);
+              }
+            })
+          },
+          error: (errorResponse) => {
+            if (errorResponse.error) {
+              this.snackBarService.openSnackBar(errorResponse.error.message);
+            } else {
+              this.snackBarService.openSnackBar('Uwierzytelnienie nie udane');
             }
-          })
-        },
-        error: (errorResponse) => {
-          if (errorResponse.error) {
-            this.snackBarService.openSnackBar(errorResponse.error.message);
-          } else {
-            this.snackBarService.openSnackBar('Uwierzytelnienie nie udane');
           }
-        }
-      })
+        })
+      }
     }
   }
 

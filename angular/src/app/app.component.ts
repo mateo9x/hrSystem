@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
       next: (userLoggedOut) => {
         if (userLoggedOut) {
           this.cookieService.delete('jwt');
+          this.cookieService.delete('user');
           this.snackBarService.openSnackBar('Wylogowano pomyślnie');
           this.userLogged = null;
         }

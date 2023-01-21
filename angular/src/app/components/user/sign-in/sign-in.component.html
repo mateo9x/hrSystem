@@ -9,7 +9,7 @@
       </mat-form-field>
       <mat-form-field class="fadeIn third" appearance="fill">
         <mat-label>Hasło</mat-label>
-        <input matInput [(ngModel)]="request.password" name="password" type="password" required>
+        <input matInput [(ngModel)]="request.password" name="password" type="password" (keyup.enter)="signInUser()" required>
       </mat-form-field>
       <mat-checkbox class="fadeIn third" color="primary"
                     [(ngModel)]="request.rememberMe" name="rememberMe">Zapamiętaj mnie!

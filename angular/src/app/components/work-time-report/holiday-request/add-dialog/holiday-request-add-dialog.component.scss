@@ -6,23 +6,24 @@
 
 .input-data {
   margin: auto auto 20px;
-  width: 300px;
+  max-width:80%;
   display: grid;
   grid-template-columns: auto;
   grid-gap: 20px;
 }
 
 h1 {
+  margin: 20px 0 20px 0;
   font-weight: 300;
   font-size: 24px;
   text-align: center;
-  width: 100%;
-  margin: auto auto 20px;
-  display: grid;
-  grid-template-columns: auto;
-  grid-gap: 20px;
 }
 
-button {
-  width: 300px;
+.button + .button {
+  margin-left: 8px;
+}
+
+span {
+  color:red;
+  font-size:12px;
 }

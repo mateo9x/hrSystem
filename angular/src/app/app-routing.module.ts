@@ -13,13 +13,14 @@ import {
 import {LoginGuard} from "./components/authentication/login-guard";
 import {ProfileComponent} from "./components/user/profile/profile-component";
 import {ProfileGuard} from "./components/authentication/profile-guard";
+import {AnonymousGuard} from "./components/authentication/anonymous-guard";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'new-password', component: NewPasswordComponent },
+  { path: 'sign-in', component: SignInComponent, canActivate: [AnonymousGuard] },
+  { path: 'sign-up', component: SignUpComponent, canActivate: [AnonymousGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AnonymousGuard] },
+  { path: 'new-password', component: NewPasswordComponent, canActivate: [AnonymousGuard] },
   { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
   { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard], loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},

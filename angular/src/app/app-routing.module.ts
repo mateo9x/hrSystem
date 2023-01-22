@@ -11,6 +11,8 @@ import {
   AttendanceWorkReportComponent
 } from "./components/work-time-report/attendance-work-report/attendance-work-report.component";
 import {LoginGuard} from "./components/authentication/login-guard";
+import {ProfileComponent} from "./components/user/profile/profile-component";
+import {ProfileGuard} from "./components/authentication/profile-guard";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
@@ -20,6 +22,7 @@ const routes: Routes = [
   { path: 'new-password', component: NewPasswordComponent },
   { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
   { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard], loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -31,6 +31,10 @@ import {MatSelectModule} from "@angular/material/select";
 import {
   AttendanceWorkReportComponent
 } from "./components/work-time-report/attendance-work-report/attendance-work-report.component";
+import {ProfileComponent} from "./components/user/profile/profile-component";
+import {ProfileGuard} from "./components/authentication/profile-guard";
+import {ProfileDataComponent} from "./components/user/profile/data/profile-data.component";
+import {ProfilePasswordComponent} from "./components/user/profile/password/profile-password.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +49,10 @@ import {
     UsersComponent,
     UserEditDialogComponent,
     ConfirmationDialogComponent,
-    AttendanceWorkReportComponent
+    AttendanceWorkReportComponent,
+    ProfileComponent,
+    ProfileDataComponent,
+    ProfilePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,7 @@ import {
       }
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    LoginGuard],
+    LoginGuard, ProfileGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

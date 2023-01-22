@@ -1,6 +1,7 @@
 package com.mateo9x.hrsystem.serviceImpl;
 
 import com.mateo9x.hrsystem.domain.User;
+import com.mateo9x.hrsystem.dto.NewUserPasswordDTO;
 import com.mateo9x.hrsystem.dto.UserDTO;
 import com.mateo9x.hrsystem.exceptions.UserException;
 import com.mateo9x.hrsystem.mapper.UserMapper;
@@ -98,6 +99,17 @@ public class UserServiceImpl implements UserService {
     public Boolean deleteUserById(Long id) {
         userRepository.deleteById(id);
         return userRepository.findById(id).isEmpty();
+    }
+
+    @Override
+    public Boolean updateUserPassword(NewUserPasswordDTO newUserPasswordDTO) {
+        User user = userRepository.findById(newUserPasswordDTO.getUserId()).orElse(null);
+        if (user == null) {
+            return false;
+        }
+        user.setPassword(passwordEncoder.encode(newUserPasswordDTO.getNewPassword()));
+        userRepository.save(user);
+        return true;
     }
 
     private boolean doesBothPasswordMatches(UserDTO userDTO, User userSavedOnBase) {

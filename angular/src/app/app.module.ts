@@ -35,6 +35,7 @@ import {ProfileComponent} from "./components/user/profile/profile-component";
 import {ProfileGuard} from "./components/authentication/profile-guard";
 import {ProfileDataComponent} from "./components/user/profile/data/profile-data.component";
 import {ProfilePasswordComponent} from "./components/user/profile/password/profile-password.component";
+import {AnonymousGuard} from "./components/authentication/anonymous-guard";
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import {ProfilePasswordComponent} from "./components/user/profile/password/profi
       }
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    LoginGuard, ProfileGuard],
+    LoginGuard, ProfileGuard, AnonymousGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

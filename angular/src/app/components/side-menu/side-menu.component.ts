@@ -42,24 +42,56 @@ export class SideMenuComponent implements OnInit, OnChanges {
   }
 
   showInfoSideMenuDialog() {
-    this.snackBarService.openSnackBar('W celu uzyskania dostępu do funkcjonalności aplikacji, zaloguj się');
+    this.snackBarService.openSnackBar('W celu uzyskania dostępu do funkcjonalności aplikacji - zaloguj się');
   }
 
   filterTabsForUserRoles(tabs: SideMenuModel[]) {
     let tabsFiltered: any[] = [];
     if (this.userLogged.roles.length > 0) {
       this.userLogged.roles.forEach((role) => {
-        tabs.forEach((tab) => {
-          if (tab.roles.includes(role)) {
-            if (!tabsFiltered.includes(tab)) {
-              tabsFiltered.push(tab);
-            }
+        const tabsFound = tabs.filter(tab => tab.roles.includes(role));
+        tabsFound.forEach(tab => {
+          if (!tabsFiltered.includes(tab)) {
+            tabsFiltered.push(tab);
           }
-        })
+        });
       });
     }
-
+    //filtered main tabs
     this.tabs = tabsFiltered;
+    this.filterSubTabsForUserRoles();
   }
+
+  filterSubTabsForUserRoles() {
+    let subTabsFiltered: any[] = [];
+    if (this.userLogged.roles.length > 0) {
+      this.userLogged.roles.forEach((role) => {
+        let subTabsForRoleFiltered: any[] = [];
+        this.tabs.forEach((tab, index) => {
+          tab.childs.forEach(subTab => {
+            if (subTab.roles.includes(role) && !subTabsForRoleFiltered.includes({
+              subTab: subTab,
+              mainTabIndex: index
+            })) {
+              subTabsForRoleFiltered.push({subTab: subTab, mainTabIndex: index})
+            }
+          });
+        });
+        subTabsFiltered.push(subTabsForRoleFiltered);
+      });
+
+      this.tabs.forEach((tab, index) => {
+        tab.childs = [];
+        subTabsFiltered.forEach(subTabForRole => {
+          subTabForRole.forEach(subTab => {
+            if (subTab.mainTabIndex === index && !tab.childs.includes(subTab.subTab)) {
+              tab.childs.push(subTab.subTab);
+            }
+          })
+        });
+      });
+    }
+  }
+
 
 }

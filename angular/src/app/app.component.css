@@ -11,16 +11,15 @@
   background-color: #3f51b5;
   max-height: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 5fr;
   align-items: center;
 }
 
 .header_left_section {
-  text-align: left;
+  text-align: center;
 }
 
 img {
-  margin-left: 5%;
   position: relative;
   cursor: pointer;
 }
@@ -80,5 +79,9 @@ img {
 }
 
 .padding_10 {
+  padding: 10px;
+}
+
+a {
   padding: 10px;
 }

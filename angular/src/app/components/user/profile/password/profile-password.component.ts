@@ -24,7 +24,7 @@ export class ProfilePasswordComponent implements OnInit {
     })
   }
 
-  register() {
+  updateUserPassword() {
     if (this.userId) {
       const request = new ProfilePasswordRequest(this.userId, this.password);
       this.userService.updateUserPassword(request).subscribe({

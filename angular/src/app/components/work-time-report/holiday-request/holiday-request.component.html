@@ -6,14 +6,14 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Wybierz datę od</mat-label>
-      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom">
+      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" [max]="dateTo">
       <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
       <mat-datepicker #pickerFrom></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Wybierz date do</mat-label>
-      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo">
+      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" [min]="dateFrom">
       <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
       <mat-datepicker #pickerTo></mat-datepicker>
     </mat-form-field>

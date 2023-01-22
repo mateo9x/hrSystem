@@ -1,5 +1,6 @@
 package com.mateo9x.hrsystem.service;
 
+import com.mateo9x.hrsystem.dto.NewUserPasswordDTO;
 import com.mateo9x.hrsystem.dto.UserDTO;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UserService {
     List<UserDTO> getAllUsers();
 
     Boolean deleteUserById(Long id);
+
+    Boolean updateUserPassword(NewUserPasswordDTO newUserPasswordDTO);
 }

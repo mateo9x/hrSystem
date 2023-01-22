@@ -1,6 +1,7 @@
 package com.mateo9x.hrsystem.controller;
 
 import com.mateo9x.hrsystem.config.JwtUtils;
+import com.mateo9x.hrsystem.dto.NewUserPasswordDTO;
 import com.mateo9x.hrsystem.dto.UserDTO;
 import com.mateo9x.hrsystem.service.UserService;
 import jakarta.servlet.http.Cookie;
@@ -76,5 +77,10 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.deleteUserById(id));
+    }
+
+    @PutMapping("/users/password")
+    public ResponseEntity<Boolean> updateUserPassword(@RequestBody @Valid NewUserPasswordDTO newUserPasswordDTO) {
+        return ResponseEntity.ok(userService.updateUserPassword(newUserPasswordDTO));
     }
 }

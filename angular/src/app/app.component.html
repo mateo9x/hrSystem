@@ -10,6 +10,10 @@
         <i class="fa fa-user" aria-hidden="true"></i>
         <span class="padding_10">Zaloguj się</span></a>
 
+      <a *ngIf="userLogged !== null" routerLink="profile" routerLinkActive="active" >
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <span class="padding_10">Profil</span></a>
+
       <a *ngIf="userLogged !== null" routerLink="" routerLinkActive="active" (click)="logOut()">
         <i class="fa fa-power-off" aria-hidden="true"></i>
         <span class="padding_10">Wyloguj się</span></a>

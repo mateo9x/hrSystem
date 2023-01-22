@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import {APP_BASE_URL} from "../app.service";
 import {Observable} from "rxjs/internal/Observable";
+import {ProfilePasswordRequest} from "../components/user/profile/password/profile-password.component";
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class UserService {
     return this.http.put<User>(`${this.userUrl}/update-user`, user);
   }
 
-  public updateUserPassword(user: User) {
-    return this.http.put<boolean>(`${this.userUrl}/password`, user);
+  public updateUserPassword(request: ProfilePasswordRequest) {
+    return this.http.put<boolean>(`${this.userUrl}/password`, request);
   }
 
   public updateUserPasswordByToken(user: User) {

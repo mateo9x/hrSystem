@@ -26,7 +26,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {UserEditDialogComponent} from "./components/admin/users/user-edit-dialog/user-edit-dialog.component";
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "./components/confirmation-dialog/confirmation-dialog.component";
-import {MatOptionModule} from "@angular/material/core";
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {
   AttendanceWorkReportComponent
@@ -36,6 +36,12 @@ import {ProfileGuard} from "./components/authentication/profile-guard";
 import {ProfileDataComponent} from "./components/user/profile/data/profile-data.component";
 import {ProfilePasswordComponent} from "./components/user/profile/password/profile-password.component";
 import {AnonymousGuard} from "./components/authentication/anonymous-guard";
+import {HolidayRequestComponent} from "./components/work-time-report/holiday-request/holiday-request.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {DatePipe} from "@angular/common";
+import {
+  HolidayRequestAddDialogComponent
+} from "./components/work-time-report/holiday-request/add-dialog/holiday-request-add-dialog.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +59,9 @@ import {AnonymousGuard} from "./components/authentication/anonymous-guard";
     AttendanceWorkReportComponent,
     ProfileComponent,
     ProfileDataComponent,
-    ProfilePasswordComponent
+    ProfilePasswordComponent,
+    HolidayRequestComponent,
+    HolidayRequestAddDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +79,9 @@ import {AnonymousGuard} from "./components/authentication/anonymous-guard";
     MatDialogModule,
     MatOptionModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
@@ -83,7 +93,8 @@ import {AnonymousGuard} from "./components/authentication/anonymous-guard";
       }
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    LoginGuard, ProfileGuard, AnonymousGuard],
+    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
+    LoginGuard, ProfileGuard, AnonymousGuard, DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

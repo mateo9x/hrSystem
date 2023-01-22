@@ -49,3 +49,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /*  right: 0!important;*/
 /*  width: 80% !important;*/
 /*}*/
+
+.button-container {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.button + .button {
+  margin-left: 8px;
+}
+
+.selected-row, .selected-cell, .selected-row:hover, .selected-cell:hover {
+  color: white !important;
+}
+
+.selected-row {
+  background-color: #3f51b5 !important;
+}
+
+.selected-row:hover {
+  background-color: #1a266c !important;
+}
+
+.table-row:hover {
+  background-color: #1a266c !important;
+  cursor: pointer;
+}

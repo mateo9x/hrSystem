@@ -28,7 +28,7 @@ export class ProfileDataComponent implements OnInit {
     })
   }
 
-  register() {
+  updateUserData() {
     this.userService.updateUser(this.user).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Dane zaaktualizowane pomyślnie');

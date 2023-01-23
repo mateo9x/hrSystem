@@ -5,6 +5,7 @@ import {UserService} from "../../../../services/user.service";
 import {FormControl} from "@angular/forms";
 import {Role} from "../../../../models/role.model";
 import {RoleService} from "../../../../services/role.service";
+import {SnackBarType} from "../../../../services/material/snackbar.service";
 
 @Component({
   selector: 'user-edit-dialog',
@@ -36,10 +37,10 @@ export class UserEditDialogComponent implements OnInit {
     this.user.roles = this.selectedRoles.value;
     this.userService.updateUser(this.user).subscribe({
       next: () => {
-        this.dialogRef.close('Dane użytkownika zaaktualizowane');
+        this.dialogRef.close({message: 'Dane użytkownika zaaktualizowane', type: SnackBarType.SUCCESS});
       },
       error: () => {
-        this.dialogRef.close('Dane użytkownika nie zostały zaaktualizowane');
+        this.dialogRef.close({message: 'Dane użytkownika nie zostały zaaktualizowane', type: SnackBarType.ERROR});
       }
     });
   }

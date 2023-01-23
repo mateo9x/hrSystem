@@ -4,7 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
 import {UserEditDialogComponent} from "./user-edit-dialog/user-edit-dialog.component";
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogModel
@@ -67,7 +67,7 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (closingMessage) => {
         if (closingMessage) {
-          this.snackBarService.openSnackBar(closingMessage);
+          this.snackBarService.openSnackBar(closingMessage.message, closingMessage.type);
           this.getUsers();
         }
       }
@@ -83,11 +83,11 @@ export class UsersComponent implements OnInit {
         if (closingMessage.accept) {
           this.userService.deleteUser(user.id).subscribe({
             next: () => {
-              this.snackBarService.openSnackBar('Użytkownik pomyślnie usunięty');
+              this.snackBarService.openSnackBar('Użytkownik pomyślnie usunięty', SnackBarType.SUCCESS);
               this.getUsers();
             },
             error: () => {
-              this.snackBarService.openSnackBar('Próba usunięcia użytkownika nie powiodła się');
+              this.snackBarService.openSnackBar('Próba usunięcia użytkownika nie powiodła się', SnackBarType.ERROR);
             }
           })
         }

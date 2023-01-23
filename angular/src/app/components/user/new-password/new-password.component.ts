@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user.model";
 
@@ -29,14 +29,14 @@ export class NewPasswordComponent implements OnInit {
         if (response !== null) {
           this.userService.updateUserPasswordByToken(this.user).subscribe((response) => {
             if (response) {
-              this.snackBarService.openSnackBar('Hasło zaaktualizowane pomyślnie');
+              this.snackBarService.openSnackBar('Hasło zaaktualizowane pomyślnie', SnackBarType.SUCCESS);
               this.router.navigate(['']);
             } else {
-              this.snackBarService.openSnackBar('Hasło nie może być takie same jak poprzednie');
+              this.snackBarService.openSnackBar('Hasło nie może być takie same jak poprzednie', SnackBarType.ERROR);
             }
           });
         } else {
-          this.snackBarService.openSnackBar('Token stracił swoją ważność');
+          this.snackBarService.openSnackBar('Token stracił swoją ważność', SnackBarType.WARN);
         }
       });
     }

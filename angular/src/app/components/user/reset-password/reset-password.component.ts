@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {UserService} from "../../../services/user.service";
 
 @Component({
@@ -19,11 +19,11 @@ export class ResetPasswordComponent {
     this.userService.doesUserWithEmailExists(this.email).subscribe((response) => {
       if (response) {
         this.userService.resetPassword(this.email).subscribe((response) => {
-          this.snackBarService.openSnackBar('Wysłano link do zresetowania hasła na podany adres e-mail');
+          this.snackBarService.openSnackBar('Wysłano link do zresetowania hasła na podany adres e-mail', SnackBarType.SUCCESS);
           this.router.navigate(['']);
         });
       } else {
-        this.snackBarService.openSnackBar('Taki użytkownik nie istnieje w bazie danych!');
+        this.snackBarService.openSnackBar('Taki użytkownik nie istnieje w bazie danych!', SnackBarType.WARN);
       }
     });
   }

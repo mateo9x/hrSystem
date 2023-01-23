@@ -5,6 +5,7 @@ import {HolidayRequest, HolidayRequestStatus, HolidayRequestType} from "../../..
 import {HolidayRequestService} from "../../../../services/holiday-request.service";
 import {DateFormatterService} from "../../../../services/date.service";
 import {User} from "../../../../models/user.model";
+import {SnackBarType} from "../../../../services/material/snackbar.service";
 
 @Component({
   selector: 'holiday-request-add-dialog',
@@ -55,14 +56,14 @@ export class HolidayRequestAddDialogComponent implements OnInit {
     this.holidayRequestService.getAllHolidayRequestsForUserBetweenSelectedDates(this.user.id, this.holidayRequest.dateFrom, this.holidayRequest.dateTo).subscribe({
       next: (response) => {
         if (response.length > 0) {
-          this.dialogRef.close('Wniosek urlopowy w wybranym zakresie czasu już istnieje');
+          this.dialogRef.close({message: 'Wniosek urlopowy w wybranym zakresie czasu już istnieje', type: SnackBarType.WARN});
         } else {
           this.holidayRequestService.saveHolidayRequest(this.holidayRequest).subscribe({
             next: () => {
-              this.dialogRef.close('Wniosek urlopowy został zapisany');
+              this.dialogRef.close({message: 'Wniosek urlopowy został zapisany', type: SnackBarType.SUCCESS});
             },
             error: () => {
-              this.dialogRef.close('Wniosek urlopowy nie został zapisany');
+              this.dialogRef.close({message: 'Wniosek urlopowy nie został zapisany', type: SnackBarType.ERROR});
             }
           });
         }

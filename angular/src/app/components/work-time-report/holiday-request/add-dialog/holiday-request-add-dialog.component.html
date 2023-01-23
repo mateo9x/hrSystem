@@ -13,7 +13,7 @@
 
   <div class="input-data">
     <mat-form-field appearance="fill">
-      <mat-label>Wybierz datę od</mat-label>
+      <mat-label>Wybierz datę do</mat-label>
       <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" [min]="dateFrom" required>
       <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
       <mat-datepicker #pickerTo></mat-datepicker>

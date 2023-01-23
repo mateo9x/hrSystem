@@ -6,7 +6,7 @@ import {HolidayRequestService} from "../../../../services/holiday-request.servic
 import {SnackBarType} from "../../../../services/material/snackbar.service";
 
 @Component({
-  selector: 'holiday-request-confirmation-editdialog',
+  selector: 'holiday-request-confirmation-edit-dialog',
   templateUrl: './holiday-request-confirmation-edit-dialog.component.html',
   styleUrls: ['./holiday-request-confirmation-edit-dialog.component.scss']
 })

@@ -1,6 +1,8 @@
 export class HolidayRequest {
   id?: number;
-  userId: number
+  userId: number;
+  userFullName: string;
+  userEmail: string;
   dateFrom: any;
   dateTo: any;
   totalHours: number;

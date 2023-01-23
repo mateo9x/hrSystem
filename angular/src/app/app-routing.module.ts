@@ -15,6 +15,9 @@ import {ProfileComponent} from "./components/user/profile/profile-component";
 import {ProfileGuard} from "./components/authentication/profile-guard";
 import {AnonymousGuard} from "./components/authentication/anonymous-guard";
 import {HolidayRequestComponent} from "./components/work-time-report/holiday-request/holiday-request.component";
+import {
+  HolidayRequestConfirmationComponent
+} from "./components/work-time-report/holiday-request-confirmation/holiday-request-confirmation.component";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
@@ -25,6 +28,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
   { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
   { path: 'holiday-request', component: HolidayRequestComponent, canActivate: [LoginGuard] },
+  { path: 'holiday-request-confirmation', component: HolidayRequestConfirmationComponent, canActivate: [LoginGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard], loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
   { path: '**', component: PageNotFoundComponent }
 ];

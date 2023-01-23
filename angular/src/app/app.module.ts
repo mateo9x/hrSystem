@@ -42,6 +42,12 @@ import {DatePipe} from "@angular/common";
 import {
   HolidayRequestAddDialogComponent
 } from "./components/work-time-report/holiday-request/add-dialog/holiday-request-add-dialog.component";
+import {
+  HolidayRequestConfirmationComponent
+} from "./components/work-time-report/holiday-request-confirmation/holiday-request-confirmation.component";
+import {
+  HolidayRequestConfirmationEditDialogComponent
+} from "./components/work-time-report/holiday-request-confirmation/edit-dialog/holiday-request-confirmation-edit-dialog.component";
 
 @NgModule({
   declarations: [
@@ -61,7 +67,9 @@ import {
     ProfileDataComponent,
     ProfilePasswordComponent,
     HolidayRequestComponent,
-    HolidayRequestAddDialogComponent
+    HolidayRequestAddDialogComponent,
+    HolidayRequestConfirmationComponent,
+    HolidayRequestConfirmationEditDialogComponent
   ],
   imports: [
     BrowserModule,

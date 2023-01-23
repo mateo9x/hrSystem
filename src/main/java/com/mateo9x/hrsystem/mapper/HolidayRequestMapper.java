@@ -39,6 +39,8 @@ public class HolidayRequestMapper {
         return HolidayRequestDTO.builder()
                 .id(holidayRequest.getId())
                 .userId(getUserId(holidayRequest.getUser()))
+                .userFullName(getUserFullName(holidayRequest.getUser()))
+                .userEmail(getUserEmail(holidayRequest.getUser()))
                 .dateFrom(holidayRequest.getDateFrom())
                 .dateTo(holidayRequest.getDateTo())
                 .totalHours(holidayRequest.getTotalHours())
@@ -104,5 +106,13 @@ public class HolidayRequestMapper {
             return null;
         }
         return holidayRequestStatusRepository.findById(id).orElse(null);
+    }
+
+    private String getUserFullName(User user) {
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
+    private String getUserEmail(User user) {
+        return user.getEmail();
     }
 }

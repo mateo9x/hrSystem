@@ -12,4 +12,6 @@ public interface HolidayRequestRepository extends JpaRepository<HolidayRequest, 
 
     List<HolidayRequest> findAllByUserIdAndDateFromGreaterThanEqualAndDateFromLessThanEqual (Long userId, LocalDate dateFrom, LocalDate dateTo);
 
+    List<HolidayRequest> findAllByDateFromGreaterThanEqualAndDateFromLessThanEqual (LocalDate dateFrom, LocalDate dateTo);
+
 }

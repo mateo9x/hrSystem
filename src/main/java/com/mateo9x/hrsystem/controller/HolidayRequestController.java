@@ -38,14 +38,19 @@ public class HolidayRequestController {
         return ResponseEntity.ok(holidayRequestService.getAllHolidayRequestsForUserBetweenSelectedDates(userId, dateFrom, dateTo));
     }
 
+    @GetMapping("/holiday-requests/{dateFrom}/{dateTo}")
+    public ResponseEntity<List<HolidayRequestDTO>> getAllHolidayRequestsBetweenSelectedDates(@PathVariable LocalDate dateFrom, @PathVariable LocalDate dateTo) {
+        return ResponseEntity.ok(holidayRequestService.getAllHolidayRequestsBetweenSelectedDates(dateFrom, dateTo));
+    }
+
     @PostMapping("/holiday-requests")
     public ResponseEntity<HolidayRequestDTO> saveHolidayRequests(@RequestBody @Valid HolidayRequestDTO holidayRequestDTO) {
-        return ResponseEntity.ok(holidayRequestService.saveHolidayRequest(holidayRequestDTO));
+        return ResponseEntity.ok(holidayRequestService.saveHolidayRequest(holidayRequestDTO, true));
     }
 
     @PutMapping("/holiday-requests")
     public ResponseEntity<HolidayRequestDTO> updateHolidayRequests(@RequestBody @Valid HolidayRequestDTO holidayRequestDTO) {
-        return ResponseEntity.ok(holidayRequestService.saveHolidayRequest(holidayRequestDTO));
+        return ResponseEntity.ok(holidayRequestService.saveHolidayRequest(holidayRequestDTO, false));
     }
 
     @DeleteMapping("/holiday-requests/{id}")

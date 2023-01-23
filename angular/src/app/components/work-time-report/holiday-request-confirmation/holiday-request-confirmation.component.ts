@@ -18,6 +18,7 @@ export class HolidayRequestConfirmationComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   displayedColumns: any[] = [
     {label: 'Użytkownik', value: 'userFullName'},
+    {label: 'Adres e-mail', value: 'userEmail'},
     {label: 'Data od', value: 'dateFrom'},
     {label: 'Data do', value: 'dateTo'},
     {label: 'Łącznie ilość godzin', value: 'totalHours'},

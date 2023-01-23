@@ -27,10 +27,13 @@ export class SignUpComponent implements OnInit {
     this.user.lastName = '';
     this.user.password = '';
     this.user.password2 = '';
+    this.user.pesel = '';
     this.user.email = '';
     this.user.street = '';
     this.user.streetNumber = '';
+    this.user.postalCode = '';
     this.user.city = '';
+    this.user.phoneNumber = '';
   }
 
   register() {

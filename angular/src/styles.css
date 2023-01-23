@@ -94,3 +94,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --mdc-snackbar-container-color: #771313 !important;
   color: white !important;
 }
+
+tr:hover td {
+  color: white !important;
+}

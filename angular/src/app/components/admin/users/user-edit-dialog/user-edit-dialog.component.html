@@ -23,15 +23,19 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email" required/>
+          <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
+                 required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
         </mat-form-field>
+        <span *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
       </div>
 
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Pesel</mat-label>
-          <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel" required/>
+          <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
+                 required pattern="[0-9]{11}" #pesel="ngModel"/>
         </mat-form-field>
+        <span *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
       </div>
 
       <div class="input-data">

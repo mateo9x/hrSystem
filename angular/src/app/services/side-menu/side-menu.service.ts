@@ -19,12 +19,6 @@ export class SideMenuService {
         ]
       },
       {
-        label: 'Finanse', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_WORKER'],
-        childs: [
-          {label: 'Wynagrodzenie', expanded: false, routing: null, roles: ['ROLE_ADMIN', 'ROLE_WORKER'], childs: null}
-        ]
-      },
-      {
         label: 'Administracja', expanded: false, routing: null, roles: ['ROLE_ADMIN'],
         childs: [
           {label: 'Użytkownicy', expanded: false, routing: 'users', roles: ['ROLE_ADMIN'], childs: null}

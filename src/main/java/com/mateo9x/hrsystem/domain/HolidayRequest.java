@@ -2,6 +2,7 @@ package com.mateo9x.hrsystem.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class HolidayRequest {
     private Integer totalHours;
 
     @Column(name = "comment")
+    @Size(max = 255)
     private String comment;
 
     @JoinColumn(name = "request_type_id")

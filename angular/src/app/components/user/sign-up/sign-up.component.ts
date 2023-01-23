@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from 'src/app/models/user.model';
 import {UserService} from 'src/app/services/user.service';
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 
 @Component({
   selector: 'sign-up',
@@ -36,11 +36,11 @@ export class SignUpComponent implements OnInit {
   register() {
     this.userService.createUser(this.user).subscribe({
       next: () => {
-        this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie');
+        this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie', SnackBarType.SUCCESS);
         this.router.navigate(['']);
       },
       error: (errorResponse) => {
-        this.snackBarService.openSnackBar(errorResponse.error.message);
+        this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
       }
     });
   }

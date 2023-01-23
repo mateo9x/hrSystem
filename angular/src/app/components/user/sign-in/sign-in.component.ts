@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {AuthenticationRequest, AuthenticationService} from "../../../services/authentication.service";
 import {CookieService} from "ngx-cookie-service";
 
@@ -28,7 +28,7 @@ export class SignInComponent implements OnInit {
   signInUser() {
     if (this.request.email && this.request.password) {
       if (this.cookieJWT && this.cookieJWT.length > 0) {
-        this.snackBarService.openSnackBar('Jesteś już zalogowany!');
+        this.snackBarService.openSnackBar('Jesteś już zalogowany!', SnackBarType.WARN);
       } else {
         this.authenticationService.signinUser(this.request).subscribe({
           next: (successResponse) => {
@@ -36,7 +36,7 @@ export class SignInComponent implements OnInit {
               next: (getUserByJWTTokenResponse) => {
                 this.cookieService.set('jwt', successResponse.token);
                 this.cookieService.set('user', JSON.stringify(getUserByJWTTokenResponse));
-                this.snackBarService.openSnackBar('Zalogowano pomyślnie');
+                this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
                 this.appComponent.userLogged = getUserByJWTTokenResponse;
                 this.router.navigate(['']);
               }
@@ -44,9 +44,9 @@ export class SignInComponent implements OnInit {
           },
           error: (errorResponse) => {
             if (errorResponse.error) {
-              this.snackBarService.openSnackBar(errorResponse.error.message);
+              this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
             } else {
-              this.snackBarService.openSnackBar('Uwierzytelnienie nie udane');
+              this.snackBarService.openSnackBar('Uwierzytelnienie nie udane', SnackBarType.ERROR);
             }
           }
         })

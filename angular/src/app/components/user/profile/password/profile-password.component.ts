@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from 'src/app/services/user.service';
-import {SnackBarService} from "../../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../../services/material/snackbar.service";
 
 @Component({
   selector: 'profile-password',
@@ -29,10 +29,10 @@ export class ProfilePasswordComponent implements OnInit {
       const request = new ProfilePasswordRequest(this.userId, this.password);
       this.userService.updateUserPassword(request).subscribe({
         next: () => {
-          this.snackBarService.openSnackBar('Hasło zaaktualizowane pomyślnie');
+          this.snackBarService.openSnackBar('Hasło zaaktualizowane pomyślnie', SnackBarType.SUCCESS);
         },
         error: (errorResponse) => {
-          this.snackBarService.openSnackBar(errorResponse.error.message);
+          this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
         }
       });
     }

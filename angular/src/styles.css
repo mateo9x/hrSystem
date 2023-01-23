@@ -76,3 +76,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #1a266c !important;
   cursor: pointer;
 }
+
+.snack-bar-success, .snack-bar-success button {
+  background-color: #49830a !important;
+  --mdc-snackbar-container-color: #49830a !important;
+  color: white !important;
+}
+
+.snack-bar-warn, .snack-bar-warn button {
+  background-color: #d7a80e !important;
+  --mdc-snackbar-container-color: #d7a80e !important;
+  color: white !important;
+}
+
+.snack-bar-error, .snack-bar-error button {
+  background-color: #771313 !important;
+  --mdc-snackbar-container-color: #771313 !important;
+  color: white !important;
+}

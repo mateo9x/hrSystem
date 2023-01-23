@@ -3,7 +3,7 @@ import {UserService} from "../../../services/user.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogModel
@@ -84,7 +84,7 @@ export class HolidayRequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (closingMessage) => {
         if (closingMessage) {
-          this.snackBarService.openSnackBar(closingMessage);
+          this.snackBarService.openSnackBar(closingMessage.message, closingMessage.type);
           this.getHolidayRequests();
         }
       }
@@ -100,11 +100,11 @@ export class HolidayRequestComponent implements OnInit {
         if (closingMessage.accept) {
           this.holidayRequestService.deleteHolidayRequest(holidayRequest.id).subscribe({
             next: () => {
-              this.snackBarService.openSnackBar('Wniosek urlopowy pomyślnie usunięty');
+              this.snackBarService.openSnackBar('Wniosek urlopowy pomyślnie usunięty', SnackBarType.SUCCESS);
               this.getHolidayRequests();
             },
             error: () => {
-              this.snackBarService.openSnackBar('Próba usunięcia wniosku urlopowego nie powiodła się');
+              this.snackBarService.openSnackBar('Próba usunięcia wniosku urlopowego nie powiodła się', SnackBarType.ERROR);
             }
           });
         }

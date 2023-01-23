@@ -3,7 +3,7 @@ import {FormControl} from "@angular/forms";
 import {AttendanceWorkReportService} from "../../../services/attendance-work-report.service";
 import {UserService} from "../../../services/user.service";
 import {AttendanceWorkReportModel} from "../../../models/attendance-work-report.model";
-import {SnackBarService} from "../../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {User} from "../../../models/user.model";
 
 @Component({
@@ -51,11 +51,11 @@ export class AttendanceWorkReportComponent implements OnInit {
     this.attendanceWorkReportService.saveAttendanceWorkReport(this.userAlreadySavedTodayAttendanceWorkReport).subscribe({
       next: (saveResponse) => {
         this.attendanceExists = true;
-        this.snackBarService.openSnackBar('Pomyślnie zgłoszono dzisiejszą obecność w pracy');
+        this.snackBarService.openSnackBar('Pomyślnie zgłoszono dzisiejszą obecność w pracy', SnackBarType.SUCCESS);
         this.userAlreadySavedTodayAttendanceWorkReport = saveResponse;
       },
       error: () => {
-        this.snackBarService.openSnackBar('Nie udało się potwierdzić dzisiejszej obecności w pracy');
+        this.snackBarService.openSnackBar('Nie udało się potwierdzić dzisiejszej obecności w pracy', SnackBarType.ERROR);
       }
     });
   }
@@ -65,11 +65,11 @@ export class AttendanceWorkReportComponent implements OnInit {
     this.attendanceWorkReportService.updateAttendanceWorkReport(this.userAlreadySavedTodayAttendanceWorkReport).subscribe({
       next: (updateResponse) => {
         this.attendanceExists = true;
-        this.snackBarService.openSnackBar('Pomyślnie zaaktualizowano dzisiejszą obecność w pracy');
+        this.snackBarService.openSnackBar('Pomyślnie zaaktualizowano dzisiejszą obecność w pracy', SnackBarType.SUCCESS);
         this.userAlreadySavedTodayAttendanceWorkReport = updateResponse;
       },
       error: () => {
-        this.snackBarService.openSnackBar('Nie udało się zaaktualizować dzisiejszej obecności w pracy');
+        this.snackBarService.openSnackBar('Nie udało się zaaktualizować dzisiejszej obecności w pracy', SnackBarType.ERROR);
       }
     });
   }

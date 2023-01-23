@@ -3,7 +3,7 @@ import {SideMenuModel, SideMenuService} from "../../services/side-menu/side-menu
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user.model";
-import {SnackBarService} from "../../services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "../../services/material/snackbar.service";
 
 @Component({
   selector: 'side-menu',
@@ -42,7 +42,7 @@ export class SideMenuComponent implements OnInit, OnChanges {
   }
 
   showInfoSideMenuDialog() {
-    this.snackBarService.openSnackBar('W celu uzyskania dostępu do funkcjonalności aplikacji - zaloguj się');
+    this.snackBarService.openSnackBar('W celu uzyskania dostępu do funkcjonalności aplikacji - zaloguj się', SnackBarType.WARN);
   }
 
   filterTabsForUserRoles(tabs: SideMenuModel[]) {

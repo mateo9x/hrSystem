@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {SnackBarService} from "./services/material/snackbar.service";
+import {SnackBarService, SnackBarType} from "./services/material/snackbar.service";
 import {User} from "./models/user.model";
 import {AuthenticationService} from "./services/authentication.service";
 import {UserService} from "./services/user.service";
@@ -39,12 +39,12 @@ export class AppComponent implements OnInit {
         if (userLoggedOut) {
           this.cookieService.delete('jwt');
           this.cookieService.delete('user');
-          this.snackBarService.openSnackBar('Wylogowano pomyślnie');
+          this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS);
           this.userLogged = null;
         }
       },
       error: () => {
-        this.snackBarService.openSnackBar('Wylogowanie nie powiodło się');
+        this.snackBarService.openSnackBar('Wylogowanie nie powiodło się', SnackBarType.ERROR);
       }
     })
   }

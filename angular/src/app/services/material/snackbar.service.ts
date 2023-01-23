@@ -8,7 +8,24 @@ export class SnackBarService {
 
   constructor(private snackBar:MatSnackBar) { }
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'OK');
+  openSnackBar(message: string, type: SnackBarType) {
+    const style = this.getStyle(type);
+    this.snackBar.open(message, 'OK', {
+      panelClass: style
+    });
   }
+
+  getStyle(type: SnackBarType): string {
+    switch(type) {
+      case SnackBarType.SUCCESS: return 'snack-bar-success';
+      case SnackBarType.WARN: return 'snack-bar-warn';
+      case SnackBarType.ERROR: return 'snack-bar-error';
+    }
+  }
+}
+
+export enum SnackBarType {
+  SUCCESS,
+  WARN,
+  ERROR
 }

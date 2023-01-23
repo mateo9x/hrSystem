@@ -11,6 +11,6 @@ export class User {
   streetNumber?: string;
   postalCode?: string;
   city?: string;
-  phoneNumber?: number;
+  phoneNumber?: string;
   resetToken?: string;
 }

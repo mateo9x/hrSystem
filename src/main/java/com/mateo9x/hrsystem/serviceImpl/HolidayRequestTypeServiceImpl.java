@@ -1,5 +1,6 @@
 package com.mateo9x.hrsystem.serviceImpl;
 
+import com.mateo9x.hrsystem.domain.HolidayRequestType;
 import com.mateo9x.hrsystem.dto.HolidayRequestTypeDTO;
 import com.mateo9x.hrsystem.mapper.HolidayRequestTypeMapper;
 import com.mateo9x.hrsystem.repository.HolidayRequestTypeRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparing;
 
 @Slf4j
 @AllArgsConstructor
@@ -22,6 +25,10 @@ public class HolidayRequestTypeServiceImpl implements HolidayRequestTypeService 
     @Override
     public List<HolidayRequestTypeDTO> getAll() {
         log.info("Request to get holiday request types");
-        return holidayRequestTypeRepository.findAll().stream().map(holidayRequestTypeMapper::toDTO).collect(Collectors.toList());
+        return holidayRequestTypeRepository.findAll()
+                .stream()
+                .sorted(comparing(HolidayRequestType::getName))
+                .map(holidayRequestTypeMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

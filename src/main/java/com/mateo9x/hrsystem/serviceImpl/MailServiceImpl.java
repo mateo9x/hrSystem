@@ -32,6 +32,21 @@ public class MailServiceImpl implements MailService {
             log.error("Nie udało się wysłać maila resetującego hasła: {}", e.getMessage());
         }
     }
+    @Override
+    public void sendNewUserMail(UserDTO userDTO) {
+        String userFullName = userDTO.getFirstName() + " " + userDTO.getLastName();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@hrsystem.pl");
+        message.setTo(userDTO.getEmail());
+        message.setSubject("HR System - Rejestracja konta");
+        message.setText("Witaj " + userFullName + "!\n\nTwoje konto w portalu HR System zostało pomyślnie zarejestrowane.\n\nPoproś przełożonego o nadanie uprawnień w celu możliwości logowania do aplikacji. \n\nMiłego dnia :)");
+
+        try {
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            log.error("Nie udało się wysłać maila powitalnego: {}", e.getMessage());
+        }
+    }
 
     @Override
     public void sendMessageToUserAboutAttendanceWorkReportForToday(UserDTO userDTO) {

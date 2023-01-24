@@ -9,4 +9,5 @@ public interface MailService {
     void sendMessageToUserAboutAttendanceWorkReportForToday(UserDTO userDTO);
 
 
+    void sendNewUserMail(UserDTO userDTO);
 }

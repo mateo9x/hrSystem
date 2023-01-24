@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
         }
         if (firstCreate) {
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            mailService.sendNewUserMail(userDTO);
         }
         User savedUser = userRepository.save(userMapper.toEntity(userDTO));
         return userMapper.toDTO(savedUser);

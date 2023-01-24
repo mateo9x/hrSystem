@@ -12,4 +12,5 @@ public interface MailService {
     void sendMessageToUserThatHisHolidayRequestStatusHasChanged(HolidayRequestDTO holidayRequestDTO, String oldStatus);
 
 
+    void sendNewUserMail(UserDTO userDTO);
 }

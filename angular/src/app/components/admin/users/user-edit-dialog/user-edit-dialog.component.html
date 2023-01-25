@@ -67,8 +67,8 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Kod Pocztowy</mat-label>
-          <input matInput type="text" name="postalCode" style="display:inline-block" [(ngModel)]="user.postalCode"
-                 pattern="[0-9]{2}-[0-9]{3}" #postalCode="ngModel"/>
+          <input matInput type="text" name="postalCode" mask="00-000" style="display:inline-block" [(ngModel)]="user.postalCode"
+                 #postalCode="ngModel"/>
         </mat-form-field>
         <span *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
       </div>
@@ -83,8 +83,8 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Numer telefonu</mat-label>
-          <input matInput type="text" name="phoneNumber" style="display:inline-block" [(ngModel)]="user.phoneNumber"
-                 onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="[0-9]{9}"
+          <input matInput type="text" name="phoneNumber" mask="000 000 000" style="display:inline-block" [(ngModel)]="user.phoneNumber"
+                 onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                  #phoneNumber="ngModel"/>
         </mat-form-field>
       </div>

@@ -9,15 +9,22 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Imię</mat-label>
-          <input matInput [(ngModel)]="user.firstName" name="firstName" type="text" required>
+          <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Z]+[a-zA-Z]{1,13}" type="text" required
+                 onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
+                 #firstName="ngModel">
         </mat-form-field>
+        <span *ngIf="firstName.errors">Imię musi zaczynać się z dużej litery i być bez cyfr.</span>
       </div>
 
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Nazwisko</mat-label>
-          <input matInput [(ngModel)]="user.lastName" name="lastName" type="text" required>
+          <input matInput [(ngModel)]="user.lastName" name="lastName" pattern="[A-Z]+[a-zA-Z]{1,35}" type="text" required
+                 onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
+                 #lastName="ngModel">
+
         </mat-form-field>
+        <span *ngIf="lastName.errors">Nazwisko musi zaczynać się z dużej litery i być bez cyfr.</span>
       </div>
 
       <div class="input-data">
@@ -67,8 +74,8 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Kod Pocztowy</mat-label>
-          <input matInput type="text" name="postalCode" style="display:inline-block" [(ngModel)]="user.postalCode"
-                 pattern="[0-9]{2}-[0-9]{3}" #postalCode="ngModel"/>
+          <input matInput type="text" name="postalCode" mask="00-000" style="display:inline-block" [(ngModel)]="user.postalCode"
+                 #postalCode="ngModel"/>
         </mat-form-field>
         <span *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
       </div>
@@ -83,8 +90,8 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Numer telefonu</mat-label>
-          <input matInput type="text" name="phoneNumber" style="display:inline-block" [(ngModel)]="user.phoneNumber"
-                 onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="[0-9]{9}"
+          <input matInput type="text" name="phoneNumber" mask="000 000 000" style="display:inline-block" [(ngModel)]="user.phoneNumber"
+                 onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                  #phoneNumber="ngModel"/>
         </mat-form-field>
       </div>

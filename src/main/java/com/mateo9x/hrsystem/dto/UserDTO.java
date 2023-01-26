@@ -39,7 +39,7 @@ public class UserDTO {
 
     private String streetNumber;
 
-    @Size(min= 6, max=6)
+    @Size(min = 5, max = 5)
     private String postalCode;
 
     private String city;

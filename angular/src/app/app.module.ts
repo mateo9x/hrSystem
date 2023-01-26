@@ -48,6 +48,7 @@ import {
 import {
   HolidayRequestConfirmationEditDialogComponent
 } from "./components/work-time-report/holiday-request-confirmation/edit-dialog/holiday-request-confirmation-edit-dialog.component";
+import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -89,9 +90,12 @@ import {
     MatSelectModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
+    provideNgxMask(),
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {

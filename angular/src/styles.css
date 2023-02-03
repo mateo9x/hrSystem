@@ -1,8 +1,12 @@
+:root {
+  --main-color: #3f51b5;
+  --main-color-hover: #2b3983;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 button {
-  background-color: #3f51b5;
+  background-color: var(--main-color);
   border: none;
   color: white;
   padding: 8px 16px;
@@ -15,7 +19,7 @@ button {
 }
 
 button:hover {
-  background-color: #32429b;
+  background-color: var(--main-color-hover);
 }
 
 a {
@@ -28,7 +32,7 @@ a:after {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #32429b;
+  background-color: var(--main-color);
   content: "";
   transition: width 0.2s;
 }
@@ -65,15 +69,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .selected-row {
-  background-color: #3f51b5 !important;
+  background-color: var(--main-color) !important;
 }
 
 .selected-row:hover {
-  background-color: #1a266c !important;
+  background-color: var(--main-color-hover) !important;
 }
 
 .table-row:hover {
-  background-color: #1a266c !important;
+  background-color: var(--main-color-hover) !important;
   cursor: pointer;
 }
 
@@ -102,4 +106,8 @@ tr:hover td {
 .error-span {
   color:red;
   font-size:12px;
+}
+
+.white-icon {
+  color:white;
 }

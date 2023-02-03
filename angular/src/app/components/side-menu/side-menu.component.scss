@@ -18,15 +18,15 @@ table {
 table,tr,td,cell {
   width: 100%;
   color: white;
-  background-color: #3f51b5;
+  background-color: var(--main-color);
 }
 tr {
-  background-color: #3f51b5;
+  background-color: var(--main-color);
   padding: 5px;
 }
 
 tr:hover,td:hover,cell:hover {
-  background-color: #1a266c;
+  background-color: var(--main-color-hover);
 }
 
 .main-row {

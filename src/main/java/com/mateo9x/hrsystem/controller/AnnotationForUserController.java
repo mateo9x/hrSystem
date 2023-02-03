@@ -28,8 +28,8 @@ public class AnnotationForUserController {
     }
 
     @PutMapping("/annotations-for-users/readed")
-    public ResponseEntity<Boolean> updateAnnotationReadedValue(@RequestBody @Valid Long id) {
-        return ResponseEntity.ok(annotationForUserService.updateAnnotationReadedValue(id));
+    public ResponseEntity<Boolean> updateAnnotationReadedValue(@RequestBody @Valid List<Long> ids) {
+        return ResponseEntity.ok(annotationForUserService.updateAnnotationsReadedValues(ids));
     }
 
     @DeleteMapping("/annotations-for-users/{id}")

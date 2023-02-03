@@ -8,7 +8,7 @@
         <td>
           <mat-checkbox color="primary"
                         [(ngModel)]="annotation.readed" name="readed" matTooltip="Przeczytano"
-                        (change)="updateAnnotationReadedValue(annotation)">
+          (change)="annotationReadedChange(annotation)">
           </mat-checkbox>
         </td>
         <td class="remove-icon" matTooltip="Usuń powiadomienie">

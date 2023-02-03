@@ -6,10 +6,7 @@ import com.mateo9x.hrsystem.service.AnnotationForUserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,20 @@ public class AnnotationForUserController {
     @PostMapping("/annotations-for-users")
     public ResponseEntity<List<AnnotationForUserDTO>> saveAnnotationsForUsers(@RequestBody @Valid AnnotationForUserRequestDTO annotationForUserRequestDTO) {
         return ResponseEntity.ok(annotationForUserService.saveAnnotationsForUser(annotationForUserRequestDTO));
+    }
+
+    @GetMapping("/annotations-for-users/{id}")
+    public ResponseEntity<List<AnnotationForUserDTO>> getAnnotationsForUser(@PathVariable Long id) {
+        return ResponseEntity.ok(annotationForUserService.getAnnotationsForUser(id));
+    }
+
+    @PutMapping("/annotations-for-users/readed")
+    public ResponseEntity<Boolean> updateAnnotationReadedValue(@RequestBody @Valid Long id) {
+        return ResponseEntity.ok(annotationForUserService.updateAnnotationReadedValue(id));
+    }
+
+    @DeleteMapping("/annotations-for-users/{id}")
+    public ResponseEntity<Boolean> deleteAnnotationById(@PathVariable Long id) {
+        return ResponseEntity.ok(annotationForUserService.deleteAnnotationById(id));
     }
 }

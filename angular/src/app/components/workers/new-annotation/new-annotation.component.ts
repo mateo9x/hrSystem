@@ -39,7 +39,7 @@ export class NewAnnotationComponent implements OnInit {
 
   sendAnnotations() {
     this.newAnnotationRequest = this.newAnnotationFormService.convertFormToNewAnnotationRequest(this.newAnnotationForm);
-    this.annotationForUserService.saveAnnotationsForUser(this.newAnnotationRequest).subscribe({
+    this.annotationForUserService.saveAnnotationsForUsers(this.newAnnotationRequest).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Powiadomienie wysłane pomyślnie', SnackBarType.SUCCESS);
         this.newAnnotationFormService.clearForm(this.newAnnotationForm);

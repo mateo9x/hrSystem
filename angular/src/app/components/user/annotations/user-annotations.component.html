@@ -1,0 +1,7 @@
+<i class="fa fa-bell white-icon" *ngIf="annotations.length > 0" (click)="toggleAnnotationDialog()"></i>
+<i class="fa fa-bell-slash white-icon" *ngIf="annotations.length === 0" (click)="toggleAnnotationDialog()"></i>
+<user-annotations-dialog
+  *ngIf="annotationDialogOpened"
+  [annotations]="annotations"
+  class="user-annotation-dialog">
+</user-annotations-dialog>

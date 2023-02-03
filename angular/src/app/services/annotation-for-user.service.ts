@@ -13,9 +13,22 @@ export class AnnotationForUserService {
   constructor(private http: HttpClient) {
   }
 
-  public saveAnnotationsForUser(request: AnnotationForUserRequest) {
+  public saveAnnotationsForUsers(request: AnnotationForUserRequest) {
     return this.http.post<AnnotationForUser[]>(`${this.attendanceWorkUrl}`, request);
   }
+
+  public getAnnotationsForUser(userId: number) {
+    return this.http.get<AnnotationForUser[]>(`${this.attendanceWorkUrl}/${userId}`);
+  }
+
+  public updateAnnotationReadedValue(id: number) {
+    return this.http.put<boolean>(`${this.attendanceWorkUrl}/readed`, id);
+  }
+
+  public deleteAnnotationById(id: number) {
+    return this.http.delete<boolean>(`${this.attendanceWorkUrl}/${id}`);
+  }
+
 }
 
 export class AnnotationForUserRequest {

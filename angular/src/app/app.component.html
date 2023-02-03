@@ -6,15 +6,16 @@
     </div>
 
     <div class="header_right_section">
-      <a *ngIf="userLogged === null" routerLink="sign-in" routerLinkActive="active">
+      <user-annotations class="padding_10" *ngIf="userLogged" [userId]="userLogged.id"></user-annotations>
+      <a *ngIf="!userLogged" routerLink="sign-in" routerLinkActive="active">
         <i class="fa fa-user" aria-hidden="true"></i>
         <span class="padding_10">Zaloguj się</span></a>
 
-      <a *ngIf="userLogged !== null" routerLink="profile" routerLinkActive="active" >
+      <a *ngIf="userLogged" routerLink="profile" routerLinkActive="active">
         <i class="fa fa-user" aria-hidden="true"></i>
         <span class="padding_10">Profil</span></a>
 
-      <a *ngIf="userLogged !== null" routerLink="" routerLinkActive="active" (click)="logOut()">
+      <a *ngIf="userLogged" routerLink="" routerLinkActive="active" (click)="logOut()">
         <i class="fa fa-power-off" aria-hidden="true"></i>
         <span class="padding_10">Wyloguj się</span></a>
     </div>

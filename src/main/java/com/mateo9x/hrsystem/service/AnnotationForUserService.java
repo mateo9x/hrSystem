@@ -11,7 +11,7 @@ public interface AnnotationForUserService {
 
     List<AnnotationForUserDTO> getAnnotationsForUser(Long id);
 
-    Boolean updateAnnotationReadedValue(Long id);
+    Boolean updateAnnotationsReadedValues(List<Long> ids);
 
     Boolean deleteAnnotationById(Long id);
 }

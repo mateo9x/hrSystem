@@ -21,7 +21,7 @@ export class AnnotationForUserService {
     return this.http.get<AnnotationForUser[]>(`${this.attendanceWorkUrl}/${userId}`);
   }
 
-  public updateAnnotationReadedValue(id: number) {
+  public updateAnnotationsReadedValues(id: number[]) {
     return this.http.put<boolean>(`${this.attendanceWorkUrl}/readed`, id);
   }
 

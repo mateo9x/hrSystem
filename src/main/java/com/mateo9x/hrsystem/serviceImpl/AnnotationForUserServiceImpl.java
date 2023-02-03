@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,7 +48,13 @@ public class AnnotationForUserServiceImpl implements AnnotationForUserService {
     }
 
     @Override
-    public Boolean updateAnnotationReadedValue(Long id) {
+    public Boolean updateAnnotationsReadedValues(List<Long> ids) {
+        AtomicReference<Boolean> result = new AtomicReference<>(false);
+        ids.forEach(id -> result.set(updateAnnotationReadedValue(id)));
+        return result.get();
+    }
+
+    private Boolean updateAnnotationReadedValue(Long id) {
         AnnotationForUser annotation = annotationForUserRepository.findById(id).orElse(null);
         if (annotation == null) {
             return false;

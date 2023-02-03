@@ -14,10 +14,6 @@ export class UserAnnotationsDialogComponent {
   constructor(private annotationForUserService: AnnotationForUserService, @Inject(UserAnnotationsComponent) private userAnnotationsComponent: UserAnnotationsComponent) {
   }
 
-  updateAnnotationReadedValue(selectedAnnotation: AnnotationForUser) {
-    this.annotationForUserService.updateAnnotationReadedValue(selectedAnnotation.id).subscribe();
-  }
-
   deleteAnnotation(selectedAnnotation: AnnotationForUser) {
     this.annotationForUserService.deleteAnnotationById(selectedAnnotation.id).subscribe({
       next: (response) => {
@@ -26,6 +22,10 @@ export class UserAnnotationsDialogComponent {
         }
       }
     });
+  }
+
+  annotationReadedChange(selectedAnnotation: AnnotationForUser) {
+    selectedAnnotation.readedChanged = true;
   }
 
 }

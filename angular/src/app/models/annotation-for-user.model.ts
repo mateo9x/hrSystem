@@ -6,6 +6,7 @@ export class AnnotationForUser {
   createDate: Date;
   message: string;
   readed: boolean;
+  readedChanged = false;
 }
 
 export class AnnotationForUsersRequest {

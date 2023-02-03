@@ -18,12 +18,12 @@ export class UserAnnotationsComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickOut(event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
-      this.annotationDialogOpened = false;
       const annotationsModified = this.annotations.filter(annotation => annotation.readedChanged);
-      if (annotationsModified) {
+      if (annotationsModified.length > 0 && this.annotationDialogOpened) {
         const ids = annotationsModified.map(annotation => annotation.id);
         this.annotationForUserService.updateAnnotationsReadedValues(ids).subscribe();
       }
+      this.annotationDialogOpened = false;
     }
   }
 

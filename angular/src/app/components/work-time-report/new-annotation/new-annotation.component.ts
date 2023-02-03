@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
 import {User} from "../../../models/user.model";
 import {NewAnnotationFormService} from "./new-annotation-form.service";
 import {AnnotationForUsersRequest} from "../../../models/annotation-for-user.model";
@@ -17,12 +17,9 @@ export class NewAnnotationComponent implements OnInit {
   newAnnotationRequest: AnnotationForUsersRequest = new AnnotationForUsersRequest();
   newAnnotationForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private snackBarService: SnackBarService,
+  constructor(private userService: UserService, private snackBarService: SnackBarService,
               private newAnnotationFormService: NewAnnotationFormService, private annotationForUserService: AnnotationForUserService) {
-    this.newAnnotationForm = this.fb.group({
-      selectedUsers: this.newAnnotationFormService.getValidatorsForUsers(),
-      annotationMessage: this.newAnnotationFormService.getValidatorsForMessage()
-    });
+    this.newAnnotationForm = this.newAnnotationFormService.getFormGroup();
   }
 
   ngOnInit() {
@@ -44,10 +41,11 @@ export class NewAnnotationComponent implements OnInit {
     this.newAnnotationRequest = this.newAnnotationFormService.convertFormToNewAnnotationRequest(this.newAnnotationForm);
     this.annotationForUserService.saveAnnotationsForUser(this.newAnnotationRequest).subscribe({
       next: () => {
-        this.snackBarService.openSnackBar('Komunikaty wysłane pomyślnie', SnackBarType.SUCCESS);
+        this.snackBarService.openSnackBar('Powiadomienie wysłane pomyślnie', SnackBarType.SUCCESS);
+        this.newAnnotationFormService.clearForm(this.newAnnotationForm);
       },
       error: () => {
-        this.snackBarService.openSnackBar('Nie udało wysłać się komunikatu', SnackBarType.ERROR);
+        this.snackBarService.openSnackBar('Nie udało wysłać się powiadomienia', SnackBarType.ERROR);
       }
     })
   }

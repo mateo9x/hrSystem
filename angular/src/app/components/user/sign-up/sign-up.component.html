@@ -9,7 +9,7 @@
              onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
              #firstName="ngModel">
     </mat-form-field>
-    <span *ngIf="firstName.errors">Imię musi zaczynać się z dużej litery i być bez cyfr.</span>
+    <span class="error-span" *ngIf="firstName.errors">Imię musi zaczynać się z dużej litery i być bez cyfr.</span>
   </div>
 
   <div class="input-data">
@@ -19,7 +19,7 @@
              onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
              #lastName="ngModel">
     </mat-form-field>
-    <span *ngIf="lastName.errors">Nazwisko musi zaczynać się z dużej litery i być bez cyfr.</span>
+    <span class="error-span" *ngIf="lastName.errors">Nazwisko musi zaczynać się z dużej litery i być bez cyfr.</span>
   </div>
 
   <div class="input-data">
@@ -28,7 +28,7 @@
       <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
              required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
     </mat-form-field>
-    <span *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+    <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
@@ -36,7 +36,7 @@
       <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
              required pattern="[0-9]{11}" #pesel="ngModel"/>
     </mat-form-field>
-    <span *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
+    <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
   </div>
 
   <div class="input-data">
@@ -45,7 +45,7 @@
       <input matInput type="password" name="password" style="display:inline-block" [(ngModel)]="user.password"
              min="5" required #password="ngModel"/>
     </mat-form-field>
-    <span *ngIf="password.errors">Hasło musi mieć min 5 znaków</span>
+    <span class="error-span" *ngIf="password.errors">Hasło musi mieć min 5 znaków</span>
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
@@ -53,7 +53,7 @@
       <input matInput type="password" name="password2"
              [(ngModel)]="user.password2" #password2="ngModel" min="5"/>
     </mat-form-field>
-      <span
+      <span class="error-span"
         *ngIf="password2.errors || user.password && user.password !== user.password2 ">Hasło muszą do siebie pasować</span>
 
   </div>
@@ -75,7 +75,7 @@
       <input matInput type="text" name="postalCode" mask="00-000" style="display:inline-block" [(ngModel)]="user.postalCode"
               #postalCode="ngModel"/>
     </mat-form-field>
-    <span *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+    <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">

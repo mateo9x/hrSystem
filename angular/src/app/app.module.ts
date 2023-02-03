@@ -49,6 +49,7 @@ import {
   HolidayRequestConfirmationEditDialogComponent
 } from "./components/work-time-report/holiday-request-confirmation/edit-dialog/holiday-request-confirmation-edit-dialog.component";
 import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
+import {NewAnnotationComponent} from "./components/work-time-report/new-annotation/new-annotation.component";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
     HolidayRequestComponent,
     HolidayRequestAddDialogComponent,
     HolidayRequestConfirmationComponent,
-    HolidayRequestConfirmationEditDialogComponent
+    HolidayRequestConfirmationEditDialogComponent,
+    NewAnnotationComponent
   ],
   imports: [
     BrowserModule,

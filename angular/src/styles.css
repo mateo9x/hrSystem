@@ -98,3 +98,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 tr:hover td {
   color: white !important;
 }
+
+.error-span {
+  color:red;
+  font-size:12px;
+}

@@ -7,3 +7,9 @@ export class AnnotationForUser {
   message: string;
   readed: boolean;
 }
+
+export class AnnotationForUsersRequest {
+  userIds: number[];
+  createDate: Date;
+  message: string;
+}

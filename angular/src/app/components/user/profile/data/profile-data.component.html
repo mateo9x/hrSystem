@@ -22,7 +22,7 @@
       <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
              required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
     </mat-form-field>
-    <span *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+    <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
   </div>
 
   <div class="input-data">
@@ -31,7 +31,7 @@
       <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
              required pattern="[0-9]{11}" #pesel="ngModel"/>
     </mat-form-field>
-    <span *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
+    <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
   </div>
 
   <div class="input-data">
@@ -54,7 +54,7 @@
       <input matInput type="text" name="postalCode" style="display:inline-block" [(ngModel)]="user.postalCode"
              pattern="[0-9]{2}-[0-9]{3}" #postalCode="ngModel"/>
     </mat-form-field>
-    <span *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+    <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
   </div>
 
   <div class="input-data">

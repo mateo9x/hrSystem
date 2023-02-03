@@ -15,7 +15,8 @@ export class SideMenuService {
         childs: [
           {label: 'Zgłoszenie obecności w pracy', expanded: false, routing: 'attendance-work-report', roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR', 'ROLE_WORKER'], childs: null},
           {label: 'Wnioski urlopowe', expanded: false, routing: 'holiday-request', roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR', 'ROLE_WORKER'], childs: null},
-          {label: 'Akceptacja wniosków urlopowych', expanded: false, routing: 'holiday-request-confirmation', roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR'], childs: null}
+          {label: 'Akceptacja wniosków urlopowych', expanded: false, routing: 'holiday-request-confirmation', roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR'], childs: null},
+          {label: 'Powiadomienia do użytkowników', expanded: false, routing: 'new-annotation', roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR'], childs: null}
         ]
       },
       {

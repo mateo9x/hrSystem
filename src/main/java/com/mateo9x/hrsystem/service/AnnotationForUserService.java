@@ -8,4 +8,10 @@ import java.util.List;
 public interface AnnotationForUserService {
 
     List<AnnotationForUserDTO> saveAnnotationsForUser(AnnotationForUserRequestDTO annotationForUserRequestDTO);
+
+    List<AnnotationForUserDTO> getAnnotationsForUser(Long id);
+
+    Boolean updateAnnotationReadedValue(Long id);
+
+    Boolean deleteAnnotationById(Long id);
 }

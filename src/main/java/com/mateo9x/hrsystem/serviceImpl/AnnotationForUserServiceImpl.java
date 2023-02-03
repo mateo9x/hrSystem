@@ -14,7 +14,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,6 +36,31 @@ public class AnnotationForUserServiceImpl implements AnnotationForUserService {
             return savedAnnotations;
         }
         return savedAnnotations;
+    }
+
+    @Override
+    public List<AnnotationForUserDTO> getAnnotationsForUser(Long id) {
+        return annotationForUserRepository.getAllByUserId(id).stream()
+                .map(annotationForUserMapper::toDTO)
+                .sorted(Comparator.comparing(AnnotationForUserDTO::getCreateDate).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean updateAnnotationReadedValue(Long id) {
+        AnnotationForUser annotation = annotationForUserRepository.findById(id).orElse(null);
+        if (annotation == null) {
+            return false;
+        }
+        annotation.setReaded(!annotation.getReaded());
+        annotationForUserRepository.save(annotation);
+        return true;
+    }
+
+    @Override
+    public Boolean deleteAnnotationById(Long id) {
+        annotationForUserRepository.deleteById(id);
+        return annotationForUserRepository.findById(id).isEmpty();
     }
 
     private AnnotationForUserDTO saveAnnotationForUser(Long userId, AnnotationForUserRequestDTO annotationForUserRequestDTO) {

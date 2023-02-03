@@ -49,7 +49,10 @@ import {
   HolidayRequestConfirmationEditDialogComponent
 } from "./components/work-time-report/holiday-request-confirmation/edit-dialog/holiday-request-confirmation-edit-dialog.component";
 import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
-import {NewAnnotationComponent} from "./components/work-time-report/new-annotation/new-annotation.component";
+import {NewAnnotationComponent} from "./components/workers/new-annotation/new-annotation.component";
+import {UserAnnotationsComponent} from "./components/user/annotations/user-annotations.component";
+import {UserAnnotationsDialogComponent} from "./components/user/annotations/dialog/user-annotations-dialog.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -72,7 +75,9 @@ import {NewAnnotationComponent} from "./components/work-time-report/new-annotati
     HolidayRequestAddDialogComponent,
     HolidayRequestConfirmationComponent,
     HolidayRequestConfirmationEditDialogComponent,
-    NewAnnotationComponent
+    NewAnnotationComponent,
+    UserAnnotationsComponent,
+    UserAnnotationsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +99,8 @@ import {NewAnnotationComponent} from "./components/work-time-report/new-annotati
     MatDatepickerModule,
     MatNativeDateModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatTooltipModule
   ],
   providers: [
     provideNgxMask(),

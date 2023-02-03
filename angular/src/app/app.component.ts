@@ -13,7 +13,6 @@ import {CookieService} from "ngx-cookie-service";
 
 @HostListener('mouseover', ['$event'])
 export class AppComponent implements OnInit {
-
   userLogged: User = null;
   cookieJWT: string;
 
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
         next: (getUserByJWTTokenResponse) => {
           this.userLogged = getUserByJWTTokenResponse;
         }
-      })
+      });
     }
   }
 

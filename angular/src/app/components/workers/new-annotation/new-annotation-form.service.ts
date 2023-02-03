@@ -25,7 +25,7 @@ export class NewAnnotationFormService {
   }
 
   private getValidatorsForMessage() {
-    return [null, [Validators.required, Validators.minLength(20), Validators.maxLength(255)]];
+    return [null, [Validators.required, Validators.minLength(10), Validators.maxLength(255)]];
   }
 
   public convertFormToNewAnnotationRequest(fb: FormGroup): AnnotationForUsersRequest {

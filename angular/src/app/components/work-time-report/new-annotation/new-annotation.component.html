@@ -1,0 +1,34 @@
+<form class="form" [formGroup]="newAnnotationForm" novalidate>
+
+  <h1>Powiadomienia do użytkowników</h1>
+
+  <div class="input-data">
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz użytkowników</mat-label>
+      <mat-select formControlName="selectedUsers" multiple>
+        <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}} ({{user.email}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="input-data">
+    <mat-form-field appearance="fill">
+      <mat-label>Treść komunikatu</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="10"
+                formControlName="annotationMessage" maxlength="255"></textarea>
+    </mat-form-field>
+    <span class="error-span" [hidden]="!annotationMessage.errors?.minlength">Minimalna długość komunikatu to 20 znaków</span>
+  </div>
+
+  <div class="button-container">
+    <button mat-raised-button color="primary"
+            [disabled]="newAnnotationForm.status !== 'VALID'" (click)="sendAnnotations()">Wyślij powiadomienie
+    </button>
+  </div>
+
+</form>

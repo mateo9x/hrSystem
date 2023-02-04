@@ -38,6 +38,13 @@ tr:hover td {
 .message {
   text-align: left;
   padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message:hover {
+  cursor: pointer;
 }
 
 tr:hover {

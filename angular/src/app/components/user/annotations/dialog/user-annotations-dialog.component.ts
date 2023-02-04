@@ -1,24 +1,33 @@
-import {Component, Inject, Input} from "@angular/core";
+import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {AnnotationForUser} from "../../../../models/annotation-for-user.model";
 import {AnnotationForUserService} from "../../../../services/annotation-for-user.service";
-import {UserAnnotationsComponent} from "../user-annotations.component";
+import {AnnotationForUserWebsocketService} from "../../../../services/websocket/annotation-for-user-websocket.service";
 
 @Component({
   selector: 'user-annotations-dialog',
   templateUrl: './user-annotations-dialog.component.html',
   styleUrls: ['./user-annotations-dialog.component.scss']
 })
-export class UserAnnotationsDialogComponent {
-  @Input() annotations: AnnotationForUser[] = [];
+export class UserAnnotationsDialogComponent implements OnChanges {
+  @Input() annotations: any[] = [];
+  @Input() userId: number;
 
-  constructor(private annotationForUserService: AnnotationForUserService, @Inject(UserAnnotationsComponent) private userAnnotationsComponent: UserAnnotationsComponent) {
+  constructor(private annotationForUserService: AnnotationForUserService,
+              private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.annotations.currentValue) {
+      this.annotations = this.annotations[this.annotations.length - 1];
+    }
   }
 
   deleteAnnotation(selectedAnnotation: AnnotationForUser) {
     this.annotationForUserService.deleteAnnotationById(selectedAnnotation.id).subscribe({
       next: (response) => {
         if (response) {
-          this.userAnnotationsComponent.annotations = this.annotations.filter(annotation => annotation.id != selectedAnnotation.id);
+          this.annotationForUserWebsocketService.sendMessage(this.userId);
+          this.annotations = this.annotations.filter(annotation => annotation.id !== selectedAnnotation.id);
         }
       }
     });

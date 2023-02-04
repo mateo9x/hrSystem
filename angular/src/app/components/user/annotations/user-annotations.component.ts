@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {AnnotationForUser} from "../../../models/annotation-for-user.model";
 import {AnnotationForUserService} from "../../../services/annotation-for-user.service";
+import {AnnotationForUserWebsocketService} from "../../../services/websocket/annotation-for-user-websocket.service";
 
 @Component({
   selector: 'user-annotations',
@@ -9,16 +9,17 @@ import {AnnotationForUserService} from "../../../services/annotation-for-user.se
 })
 export class UserAnnotationsComponent implements OnInit {
   annotationDialogOpened = false;
-  annotations: AnnotationForUser[] = [];
+  annotations: any[] = [];
   @Input() userId: number;
 
-  constructor(private eRef: ElementRef, private annotationForUserService: AnnotationForUserService) {
+  constructor(private eRef: ElementRef, private annotationForUserService: AnnotationForUserService,
+              private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
   }
 
   @HostListener('document:click', ['$event'])
   clickOut(event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
-      const annotationsModified = this.annotations.filter(annotation => annotation.readedChanged);
+      const annotationsModified = this.annotations[this.annotations.length - 1].filter(annotation => annotation.readedChanged);
       if (annotationsModified.length > 0 && this.annotationDialogOpened) {
         const ids = annotationsModified.map(annotation => annotation.id);
         this.annotationForUserService.updateAnnotationsReadedValues(ids).subscribe();
@@ -29,14 +30,8 @@ export class UserAnnotationsComponent implements OnInit {
 
   ngOnInit() {
     if (this.userId) {
-      this.annotationForUserService.getAnnotationsForUser(this.userId).subscribe({
-        next: (response) => {
-          this.annotations = response;
-        },
-        error: () => {
-          this.annotations = [];
-        }
-      });
+      this.annotationForUserWebsocketService.connect(this.userId);
+      this.annotations = this.annotationForUserWebsocketService.annotationsWebSocket;
     }
   }
 
@@ -45,7 +40,7 @@ export class UserAnnotationsComponent implements OnInit {
   }
 
   atLeastOneAnnotationNotReaded() {
-    const annotationNotReaded = this.annotations.find(annotation => !annotation.readed);
+    const annotationNotReaded = this.annotations[this.annotations.length - 1].find(annotation => !annotation.readed);
     return !!annotationNotReaded;
   }
 

@@ -140,7 +140,6 @@ tr:hover td {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--main-color);
-  border-radius: 10px;
 }
 
 /* Handle on hover */

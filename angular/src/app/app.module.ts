@@ -54,7 +54,6 @@ import {UserAnnotationsComponent} from "./components/user/annotations/user-annot
 import {UserAnnotationsDialogComponent} from "./components/user/annotations/dialog/user-annotations-dialog.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
-import {ProfileDocumentsComponent} from "./components/user/profile/documents/profile-documents.component";
 import {InformationDialogComponent} from "./components/dialogs/information-dialog/information-dialog.component";
 
 @NgModule({

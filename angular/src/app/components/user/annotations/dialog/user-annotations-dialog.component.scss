@@ -55,8 +55,13 @@ tr:hover {
 }
 
 i {
+  color: var(--main-color);
   width: 100%;
   height: 100%;
   display: grid;
   align-items: center;
+}
+
+i:hover {
+  color: var(--main-color-hover);
 }

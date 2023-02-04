@@ -27,6 +27,7 @@
     "ng2-stomp-service": "^1.2.2",
     "ngx-cookie-service": "^15.0.0",
     "ngx-mask": "^15.0.2",
+    "ngx-mat-select-search": "^7.0.0",
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
     "tslib": "^2.4.1",

@@ -12,7 +12,8 @@ export class NewAnnotationFormService {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       selectedUsers: this.getValidatorsForUsers(),
-      annotationMessage: this.getValidatorsForMessage()
+      annotationMessage: this.getValidatorsForMessage(),
+      usersFilterCtrl: ['']
     });
   }
 

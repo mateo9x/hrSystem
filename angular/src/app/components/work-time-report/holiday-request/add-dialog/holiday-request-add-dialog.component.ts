@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl} from "@angular/forms";
 import {HolidayRequest, HolidayRequestStatus, HolidayRequestType} from "../../../../models/holiday-request.model";
 import {HolidayRequestService} from "../../../../services/holiday-request.service";
-import {DateFormatterService} from "../../../../services/date.service";
+import {DateService} from "../../../../services/date.service";
 import {User} from "../../../../models/user.model";
 import {SnackBarType} from "../../../../services/material/snackbar.service";
 
@@ -21,7 +21,7 @@ export class HolidayRequestAddDialogComponent implements OnInit {
   types: HolidayRequestType[] = [];
 
   constructor(private dialogRef: MatDialogRef<HolidayRequestAddDialogComponent>, private holidayRequestService: HolidayRequestService,
-              private dateFormatterService: DateFormatterService, @Inject(MAT_DIALOG_DATA) public user: User) {
+              private dateService: DateService, @Inject(MAT_DIALOG_DATA) public user: User) {
   }
 
   ngOnInit() {
@@ -48,8 +48,8 @@ export class HolidayRequestAddDialogComponent implements OnInit {
   saveRequest() {
     this.holidayRequest.holidayRequestTypeId = this.getHolidayRequestType(parseInt(this.selectedType.value)).id;
     this.holidayRequest.holidayRequestStatusId = this.getHolidayRequestStatusForNewRequest().id;
-    this.holidayRequest.dateFrom = this.dateFormatterService.convertDateToJavaLocalDate(this.dateFrom);
-    this.holidayRequest.dateTo = this.dateFormatterService.convertDateToJavaLocalDate(this.dateTo);
+    this.holidayRequest.dateFrom = this.dateService.convertDateToJavaLocalDate(this.dateFrom);
+    this.holidayRequest.dateTo = this.dateService.convertDateToJavaLocalDate(this.dateTo);
     this.holidayRequest.totalHours = this.calculateTotalHours();
     this.holidayRequest.userId = this.user.id;
 

@@ -12,7 +12,7 @@ import {User} from "../../../models/user.model";
 import {HolidayRequestService} from "../../../services/holiday-request.service";
 import {HolidayRequest} from "../../../models/holiday-request.model";
 import {HolidayRequestAddDialogComponent} from "./add-dialog/holiday-request-add-dialog.component";
-import {DateFormatterService} from "../../../services/date.service";
+import {DateService} from "../../../services/date.service";
 
 @Component({
   selector: 'holiday-request',
@@ -37,7 +37,7 @@ export class HolidayRequestComponent implements OnInit {
   selection = new SelectionModel<any>(false, null);
 
   constructor(private userService: UserService, private holidayRequestService: HolidayRequestService, private dialog: MatDialog,
-              private snackBarService: SnackBarService, private dateFormatterService: DateFormatterService) {
+              private snackBarService: SnackBarService, private dateService: DateService) {
   }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class HolidayRequestComponent implements OnInit {
   }
 
   getHolidayRequests() {
-    this.holidayRequestService.getAllHolidayRequestsForUserBetweenSelectedDates(this.user.id, this.dateFormatterService.convertDateToJavaLocalDate(this.dateFrom), this.dateFormatterService.convertDateToJavaLocalDate(this.dateTo)).subscribe({
+    this.holidayRequestService.getAllHolidayRequestsForUserBetweenSelectedDates(this.user.id, this.dateService.convertDateToJavaLocalDate(this.dateFrom), this.dateService.convertDateToJavaLocalDate(this.dateTo)).subscribe({
       next: (holidayRequests) => {
         this.dataSource = new MatTableDataSource(holidayRequests);
       }

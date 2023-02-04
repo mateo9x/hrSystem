@@ -4,7 +4,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
 import {SnackBarService} from "../../../services/material/snackbar.service";
 import {HolidayRequestService} from "../../../services/holiday-request.service";
-import {DateFormatterService} from "../../../services/date.service";
+import {DateService} from "../../../services/date.service";
 import {
   HolidayRequestConfirmationEditDialogComponent
 } from "./edit-dialog/holiday-request-confirmation-edit-dialog.component";
@@ -33,7 +33,7 @@ export class HolidayRequestConfirmationComponent implements OnInit {
   selection = new SelectionModel<any>(false, null);
 
   constructor(private holidayRequestService: HolidayRequestService, private dialog: MatDialog,
-              private snackBarService: SnackBarService, private dateFormatterService: DateFormatterService) {
+              private snackBarService: SnackBarService, private dateService: DateService) {
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class HolidayRequestConfirmationComponent implements OnInit {
   }
 
   getHolidayRequests() {
-    this.holidayRequestService.getAllHolidayRequestsBetweenSelectedDates(this.dateFormatterService.convertDateToJavaLocalDate(this.dateFrom), this.dateFormatterService.convertDateToJavaLocalDate(this.dateTo)).subscribe({
+    this.holidayRequestService.getAllHolidayRequestsBetweenSelectedDates(this.dateService.convertDateToJavaLocalDate(this.dateFrom), this.dateService.convertDateToJavaLocalDate(this.dateTo)).subscribe({
       next: (holidayRequests) => {
         this.dataSource = new MatTableDataSource(holidayRequests);
       }

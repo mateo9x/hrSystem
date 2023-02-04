@@ -44,4 +44,9 @@ export class UserAnnotationsComponent implements OnInit {
     this.annotationDialogOpened = !this.annotationDialogOpened;
   }
 
+  atLeastOneAnnotationNotReaded() {
+    const annotationNotReaded = this.annotations.find(annotation => !annotation.readed);
+    return !!annotationNotReaded;
+  }
+
 }

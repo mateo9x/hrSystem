@@ -53,6 +53,7 @@ import {NewAnnotationComponent} from "./components/workers/new-annotation/new-an
 import {UserAnnotationsComponent} from "./components/user/annotations/user-annotations.component";
 import {UserAnnotationsDialogComponent} from "./components/user/annotations/dialog/user-annotations-dialog.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatNativeDateModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxMatSelectSearchModule
   ],
   providers: [
     provideNgxMask(),

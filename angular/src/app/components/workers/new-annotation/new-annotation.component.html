@@ -6,7 +6,11 @@
     <mat-form-field appearance="fill">
       <mat-label>Wybierz użytkowników</mat-label>
       <mat-select formControlName="selectedUsers" multiple>
-        <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}} ({{user.email}})
+        <mat-option>
+          <ngx-mat-select-search placeholderLabel="Szukaj..." noEntriesFoundLabel="Brak wyników wyszukiwania!" formControlName="usersFilterCtrl"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let user of usersFiltered" [value]="user.id">{{user.firstName}} {{user.lastName}}
+          ({{user.email}})
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -21,7 +25,8 @@
                 cdkAutosizeMinRows="1"
                 cdkAutosizeMaxRows="10"
                 formControlName="annotationMessage" maxlength="255"></textarea>
-      <span class="error-span" [hidden]="!annotationMessage.errors?.minlength">Minimalna długość komunikatu to 10 znaków</span>
+      <span class="error-span"
+            [hidden]="!annotationMessage.errors?.minlength">Minimalna długość komunikatu to 10 znaków</span>
     </mat-form-field>
 
   </div>

@@ -26,3 +26,7 @@ h1 {
 button {
   width: 300px;
 }
+
+::ng-deep .mat-select-search-clear {
+  background: none !important;
+}

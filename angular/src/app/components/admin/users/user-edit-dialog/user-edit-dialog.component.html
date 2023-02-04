@@ -12,8 +12,9 @@
           <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Z]+[a-zA-Z]{1,13}" type="text" required
                  onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
                  #firstName="ngModel">
+          <span class="error-span" *ngIf="firstName.errors">Imię musi zaczynać się z dużej litery i być bez cyfr.</span>
         </mat-form-field>
-        <span class="error-span" *ngIf="firstName.errors">Imię musi zaczynać się z dużej litery i być bez cyfr.</span>
+
       </div>
 
       <div class="input-data">
@@ -22,9 +23,9 @@
           <input matInput [(ngModel)]="user.lastName" name="lastName" pattern="[A-Z]+[a-zA-Z]{1,35}" type="text" required
                  onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
                  #lastName="ngModel">
-
+          <span class="error-span" *ngIf="lastName.errors">Nazwisko musi zaczynać się z dużej litery i być bez cyfr.</span>
         </mat-form-field>
-        <span class="error-span" *ngIf="lastName.errors">Nazwisko musi zaczynać się z dużej litery i być bez cyfr.</span>
+
       </div>
 
       <div class="input-data">
@@ -32,8 +33,9 @@
           <mat-label>Email</mat-label>
           <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
                  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
+          <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
         </mat-form-field>
-        <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+
       </div>
 
       <div class="input-data">
@@ -41,8 +43,9 @@
           <mat-label>Pesel</mat-label>
           <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
                  required pattern="[0-9]{11}" #pesel="ngModel"/>
+          <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
         </mat-form-field>
-        <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
+
       </div>
 
       <div class="input-data">
@@ -76,8 +79,9 @@
           <mat-label>Kod Pocztowy</mat-label>
           <input matInput type="text" name="postalCode" mask="00-000" style="display:inline-block" [(ngModel)]="user.postalCode"
                  #postalCode="ngModel"/>
+          <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
         </mat-form-field>
-        <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+
       </div>
 
       <div class="input-data">

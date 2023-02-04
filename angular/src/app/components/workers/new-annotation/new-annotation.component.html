@@ -21,8 +21,9 @@
                 cdkAutosizeMinRows="1"
                 cdkAutosizeMaxRows="10"
                 formControlName="annotationMessage" maxlength="255"></textarea>
+      <span class="error-span" [hidden]="!annotationMessage.errors?.minlength">Minimalna długość komunikatu to 10 znaków</span>
     </mat-form-field>
-    <span class="error-span" [hidden]="!annotationMessage.errors?.minlength">Minimalna długość komunikatu to 10 znaków</span>
+
   </div>
 
   <div class="button-container">

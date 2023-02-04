@@ -3,12 +3,13 @@
     <ng-container *ngFor="let annotation of annotations">
       <tr>
         <td [class]="annotation.readed ? 'readed-annotation' : 'unreaded-annotation'"
-            class="message">{{annotation.message}}</td>
+            class="message"
+            (click)="openAnnotationDetail(annotation)">{{annotation.message}}</td>
         <td>{{annotation.createDate | date: 'yyyy-MM-dd hh:mm'}}</td>
         <td>
           <mat-checkbox color="primary"
                         [(ngModel)]="annotation.readed" name="readed" matTooltip="Przeczytano"
-          (change)="annotationReadedChange(annotation)">
+                        (change)="annotationReadedChange(annotation)">
           </mat-checkbox>
         </td>
         <td class="remove-icon" matTooltip="Usuń powiadomienie">

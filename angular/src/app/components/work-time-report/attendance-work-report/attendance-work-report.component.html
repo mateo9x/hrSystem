@@ -14,11 +14,11 @@
   </div>
 
   <div class="button-container">
-    <button mat-raised-button color="primary" *ngIf="!attendanceExists"
+    <button mat-raised-button *ngIf="!attendanceExists" class="app-button"
             [disabled]="!isSelectedWorkTypeProperFilled()" (click)="saveAttendanceWorkReport()">POTWIERDŹ OBECNOŚĆ W
       PRACY
     </button>
-    <button mat-raised-button color="primary" *ngIf="attendanceExists"
+    <button mat-raised-button *ngIf="attendanceExists" class="app-button"
             [disabled]="!isSelectedWorkTypeProperFilled()" (click)="updateAttendanceWorkReport()">ZMIEŃ OBECNOŚĆ W PRACY
     </button>
   </div>

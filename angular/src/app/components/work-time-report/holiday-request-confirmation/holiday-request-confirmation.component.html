@@ -18,16 +18,16 @@
       <mat-datepicker #pickerTo></mat-datepicker>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="getHolidayRequests()" class="button"
+    <button mat-raised-button (click)="getHolidayRequests()" class="button app-button"
             [disabled]="dateFrom > dateTo || !dateTo || !dateFrom">Szukaj
     </button>
 
   </div>
   <button
-    mat-raised-button color="primary"
+    mat-raised-button
     [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
     (click)="editRequest(selectedRow)"
-    class="button">
+    class="button app-button">
     Edytuj wniosek
   </button>
 </div>

@@ -99,10 +99,10 @@
     </mat-form-field>
   </div>
   <div class="buttons">
-    <button mat-raised-button color="primary" name="signup_submit" (click)="clear()"
+    <button mat-raised-button class="app-button" name="signup_submit" (click)="clear()"
             style="margin-right:10%">Wyczyść
     </button>
-    <button mat-raised-button color="primary" name="clear_submit" (click)="register()"
+    <button mat-raised-button class="app-button" name="clear_submit" (click)="register()"
             [disabled]="form.invalid || user.password != user.password2">Zarejestruj
     </button>
   </div>

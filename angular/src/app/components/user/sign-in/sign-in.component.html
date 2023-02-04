@@ -16,13 +16,13 @@
       </mat-checkbox>
     </form>
 
-    <button mat-raised-button color="primary" (click)="signInUser()" class="fadeIn fourth" style="margin-bottom:5%"
+    <button mat-raised-button (click)="signInUser()" class="fadeIn fourth app-button" style="margin-bottom:5%"
             [disabled]="form.invalid">
       Zaloguj się
     </button>
 
     <div id="formFooter">
-      <button mat-raised-button color="primary" (click)="signUp()" class="fadeIn fourth">Zarejestruj się
+      <button mat-raised-button (click)="signUp()" class="fadeIn fourth app-button">Zarejestruj się
       </button>
       <br>
       <a (click)="resetPassword()" class="fadeIn fourth underlineHover">Nie pamiętasz hasła?</a>

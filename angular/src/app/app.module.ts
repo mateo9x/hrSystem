@@ -25,7 +25,7 @@ import {UsersComponent} from "./components/admin/users/users.component";
 import {MatSortModule} from "@angular/material/sort";
 import {UserEditDialogComponent} from "./components/admin/users/user-edit-dialog/user-edit-dialog.component";
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
-import {ConfirmationDialogComponent} from "./components/confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialogComponent} from "./components/dialogs/confirmation-dialog/confirmation-dialog.component";
 import {MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {
@@ -54,6 +54,8 @@ import {UserAnnotationsComponent} from "./components/user/annotations/user-annot
 import {UserAnnotationsDialogComponent} from "./components/user/annotations/dialog/user-annotations-dialog.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {ProfileDocumentsComponent} from "./components/user/profile/documents/profile-documents.component";
+import {InformationDialogComponent} from "./components/dialogs/information-dialog/information-dialog.component";
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
     UsersComponent,
     UserEditDialogComponent,
     ConfirmationDialogComponent,
+    InformationDialogComponent,
     AttendanceWorkReportComponent,
     ProfileComponent,
     ProfileDataComponent,

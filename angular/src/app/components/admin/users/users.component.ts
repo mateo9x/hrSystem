@@ -8,7 +8,7 @@ import {SnackBarService, SnackBarType} from "../../../services/material/snackbar
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogModel
-} from "../../confirmation-dialog/confirmation-dialog.component";
+} from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
 import {User} from "../../../models/user.model";
 
 @Component({

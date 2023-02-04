@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as SockJS from "sockjs-client";
 import {Stomp} from "@stomp/stompjs";
+import {APP_BASE_URL} from "../../app.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AnnotationForUserWebsocketService {
   annotationsWebSocket: any[] = [];
 
   public connect(userId: number) {
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS(APP_BASE_URL + '/ws');
     this.stompClient = Stomp.over(socket);
     const _this = this;
     this.stompClient.debug = () => {};

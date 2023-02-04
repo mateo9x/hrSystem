@@ -18,8 +18,23 @@ button {
   border-radius: 20px;
 }
 
-button:hover {
-  background-color: var(--main-color-hover);
+.app-button {
+  background-color: var(--main-color) !important;
+  color: white !important;
+}
+
+.app-button:hover {
+  cursor: pointer !important;
+  background-color: var(--main-color-hover) !important;
+}
+
+.app-button[disabled] {
+  background-color: #b7b4b4 !important;
+}
+
+::ng-deep .mat-month-view > button {
+  background-color: white !important;
+  color: black !important;
 }
 
 a {

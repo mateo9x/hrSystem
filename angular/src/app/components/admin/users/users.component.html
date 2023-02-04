@@ -4,15 +4,15 @@
 </mat-form-field>
 
 <div class="button-container">
-  <button mat-raised-button color="primary" (click)="editUser()"
-          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined" class="button">
+  <button mat-raised-button (click)="editUser()"
+          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined" class="button app-button">
     Edytuj użytkownika
   </button>
   <button
-    mat-raised-button color="primary"
+    mat-raised-button
     [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
     (click)="deleteUser(selectedRow)"
-    class="button">
+    class="button app-button">
     Usuń użytkownika
   </button>
 </div>

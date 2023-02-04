@@ -1,9 +1,10 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {SnackBarService, SnackBarType} from "./services/material/snackbar.service";
 import {User} from "./models/user.model";
 import {AuthenticationService} from "./services/authentication.service";
 import {UserService} from "./services/user.service";
 import {CookieService} from "ngx-cookie-service";
+import {AnnotationForUserWebsocketService} from "./services/websocket/annotation-for-user-websocket.service";
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,12 @@ import {CookieService} from "ngx-cookie-service";
 })
 
 @HostListener('mouseover', ['$event'])
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   userLogged: User = null;
   cookieJWT: string;
 
   constructor(private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
-              private userService: UserService, private cookieService: CookieService) {
+              private userService: UserService, private cookieService: CookieService, private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
   }
 
   ngOnInit() {
@@ -32,6 +33,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.annotationForUserWebsocketService.disconnect();
+  }
+
   logOut() {
     this.authenticationService.logoutUser().subscribe({
       next: (userLoggedOut) => {
@@ -40,6 +45,7 @@ export class AppComponent implements OnInit {
           this.cookieService.delete('user');
           this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS);
           this.userLogged = null;
+          this.annotationForUserWebsocketService.disconnect();
         }
       },
       error: () => {

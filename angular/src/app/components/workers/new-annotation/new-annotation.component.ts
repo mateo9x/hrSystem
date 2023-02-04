@@ -6,6 +6,7 @@ import {User} from "../../../models/user.model";
 import {NewAnnotationFormService} from "./new-annotation-form.service";
 import {AnnotationForUsersRequest} from "../../../models/annotation-for-user.model";
 import {AnnotationForUserService} from "../../../services/annotation-for-user.service";
+import {AnnotationForUserWebsocketService} from "../../../services/websocket/annotation-for-user-websocket.service";
 
 @Component({
   selector: 'new-annotation',
@@ -13,17 +14,28 @@ import {AnnotationForUserService} from "../../../services/annotation-for-user.se
   styleUrls: ['./new-annotation.component.scss']
 })
 export class NewAnnotationComponent implements OnInit {
+  userLogged: User = new User();
   users: User[] = [];
   newAnnotationRequest: AnnotationForUsersRequest = new AnnotationForUsersRequest();
   newAnnotationForm: FormGroup;
 
   constructor(private userService: UserService, private snackBarService: SnackBarService,
-              private newAnnotationFormService: NewAnnotationFormService, private annotationForUserService: AnnotationForUserService) {
+              private newAnnotationFormService: NewAnnotationFormService, private annotationForUserService: AnnotationForUserService,
+              private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
     this.newAnnotationForm = this.newAnnotationFormService.getFormGroup();
   }
 
   ngOnInit() {
+    this.getUserLogged();
     this.getUsers();
+  }
+
+  getUserLogged() {
+    this.userService.getUserByJWTToken().subscribe({
+      next: (response) => {
+       this.userLogged = response;
+      }
+    });
   }
 
   getUsers() {
@@ -43,6 +55,7 @@ export class NewAnnotationComponent implements OnInit {
       next: () => {
         this.snackBarService.openSnackBar('Powiadomienie wysłane pomyślnie', SnackBarType.SUCCESS);
         this.newAnnotationFormService.clearForm(this.newAnnotationForm);
+        this.annotationForUserWebsocketService.sendMessage(this.userLogged.id);
       },
       error: () => {
         this.snackBarService.openSnackBar('Nie udało wysłać się powiadomienia', SnackBarType.ERROR);

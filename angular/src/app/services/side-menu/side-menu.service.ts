@@ -24,6 +24,13 @@ export class SideMenuService {
             childs: null
           },
           {
+            label: 'Obecności w pracy',
+            expanded: false,
+            routing: 'attendance-work-week',
+            roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR', 'ROLE_WORKER'],
+            childs: null
+          },
+          {
             label: 'Wnioski urlopowe',
             expanded: false,
             routing: 'holiday-request',

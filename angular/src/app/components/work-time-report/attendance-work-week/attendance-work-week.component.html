@@ -1,0 +1,50 @@
+<div class="card-header button-container">
+
+  <h1>Obecności w pracy</h1>
+
+  <div class="date-container">
+    <mat-icon class="arrows" (click)="previousWeek()">arrow_left</mat-icon>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz datę od</mat-label>
+      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" disabled>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz datę do</mat-label>
+      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" disabled>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+
+    <mat-icon class="arrows" (click)="nextWeek()">arrow_right</mat-icon>
+
+  </div>
+
+</div>
+
+<table>
+  <ng-container *ngIf="tableData.length > 0; else noData">
+    <tr class="attendance-row card-header">
+      <ng-container *ngFor="let col of columns">
+        <td><strong>{{col}}</strong></td>
+      </ng-container>
+    </tr>
+    <ng-container *ngFor="let data of tableData">
+      <tr class="attendance-row">
+        <td><strong>{{ data.label | titlecase }}</strong></td>
+        <td>{{ data.value.day }}</td>
+        <td>{{ data.value.attendance }}</td>
+      </tr>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noData>
+    <tr class="no-data-row">
+      <td class="padding_20"><strong>Wczytywanie danych nie powiodło się :(</strong></td>
+    </tr>
+  </ng-template>
+
+</table>

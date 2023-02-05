@@ -55,6 +55,9 @@ import {UserAnnotationsDialogComponent} from "./components/user/annotations/dial
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {InformationDialogComponent} from "./components/dialogs/information-dialog/information-dialog.component";
+import {
+  AttendanceWorkWeekComponent
+} from "./components/work-time-report/attendance-work-week/attendance-work-week.component";
 
 @NgModule({
   declarations: [
@@ -80,7 +83,8 @@ import {InformationDialogComponent} from "./components/dialogs/information-dialo
     HolidayRequestConfirmationEditDialogComponent,
     NewAnnotationComponent,
     UserAnnotationsComponent,
-    UserAnnotationsDialogComponent
+    UserAnnotationsDialogComponent,
+    AttendanceWorkWeekComponent
   ],
   imports: [
     BrowserModule,

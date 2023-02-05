@@ -19,6 +19,9 @@ import {
   HolidayRequestConfirmationComponent
 } from "./components/work-time-report/holiday-request-confirmation/holiday-request-confirmation.component";
 import {NewAnnotationComponent} from "./components/workers/new-annotation/new-annotation.component";
+import {
+  AttendanceWorkWeekComponent
+} from "./components/work-time-report/attendance-work-week/attendance-work-week.component";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
@@ -28,6 +31,7 @@ const routes: Routes = [
   { path: 'new-password', component: NewPasswordComponent, canActivate: [AnonymousGuard] },
   { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
   { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
+  { path: 'attendance-work-week', component: AttendanceWorkWeekComponent, canActivate: [LoginGuard] },
   { path: 'holiday-request', component: HolidayRequestComponent, canActivate: [LoginGuard] },
   { path: 'holiday-request-confirmation', component: HolidayRequestConfirmationComponent, canActivate: [LoginGuard] },
   { path: 'new-annotation', component: NewAnnotationComponent, canActivate: [LoginGuard] },

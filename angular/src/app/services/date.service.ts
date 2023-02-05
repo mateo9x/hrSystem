@@ -21,6 +21,10 @@ export class DateService {
     return Math.floor(diffrenceInTime / (1000 * 3600 * 24));
   }
 
+  public getDayName(date: Date, locale) {
+    return date.toLocaleDateString(locale, { weekday: 'long' });
+  }
+
   private zeroDate(date: Date) {
     date.setHours(0);
     date.setMinutes(0);

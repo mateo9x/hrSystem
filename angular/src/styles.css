@@ -146,3 +146,7 @@ tr:hover td {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--main-color-hover);
 }
+
+.padding_20 {
+  padding: 20px;
+}

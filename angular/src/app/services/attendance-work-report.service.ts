@@ -17,6 +17,10 @@ export class AttendanceWorkReportService {
     return this.http.get<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}/today/user/${userId}`);
   }
 
+  public getUserSavedAttendanceWorkReportBetweenDates(userId: number, dateFrom: string, dateTo: string) {
+    return this.http.get<AttendanceWorkReportModel[]>(`${this.attendanceWorkUrl}/user/${userId}/${dateFrom}/${dateTo}`);
+  }
+
   public saveAttendanceWorkReport(model: AttendanceWorkReportModel) {
     return this.http.post<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}`, model);
   }

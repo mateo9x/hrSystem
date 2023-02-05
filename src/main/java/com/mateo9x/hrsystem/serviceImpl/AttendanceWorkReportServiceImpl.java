@@ -45,4 +45,13 @@ public class AttendanceWorkReportServiceImpl implements AttendanceWorkReportServ
         return attendanceWorkReportRepository.findAllAttendanceWorkReportByDate(LocalDate.now()).stream()
                 .map(attendanceWorkReportMapper::toDTO).collect(Collectors.toList());
     }
+
+    @Override
+    public List<AttendanceWorkReportDTO> getAllSavedAttendanceWorksForUserBetweenSelectedDates(Long userId, LocalDate dateFrom, LocalDate dateTo) {
+        log.info("Request to get user {} attendance work report between selected dates: {} - {}", userId, dateFrom, dateTo);
+        return attendanceWorkReportRepository.findAllByUserIdAndDateGreaterThanEqualAndDateLessThanEqual(userId, dateFrom, dateTo)
+                .stream()
+                .map(attendanceWorkReportMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 }

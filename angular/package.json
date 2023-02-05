@@ -1,6 +1,6 @@
 {
   "name": "hr-system-angular",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,6 +24,7 @@
     "@stomp/stompjs": "^6.1.2",
     "@types/sockjs-client": "^1.5.1",
     "cors": "^2.8.5",
+    "date-fns": "^2.29.3",
     "ng2-stomp-service": "^1.2.2",
     "ngx-cookie-service": "^15.0.0",
     "ngx-mask": "^15.0.2",

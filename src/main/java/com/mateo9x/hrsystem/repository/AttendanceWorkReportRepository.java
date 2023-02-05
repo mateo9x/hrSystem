@@ -12,5 +12,8 @@ import java.util.Optional;
 public interface AttendanceWorkReportRepository extends JpaRepository<AttendanceWorkReport, Long> {
 
     Optional<AttendanceWorkReport> findAttendanceWorkReportByUserIdAndDate(Long userId, LocalDate date);
+
     List<AttendanceWorkReport> findAllAttendanceWorkReportByDate(LocalDate date);
+
+    List<AttendanceWorkReport> findAllByUserIdAndDateGreaterThanEqualAndDateLessThanEqual(Long userId, LocalDate dateFrom, LocalDate dateTo);
 }

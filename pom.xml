@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.mateo9x</groupId>
     <artifactId>hrSystem</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <packaging>war</packaging>
     <name>hrSystem</name>
     <description>hrSystem</description>

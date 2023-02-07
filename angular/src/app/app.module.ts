@@ -61,7 +61,6 @@ import {
 import {
   AttendanceWorkWeekDialogComponent
 } from "./components/work-time-report/attendance-work-week/dialog/attendance-work-week-dialog.component";
-import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -113,8 +112,7 @@ import {TableModule} from "primeng/table";
         NgxMaskDirective,
         NgxMaskPipe,
         MatTooltipModule,
-        NgxMatSelectSearchModule,
-        TableModule
+        NgxMatSelectSearchModule
     ],
   providers: [
     provideNgxMask(),

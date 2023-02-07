@@ -115,16 +115,20 @@ export class AttendanceWorkWeekComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (response) => {
         if (response) {
-          this.attendanceWorkReportService.saveAttendanceWorkDayForUser(response.data).subscribe({
-            next: () => {
-              this.snackBarService.openSnackBar('Pomyślnie dodano raport czasu pracy dla dnia: ' + day, SnackBarType.SUCCESS);
-              this.getAttendanceWorkForSelectedWeek();
-            },
-            error: () => {
-              this.snackBarService.openSnackBar('Nie udało dodać się raportu czasu pracy dla dnia: ' + day, SnackBarType.ERROR);
-            }
-          });
+          this.saveNewAttendanceWorkDayForUser(day, response.data);
         }
+      }
+    });
+  }
+
+  saveNewAttendanceWorkDayForUser(day: string, data: any) {
+    this.attendanceWorkReportService.saveAttendanceWorkDayForUser(data).subscribe({
+      next: () => {
+        this.snackBarService.openSnackBar('Pomyślnie dodano raport czasu pracy dla dnia: ' + day, SnackBarType.SUCCESS);
+        this.getAttendanceWorkForSelectedWeek();
+      },
+      error: () => {
+        this.snackBarService.openSnackBar('Nie udało dodać się raportu czasu pracy dla dnia: ' + day, SnackBarType.ERROR);
       }
     });
   }
@@ -136,31 +140,37 @@ export class AttendanceWorkWeekComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (response) => {
         if (response && !response.delete) {
-          this.attendanceWorkReportService.updateAttendanceWorkDayForUser(response.data).subscribe({
-            next: (updatedAttendanceWorkDay) => {
-              this.snackBarService.openSnackBar('Pomyślnie zaaktualizowano raport czasu pracy dla dnia: ' + updatedAttendanceWorkDay.attendanceWorkReport.date, SnackBarType.SUCCESS);
-              this.getAttendanceWorkForSelectedWeek();
-            },
-            error: () => {
-              this.snackBarService.openSnackBar('Nie udało zaaktualizować się raportu czasu pracy dla dnia: ' + response.data.attendanceWorkReport.date, SnackBarType.ERROR);
-            }
-          });
+          this.updateAttendanceWorkDayForUser(response.data);
         } else if (response && response.delete) {
-          const id = response.data;
-          this.attendanceWorkReportService.deleteAttendanceWorkDayForUser(id).subscribe({
-            next: () => {
-              this.snackBarService.openSnackBar('Usunięto raport czasu pracy', SnackBarType.SUCCESS);
-              this.getAttendanceWorkForSelectedWeek();
-            },
-            error: () => {
-              this.snackBarService.openSnackBar('Nie udało usunąć się raportu czasu pracy', SnackBarType.ERROR);
-            }
-          });
+          this.deleteAttendanceWorkDayById(response.data);
         }
       }
     });
   }
 
+  updateAttendanceWorkDayForUser(data: any) {
+    this.attendanceWorkReportService.updateAttendanceWorkDayForUser(data).subscribe({
+      next: (updatedAttendanceWorkDay) => {
+        this.snackBarService.openSnackBar('Pomyślnie zaaktualizowano raport czasu pracy dla dnia: ' + updatedAttendanceWorkDay.attendanceWorkReport.date, SnackBarType.SUCCESS);
+        this.getAttendanceWorkForSelectedWeek();
+      },
+      error: () => {
+        this.snackBarService.openSnackBar('Nie udało zaaktualizować się raportu czasu pracy dla dnia: ' + data.attendanceWorkReport.date, SnackBarType.ERROR);
+      }
+    });
+  }
+
+  deleteAttendanceWorkDayById(id: number) {
+    this.attendanceWorkReportService.deleteAttendanceWorkDayForUser(id).subscribe({
+      next: () => {
+        this.snackBarService.openSnackBar('Usunięto raport czasu pracy', SnackBarType.SUCCESS);
+        this.getAttendanceWorkForSelectedWeek();
+      },
+      error: () => {
+        this.snackBarService.openSnackBar('Nie udało usunąć się raportu czasu pracy', SnackBarType.ERROR);
+      }
+    });
+  }
 
   getAttendanceWorkReportByDay(day: string) {
     return this.attendanceWorkReportsForSelectedWeek.find((attendanceWorkReport => attendanceWorkReport.date.toString() === day));

@@ -1,4 +1,4 @@
-package com.mateo9x.hrsystem.serviceImpl;
+package com.mateo9x.hrsystem.service.impl;
 
 import com.mateo9x.hrsystem.domain.AnnotationForUser;
 import com.mateo9x.hrsystem.domain.User;
@@ -9,7 +9,6 @@ import com.mateo9x.hrsystem.repository.AnnotationForUserRepository;
 import com.mateo9x.hrsystem.repository.UserRepository;
 import com.mateo9x.hrsystem.service.AnnotationForUserService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-@Slf4j
 public class AnnotationForUserServiceImpl implements AnnotationForUserService {
 
     private final AnnotationForUserRepository annotationForUserRepository;
@@ -30,7 +28,6 @@ public class AnnotationForUserServiceImpl implements AnnotationForUserService {
 
     @Override
     public List<AnnotationForUserDTO> saveAnnotationsForUser(AnnotationForUserRequestDTO annotationForUserRequestDTO) {
-        log.info("Request to save annotations for users with message: {}", annotationForUserRequestDTO.getMessage());
         List<AnnotationForUserDTO> savedAnnotations = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(annotationForUserRequestDTO.getUserIds())) {
             annotationForUserRequestDTO.getUserIds().forEach(userId -> savedAnnotations.add(saveAnnotationForUser(userId, annotationForUserRequestDTO)));

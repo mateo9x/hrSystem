@@ -3,6 +3,7 @@ package com.mateo9x.hrsystem.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,12 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
+@AllArgsConstructor
 public class JwtUtils {
 
     private final String SECRET_KEY = "secret";
+
+    private final AdditionalAppProperties appProperties;
 
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -37,16 +41,16 @@ public class JwtUtils {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, Boolean rememberMe) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", userDetails.getAuthorities());
-        return createToken(claims, userDetails.getUsername());
+        return createToken(claims, userDetails.getUsername(), rememberMe);
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    private String createToken(Map<String, Object> claims, String subject, Boolean rememberMe) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + getExpirationTime(rememberMe)))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
@@ -57,5 +61,9 @@ public class JwtUtils {
 
     public String extractEmailFromToken(String token) {
         return extractEmail(token);
+    }
+
+    private Integer getExpirationTime(Boolean rememberMe) {
+        return rememberMe ? appProperties.getJwtExpirationTimeRememberMe() : appProperties.getJwtExpirationTime();
     }
 }

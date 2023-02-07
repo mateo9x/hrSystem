@@ -1,4 +1,4 @@
-package com.mateo9x.hrsystem.serviceImpl;
+package com.mateo9x.hrsystem.service.impl;
 
 import com.mateo9x.hrsystem.domain.HolidayRequest;
 import com.mateo9x.hrsystem.dto.HolidayRequestDTO;
@@ -8,7 +8,6 @@ import com.mateo9x.hrsystem.service.HolidayRequestService;
 import com.mateo9x.hrsystem.service.MailService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-@Slf4j
 @Transactional
 public class HolidayRequestServiceImpl implements HolidayRequestService {
 
@@ -28,7 +26,6 @@ public class HolidayRequestServiceImpl implements HolidayRequestService {
 
     @Override
     public List<HolidayRequestDTO> getAllHolidayRequestsForUserBetweenSelectedDates(Long userId, LocalDate dateFrom, LocalDate dateTo) {
-        log.info("Request to get all holiday request for user: {} between dates: {} - {}", userId, dateFrom, dateTo);
         return holidayRequestRepository.findAllByUserIdAndDateFromGreaterThanEqualAndDateFromLessThanEqual(userId, dateFrom, dateTo)
                 .stream()
                 .map(holidayRequestMapper::toDTO)
@@ -37,7 +34,6 @@ public class HolidayRequestServiceImpl implements HolidayRequestService {
 
     @Override
     public List<HolidayRequestDTO> getAllHolidayRequestsBetweenSelectedDates(LocalDate dateFrom, LocalDate dateTo) {
-        log.info("Request to get all holiday request between dates: {} - {}", dateFrom, dateTo);
         return holidayRequestRepository.findAllByDateFromGreaterThanEqualAndDateFromLessThanEqual(dateFrom, dateTo)
                 .stream()
                 .map(holidayRequestMapper::toDTO)
@@ -47,7 +43,6 @@ public class HolidayRequestServiceImpl implements HolidayRequestService {
 
     @Override
     public HolidayRequestDTO saveHolidayRequest(HolidayRequestDTO holidayRequestDTO, Boolean firstCreate) {
-        log.info("Request to save holiday request: {}", holidayRequestDTO);
         HolidayRequest holidayRequest = holidayRequestMapper.toEntity(holidayRequestDTO);
         if (!firstCreate) {
             HolidayRequest holidayRequestSavedOnDb = holidayRequestRepository.findById(holidayRequestDTO.getId()).orElse(null);
@@ -61,7 +56,6 @@ public class HolidayRequestServiceImpl implements HolidayRequestService {
 
     @Override
     public Boolean deleteHolidayRequest(Long id) {
-        log.info("Request to delete holiday request by id: {}", id);
         holidayRequestRepository.deleteById(id);
         return holidayRequestRepository.findById(id).isEmpty();
     }

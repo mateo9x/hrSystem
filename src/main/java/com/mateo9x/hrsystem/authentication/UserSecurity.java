@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class UserSecurity implements UserDetails {
-    private final User user;
 
+    private final User user;
 
     public UserSecurity(User user) {
         this.user = user;

@@ -1,4 +1,4 @@
-package com.mateo9x.hrsystem.serviceImpl;
+package com.mateo9x.hrsystem.service.impl;
 
 import com.mateo9x.hrsystem.config.AdditionalAppProperties;
 import com.mateo9x.hrsystem.dto.HolidayRequestDTO;

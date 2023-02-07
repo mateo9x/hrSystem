@@ -1,4 +1,4 @@
-package com.mateo9x.hrsystem.serviceImpl;
+package com.mateo9x.hrsystem.service.impl;
 
 import com.mateo9x.hrsystem.domain.User;
 import com.mateo9x.hrsystem.dto.NewUserPasswordDTO;
@@ -9,7 +9,6 @@ import com.mateo9x.hrsystem.repository.UserRepository;
 import com.mateo9x.hrsystem.service.MailService;
 import com.mateo9x.hrsystem.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -30,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO save(UserDTO userDTO, Boolean firstCreate) {
-        log.info("Request to save User: {}", userDTO);
         if (firstCreate && userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new UserException("Użytkownik z podanym adresem e-mail już istnieje!");
         }
@@ -44,13 +41,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean doesUserWithEmailExists(String email) {
-        log.info("Request to check if User with email: {} exists", email);
         return userRepository.findByEmail(email).isPresent();
     }
 
     @Override
     public UserDTO findByEmail(String email) {
-        log.info("Request to get User by email: {}", email);
         User user = userRepository.findByEmail(email).orElse(null);
         return userMapper.toDTO(user);
     }
@@ -69,7 +64,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findByResetToken(String token) {
-        log.info("Request to find User by Reset Token: {}", token);
         Optional<User> user = userRepository.findByResetToken(token);
         return user.map(userMapper::toDTO).orElse(null);
     }
@@ -80,7 +74,6 @@ public class UserServiceImpl implements UserService {
         if (userSavedOnBaseOptional.isPresent()) {
             User userSavedOnBase = userSavedOnBaseOptional.get();
             if (!doesBothPasswordMatches(userDTO, userSavedOnBase)) {
-                log.info("Request to update User: {} password", userDTO.getEmail());
                 userSavedOnBase.setPassword(passwordEncoder.encode(userDTO.getPassword()));
                 userSavedOnBase.setResetToken(null);
                 userRepository.save(userSavedOnBase);

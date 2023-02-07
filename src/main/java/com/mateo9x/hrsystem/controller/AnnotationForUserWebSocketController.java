@@ -17,8 +17,7 @@ public class AnnotationForUserWebSocketController {
 
     @MessageMapping("/annotations")
     @SendTo("/ws/annotations")
-    public List<AnnotationForUserDTO> chat(Long userId) {
-        System.out.println(userId);
+    public List<AnnotationForUserDTO> getAnnotationsForUserWebSocket(Long userId) {
         return annotationForUserService.getAnnotationsForUser(userId);
     }
 

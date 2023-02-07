@@ -28,34 +28,6 @@
 <table>
   <ng-container *ngIf="tableData.length > 0; else noData">
 
-
-    <!--    <ng-template pTemplate="header" let-columns>-->
-    <!--      <tr>-->
-    <!--        <th *ngFor="let col of columns">-->
-    <!--          {{col.label | titlecase}}-->
-    <!--        </th>-->
-    <!--      </tr>-->
-    <!--    </ng-template>-->
-    <!--    <ng-template pTemplate="body" let-rowData let-columns="columns">-->
-    <!--      <tr>-->
-    <!--        <td *ngFor="let col of columns">-->
-    <!--          {{displayRowData(attendance)}}-->
-    <!--          {{attendance.comment}}-->
-    <!--        </td>-->
-    <!--      </tr>-->
-    <!--    </ng-template>-->
-
-
-    <!--    <tr class="attendance-row card-header column-row">-->
-    <!--      <ng-container *ngFor="let data of tableData">-->
-    <!--        <td><strong>{{ data.label | titlecase }}</strong></td>-->
-    <!--      </ng-container>-->
-    <!--      <ng-container *ngFor="let data of tableData">-->
-    <!--        <td>({{data.day}})</td>-->
-    <!--      </ng-container>-->
-    <!--    </tr>-->
-
-
     <ng-container *ngFor="let data of tableData; let i = index">
       <tr>
         <th class="card-header">
@@ -76,35 +48,6 @@
       </tr>
     </ng-container>
 
-    <!--    <ng-container *ngFor="let attendanceWorkDay of getLongestAttendanceWorkDaysForOneWeek(); let i = index">-->
-    <!--      <tr class="attendance-list">-->
-    <!--        <ng-container *ngFor="let data of tableData; let j = index">-->
-    <!--          <td-->
-    <!--            *ngIf="attendanceWorkDay.attendanceWorkReport.date.toString() === data.day.toString()"> test-->
-    <!--          </td>-->
-    <!--        </ng-container>-->
-    <!--      </tr>-->
-    <!--    </ng-container>-->
-
-    <!--    <tr class="attendance-list">-->
-    <!--      <ng-container *ngFor="let data of tableData; let i = index">-->
-    <!--        <td *ngIf="doesAttendanceWorkReportExistsForDay(data.day)" (click)="openNewWorkDayDialog(data.day)">-->
-    <!--          <mat-icon>alarm_add</mat-icon>-->
-    <!--        </td>-->
-    <!--        <td class="material-icons lock-div" *ngIf="!doesAttendanceWorkReportExistsForDay(data.day)"-->
-    <!--            matTooltip="Brak potwierdzonej obecności w pracy w tym dniu. Skontaktuj się z przełożonym w celu odblokowania raportowania czasu pracy za ten dzień.">-->
-    <!--          lock-->
-    <!--        </td>-->
-    <!--      </ng-container>-->
-    <!--    </tr>-->
-
-    <!--    <ng-container *ngFor="let i = 0; i <7;i++">-->
-    <!--      <ng-container *ngFor="let attendance of tableData[i].value.attendances">-->
-    <!--        <tr class="attendance-list">-->
-    <!--          <td>Data: {{attendance.attendanceWorkReport.date}} {{ attendance.comment }} Ilość godzin: {{ attendance.hours }}</td>-->
-    <!--        </tr>-->
-    <!--      </ng-container>-->
-    <!--    </ng-container>-->
   </ng-container>
 
   <ng-template #noData>

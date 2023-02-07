@@ -11,6 +11,9 @@ h1 {
 
 .date-container {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-form-field + mat-form-field {
@@ -19,4 +22,17 @@ mat-form-field + mat-form-field {
 
 mat-form-field + button {
   margin-left: 8px;
+}
+
+tr:hover td {
+  color: white !important;
+}
+
+.button-container {
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+.card-header {
+  padding: 10px;
 }

@@ -58,6 +58,10 @@ import {InformationDialogComponent} from "./components/dialogs/information-dialo
 import {
   AttendanceWorkWeekComponent
 } from "./components/work-time-report/attendance-work-week/attendance-work-week.component";
+import {
+  AttendanceWorkWeekDialogComponent
+} from "./components/work-time-report/attendance-work-week/dialog/attendance-work-week-dialog.component";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -84,32 +88,34 @@ import {
     NewAnnotationComponent,
     UserAnnotationsComponent,
     UserAnnotationsDialogComponent,
-    AttendanceWorkWeekComponent
+    AttendanceWorkWeekComponent,
+    AttendanceWorkWeekDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatInputModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatIconModule,
-    MatSortModule,
-    MatDialogModule,
-    MatOptionModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
-    MatTooltipModule,
-    NgxMatSelectSearchModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatInputModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatIconModule,
+        MatSortModule,
+        MatDialogModule,
+        MatOptionModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        NgxMaskDirective,
+        NgxMaskPipe,
+        MatTooltipModule,
+        NgxMatSelectSearchModule,
+        TableModule
+    ],
   providers: [
     provideNgxMask(),
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},

@@ -1,4 +1,4 @@
-<div class="card-header button-container">
+<div class="card-header">
 
   <h1>Akceptacja wniosków urlopowych</h1>
 
@@ -23,13 +23,15 @@
     </button>
 
   </div>
-  <button
-    mat-raised-button
-    [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
-    (click)="editRequest(selectedRow)"
-    class="button app-button">
-    Edytuj wniosek
-  </button>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
+      (click)="editRequest(selectedRow)"
+      class="button app-button">
+      Edytuj wniosek
+    </button>
+  </div>
 </div>
 
 <table mat-table class="lmat-elevation-z8" [dataSource]="dataSource">

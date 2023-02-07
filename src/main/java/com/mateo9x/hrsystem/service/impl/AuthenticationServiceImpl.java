@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.javatuples.Pair;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Cookie logoutUser() {
+        SecurityContextHolder.clearContext();
         Cookie cookie = new Cookie("jwt", null);
         cookie.setMaxAge(0);
         cookie.setHttpOnly(!appProperties.getLocalRunningApp());

@@ -34,14 +34,15 @@ mat-form-field + mat-form-field {
 }
 
 table {
+  display: flex;
   width: 100%;
 }
 
 .attendance-row {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
   padding: 10px;
+  text-align: center;
+  align-items: center;
 }
 
 .attendance-row:hover {
@@ -57,4 +58,68 @@ table {
 .no-data-row > td:hover {
   cursor: pointer;
   color: black !important;
+}
+
+.attendance-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  text-align: center;
+  align-items: center;
+}
+
+.attendance-list > td {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.attendance-list:hover > td {
+  cursor: pointer;
+  color: black !important;
+}
+
+.attendance-list > td:hover {
+  color: white !important;
+  background-color: var(--main-color-hover);
+}
+
+.attendance-list > mat-icon:hover {
+  color: white;
+  cursor: pointer;
+}
+
+tr {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+  align-items: center;
+}
+
+tr:hover {
+  color: black !important;
+}
+
+td, th {
+  width: 100%;
+  padding: 10px;
+}
+
+td {
+  border-radius: 10px;
+}
+
+td:hover {
+  cursor: pointer;
+  color: white !important;
+  background-color: var(--main-color-hover);
+}
+
+.error-hours {
+  color:red;
+  font-size:12px;
+}
+
+.hours {
+  font-size:12px;
 }

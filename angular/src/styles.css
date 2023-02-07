@@ -114,10 +114,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white !important;
 }
 
-tr:hover td {
-  color: white !important;
-}
-
 .error-span {
   color:red;
   font-size:12px;
@@ -149,4 +145,15 @@ tr:hover td {
 
 .padding_20 {
   padding: 20px;
+}
+
+.column-row {
+  background-color:rgba(0,0,0,.03) !important;
+}
+.column-row:hover {
+  background-color:rgba(0,0,0,.03) !important;
+}
+
+.column-row:hover > td {
+  color: black !important;
 }

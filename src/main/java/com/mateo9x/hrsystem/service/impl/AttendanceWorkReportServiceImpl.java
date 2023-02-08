@@ -36,6 +36,12 @@ public class AttendanceWorkReportServiceImpl implements AttendanceWorkReportServ
     }
 
     @Override
+    public AttendanceWorkReportDTO saveAttendanceWorkReportForSelectedDateByUser(AttendanceWorkReportDTO attendanceWorkReportDTO) {
+        AttendanceWorkReport attendanceWorkReport = attendanceWorkReportMapper.toEntity(attendanceWorkReportDTO);
+        return attendanceWorkReportMapper.toDTO(attendanceWorkReportRepository.save(attendanceWorkReport));
+    }
+
+    @Override
     public List<AttendanceWorkReportDTO> getAllUsersSavedAttendanceWorkReportForToday() {
         return attendanceWorkReportRepository.findAllAttendanceWorkReportByDate(LocalDate.now()).stream()
                 .map(attendanceWorkReportMapper::toDTO).collect(Collectors.toList());

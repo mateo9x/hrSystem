@@ -21,7 +21,7 @@
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Ilość godzin</mat-label>
-      <input matInput formControlName="hours"/>
+      <input matInput formControlName="hours" type="number"/>
       <span class="error-span"
             [hidden]="!hours.errors?.max">Maksymalna ilość godzin wynosi 8</span>
       <span class="error-span"

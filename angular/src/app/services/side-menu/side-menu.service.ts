@@ -31,6 +31,13 @@ export class SideMenuService {
             childs: null
           },
           {
+            label: 'Edycja obecności w pracy',
+            expanded: false,
+            routing: 'attendance-work-report-edit',
+            roles: ['ROLE_ADMIN', 'ROLE_EMPLOYER', 'ROLE_EMPLOYER_SUPERVISOR'],
+            childs: null
+          },
+          {
             label: 'Wnioski urlopowe',
             expanded: false,
             routing: 'holiday-request',

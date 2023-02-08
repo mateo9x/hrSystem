@@ -22,6 +22,9 @@ import {NewAnnotationComponent} from "./components/workers/new-annotation/new-an
 import {
   AttendanceWorkWeekComponent
 } from "./components/work-time-report/attendance-work-week/attendance-work-week.component";
+import {
+  AttendanceWorkReportEditComponent
+} from "./components/work-time-report/attendance-work-report-edit/attendance-work-report-edit.component";
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
@@ -31,6 +34,7 @@ const routes: Routes = [
   { path: 'new-password', component: NewPasswordComponent, canActivate: [AnonymousGuard] },
   { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
   { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
+  { path: 'attendance-work-report-edit', component: AttendanceWorkReportEditComponent, canActivate: [LoginGuard] },
   { path: 'attendance-work-week', component: AttendanceWorkWeekComponent, canActivate: [LoginGuard] },
   { path: 'holiday-request', component: HolidayRequestComponent, canActivate: [LoginGuard] },
   { path: 'holiday-request-confirmation', component: HolidayRequestConfirmationComponent, canActivate: [LoginGuard] },

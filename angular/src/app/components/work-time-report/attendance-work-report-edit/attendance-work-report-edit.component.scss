@@ -16,6 +16,10 @@ h1 {
   align-items: center;
 }
 
+.button-container {
+  padding: 10px 10px 0;
+}
+
 mat-form-field + mat-form-field {
   margin-left: 8px;
 }
@@ -34,7 +38,6 @@ mat-form-field + mat-form-field {
 }
 
 table {
-  display: flex;
   width: 100%;
 }
 
@@ -55,9 +58,9 @@ table {
 }
 
 tr {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  width:100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   text-align: center;
   align-items: center;
 }
@@ -79,13 +82,4 @@ td:hover {
   cursor: pointer;
   color: white !important;
   background-color: var(--main-color-hover);
-}
-
-.error-hours {
-  color:red;
-  font-size:12px;
-}
-
-.hours {
-  font-size:12px;
 }

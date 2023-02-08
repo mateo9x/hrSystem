@@ -11,6 +11,8 @@ public interface AttendanceWorkReportService {
 
     AttendanceWorkReportDTO saveAttendanceWorkReport(AttendanceWorkReportDTO attendanceWorkReportDTO);
 
+    AttendanceWorkReportDTO saveAttendanceWorkReportForSelectedDateByUser(AttendanceWorkReportDTO attendanceWorkReportDTO);
+
     List<AttendanceWorkReportDTO> getAllUsersSavedAttendanceWorkReportForToday();
 
     List<AttendanceWorkReportDTO> getAllSavedAttendanceWorksForUserBetweenSelectedDates(Long userId, LocalDate dateFrom, LocalDate dateTo);

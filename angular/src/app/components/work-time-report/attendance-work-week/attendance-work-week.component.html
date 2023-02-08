@@ -3,7 +3,7 @@
   <h1>Obecności w pracy</h1>
 
   <div class="date-container">
-    <mat-icon class="arrows" (click)="previousWeek()">arrow_left</mat-icon>
+    <mat-icon class="arrows" (click)="previousWeek()" matTooltip="Poprzedni tydzień">arrow_left</mat-icon>
 
     <mat-form-field appearance="fill">
       <mat-label>Wybierz datę od</mat-label>
@@ -19,7 +19,7 @@
       <mat-datepicker #pickerTo></mat-datepicker>
     </mat-form-field>
 
-    <mat-icon class="arrows" (click)="nextWeek()">arrow_right</mat-icon>
+    <mat-icon class="arrows" (click)="nextWeek()" matTooltip="Następny tydzień">arrow_right</mat-icon>
 
   </div>
 

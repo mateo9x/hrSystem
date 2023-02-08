@@ -61,6 +61,12 @@ import {
 import {
   AttendanceWorkWeekDialogComponent
 } from "./components/work-time-report/attendance-work-week/dialog/attendance-work-week-dialog.component";
+import {
+  AttendanceWorkReportEditComponent
+} from "./components/work-time-report/attendance-work-report-edit/attendance-work-report-edit.component";
+import {
+  AttendanceWorkReportEditDialogComponent
+} from "./components/work-time-report/attendance-work-report-edit/dialog/attendance-work-report-edit-dialog.component";
 
 @NgModule({
   declarations: [
@@ -88,7 +94,9 @@ import {
     UserAnnotationsComponent,
     UserAnnotationsDialogComponent,
     AttendanceWorkWeekComponent,
-    AttendanceWorkWeekDialogComponent
+    AttendanceWorkWeekDialogComponent,
+    AttendanceWorkReportEditComponent,
+    AttendanceWorkReportEditDialogComponent
   ],
     imports: [
         BrowserModule,

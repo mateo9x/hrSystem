@@ -37,6 +37,18 @@ public class AttendanceWorkReportController {
         return ResponseEntity.ok(attendanceWorkReportService.saveAttendanceWorkReport(attendanceWorkReportDTO));
     }
 
+    @PostMapping("/attendance-works/selected-date-by-user")
+    public ResponseEntity<AttendanceWorkReportDTO> saveAttendanceWorkReportForSelectedDateByUser(@RequestBody @Valid AttendanceWorkReportDTO attendanceWorkReportDTO) {
+        log.info("REST request to save attendance work report");
+        return ResponseEntity.ok(attendanceWorkReportService.saveAttendanceWorkReportForSelectedDateByUser(attendanceWorkReportDTO));
+    }
+
+    @PutMapping("/attendance-works/selected-date-by-user")
+    public ResponseEntity<AttendanceWorkReportDTO> updateAttendanceWorkReportForSelectedDateByUser(@RequestBody @Valid AttendanceWorkReportDTO attendanceWorkReportDTO) {
+        log.info("REST request to save attendance work report");
+        return ResponseEntity.ok(attendanceWorkReportService.saveAttendanceWorkReportForSelectedDateByUser(attendanceWorkReportDTO));
+    }
+
     @PutMapping("/attendance-works")
     public ResponseEntity<AttendanceWorkReportDTO> updateAttendanceWorkReport(@RequestBody @Valid AttendanceWorkReportDTO attendanceWorkReportDTO) {
         log.info("REST request to update attendance work report");

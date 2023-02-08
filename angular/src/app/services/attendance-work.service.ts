@@ -27,6 +27,14 @@ export class AttendanceWorkService {
     return this.http.post<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}`, model);
   }
 
+  public saveAttendanceWorkReportForSelectedDateByUser(model: AttendanceWorkReportModel) {
+    return this.http.post<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}/selected-date-by-user`, model);
+  }
+
+  public updateAttendanceWorkReportForSelectedDateByUser(model: AttendanceWorkReportModel) {
+    return this.http.put<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}/selected-date-by-user`, model);
+  }
+
   public updateAttendanceWorkReport(model: AttendanceWorkReportModel) {
     return this.http.put<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}`, model);
   }

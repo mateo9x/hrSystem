@@ -36,7 +36,13 @@
           <div [class]="data.hours > 8 ? 'error-hours' : 'hours'">{{ data.hours }}h / 8h</div>
         </th>
         <ng-container *ngFor="let attendance of tableData[i].attendances">
-          <td (click)="openEditWorkDayDialog(attendance)">{{attendance.comment}}</td>
+          <td (click)="openEditWorkDayDialog(attendance)">
+            <div class="attendance-label">Rodzaj pracy</div>
+            <div>{{attendance.dicAttendanceWorkType.name}}</div>
+
+            <div class="attendance-label">Ilość godzin</div>
+            <div>{{attendance.hours}}</div>
+          </td>
         </ng-container>
         <td *ngIf="doesAttendanceWorkReportExistsForDay(data.day)" (click)="openNewWorkDayDialog(data.day)">
           <mat-icon>alarm_add</mat-icon>

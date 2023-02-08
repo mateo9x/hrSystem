@@ -17,6 +17,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -30,9 +32,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String userEmail;
         String jwtToken = null;
 
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals("jwt")) {
-                jwtToken = cookie.getValue();
+        if (isNotEmpty(request.getCookies())) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("jwt")) {
+                    jwtToken = cookie.getValue();
+                }
             }
         }
 

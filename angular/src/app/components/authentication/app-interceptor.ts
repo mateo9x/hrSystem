@@ -1,29 +1,37 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
+import {CookieService} from "ngx-cookie-service";
+import {catchError} from "rxjs";
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor() {
+  constructor(private cookieService: CookieService) {
   }
 
   intercept(request: HttpRequest<any>,
             next: HttpHandler): Observable<HttpEvent<any>> {
-    const idToken = sessionStorage.getItem("id_token");
+    const token = this.cookieService.get('jwt');
     let newRequest;
-    if (!!idToken) {
+    if (!!token) {
+      document.cookie = token;
       newRequest = request.clone({
-        setHeaders: {
-          Authorization: 'Bearer ' + idToken
-        },
         withCredentials: true
       });
     } else {
+      document.cookie = null;
       newRequest = request.clone({
         withCredentials: true
       })
     }
-    return next.handle(newRequest);
+    return next.handle(newRequest).pipe(catchError((err, caught) => {
+      if (err.status === 401) {
+        document.cookie = null;
+        this.cookieService.delete('jwt');
+        this.cookieService.delete('user');
+      }
+      throw err;
+    }));
   }
 }

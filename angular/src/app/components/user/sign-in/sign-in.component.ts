@@ -32,9 +32,9 @@ export class SignInComponent implements OnInit {
       } else {
         this.authenticationService.signinUser(this.request).subscribe({
           next: (successResponse) => {
+            this.cookieService.set('jwt', successResponse.token);
             this.userService.getUserByJWTToken().subscribe({
               next: (getUserByJWTTokenResponse) => {
-                this.cookieService.set('jwt', successResponse.token);
                 this.cookieService.set('user', JSON.stringify(getUserByJWTTokenResponse));
                 this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
                 this.appComponent.userLogged = getUserByJWTTokenResponse;

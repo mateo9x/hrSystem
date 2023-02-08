@@ -22,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.cookieService.set('hrSystem', 'hrSystem');
     this.cookieJWT = this.cookieService.get('jwt');
     if (this.cookieJWT && this.cookieJWT.length > 0) {
       this.userService.getUserByJWTToken().subscribe( {

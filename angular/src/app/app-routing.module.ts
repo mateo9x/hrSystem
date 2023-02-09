@@ -18,7 +18,7 @@ import {HolidayRequestComponent} from "./components/work-time-report/holiday-req
 import {
   HolidayRequestConfirmationComponent
 } from "./components/work-time-report/holiday-request-confirmation/holiday-request-confirmation.component";
-import {NewAnnotationComponent} from "./components/workers/new-annotation/new-annotation.component";
+import {NewAnnotationComponent} from "./components/admin/new-annotation/new-annotation.component";
 import {
   AttendanceWorkWeekComponent
 } from "./components/work-time-report/attendance-work-week/attendance-work-week.component";

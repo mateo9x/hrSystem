@@ -48,7 +48,7 @@ export class HolidayRequestConfirmationComponent implements OnInit {
   }
 
   getHolidayRequests() {
-    this.holidayRequestService.getAllHolidayRequestsBetweenSelectedDates(this.dateService.convertDateToJavaLocalDate(this.dateFrom), this.dateService.convertDateToJavaLocalDate(this.dateTo)).subscribe({
+    this.holidayRequestService.getAllHolidayRequestsBetweenSelectedDatesPending(this.dateService.convertDateToJavaLocalDate(this.dateFrom), this.dateService.convertDateToJavaLocalDate(this.dateTo)).subscribe({
       next: (holidayRequests) => {
         this.dataSource = new MatTableDataSource(holidayRequests);
       }

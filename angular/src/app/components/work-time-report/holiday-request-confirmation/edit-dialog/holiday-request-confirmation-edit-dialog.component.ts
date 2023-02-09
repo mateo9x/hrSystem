@@ -25,14 +25,9 @@ export class HolidayRequestConfirmationEditDialogComponent implements OnInit {
   prepareDialogData() {
     this.holidayRequestService.getAllHolidayRequestStatuses().subscribe({
       next: (response) => {
-        this.statuses = response;
-        this.fillStatusesDropdown();
+        this.statuses = response.filter((status) => status.name !== 'Wysłano');
       }
     });
-  }
-
-  fillStatusesDropdown() {
-    this.selectedStatus.setValue(this.holidayRequest.holidayRequestStatusId as unknown as string);
   }
 
   saveRequest() {

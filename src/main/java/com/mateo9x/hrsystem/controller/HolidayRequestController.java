@@ -44,9 +44,9 @@ public class HolidayRequestController {
     }
 
     @GetMapping("/holiday-requests/{dateFrom}/{dateTo}")
-    public ResponseEntity<List<HolidayRequestDTO>> getAllHolidayRequestsBetweenSelectedDates(@PathVariable LocalDate dateFrom, @PathVariable LocalDate dateTo) {
+    public ResponseEntity<List<HolidayRequestDTO>> getAllHolidayRequestsBetweenSelectedDatesPending(@PathVariable LocalDate dateFrom, @PathVariable LocalDate dateTo) {
         log.info("REST request to get all holiday request types between dates: {} - {}", dateFrom, dateTo);
-        return ResponseEntity.ok(holidayRequestService.getAllHolidayRequestsBetweenSelectedDates(dateFrom, dateTo));
+        return ResponseEntity.ok(holidayRequestService.getAllHolidayRequestsBetweenSelectedDatesPending(dateFrom, dateTo));
     }
 
     @PostMapping("/holiday-requests")

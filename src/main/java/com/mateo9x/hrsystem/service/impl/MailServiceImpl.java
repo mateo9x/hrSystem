@@ -75,7 +75,7 @@ public class MailServiceImpl implements MailService {
         message.setTo(holidayRequestDTO.getUserEmail());
         message.setSubject("HR System - Wniosek urlopowy");
         message.setText("Witaj " + holidayRequestDTO.getUserFullName() + "!\n\nTwój wniosek o " + holidayRequestDTO.getHolidayRequestTypeName().toLowerCase() +
-                " w dniach " + holidayRequestDateRange + " zmienił status z " + oldStatus + " na " + holidayRequestDTO.getHolidayRequestStatusName() + " z powodu:\n\n" +
+                " w dniach " + holidayRequestDateRange + " zmienił status z " + oldStatus + " na " + holidayRequestDTO.getHolidayRequestStatusName() + " z komentarzem:\n\n" +
                 comment + "\n\nW razie pytań skontaktuj się bezpośrednio ze swoim przełożonym.");
         try {
             javaMailSender.send(message);

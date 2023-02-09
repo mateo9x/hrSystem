@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {AnnotationForUserService} from "../../../services/annotation-for-user.service";
 import {AnnotationForUserWebsocketService} from "../../../services/websocket/annotation-for-user-websocket.service";
 
@@ -7,7 +7,7 @@ import {AnnotationForUserWebsocketService} from "../../../services/websocket/ann
   templateUrl: './user-annotations.component.html',
   styleUrls: ['./user-annotations.component.scss']
 })
-export class UserAnnotationsComponent implements OnInit {
+export class UserAnnotationsComponent implements OnChanges {
   annotationDialogOpened = false;
   annotations: any[] = [];
   @Input() userId: number;
@@ -28,7 +28,8 @@ export class UserAnnotationsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.userId = changes.userId.currentValue;
     if (this.userId) {
       this.annotationForUserWebsocketService.connect(this.userId);
       this.annotations = this.annotationForUserWebsocketService.annotationsWebSocket;

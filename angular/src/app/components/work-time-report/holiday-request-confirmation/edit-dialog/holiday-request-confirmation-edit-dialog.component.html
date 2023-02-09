@@ -14,13 +14,21 @@
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Komentarz</mat-label>
-      <input matInput [(ngModel)]="holidayRequest.comment" name="lastName" type="text" max="255">
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="10"
+                maxlength="255"
+                [(ngModel)]="holidayRequest.comment"
+                required></textarea>
     </mat-form-field>
   </div>
 
   <div class="button-container">
     <button mat-raised-button (click)="cancel()" name="cancel" class="button app-button">Anuluj</button>
-    <button mat-raised-button (click)="saveRequest()" [disabled]="form.invalid || !selectedStatus.value" name="save" class="button app-button">
+    <button mat-raised-button (click)="saveRequest()" [disabled]="form.invalid || !selectedStatus.value" name="save"
+            class="button app-button">
       Zapisz
     </button>
   </div>

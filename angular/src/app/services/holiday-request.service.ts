@@ -25,7 +25,7 @@ export class HolidayRequestService {
     return this.http.get<HolidayRequest[]>(`${this.holidayRequestTypeUrl}/${userId}/${dateFrom}/${dateTo}`);
   }
 
-  public getAllHolidayRequestsBetweenSelectedDates(dateFrom: string, dateTo: string) {
+  public getAllHolidayRequestsBetweenSelectedDatesPending(dateFrom: string, dateTo: string) {
     return this.http.get<HolidayRequest[]>(`${this.holidayRequestTypeUrl}/${dateFrom}/${dateTo}`);
   }
 

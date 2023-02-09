@@ -9,7 +9,7 @@ public interface HolidayRequestService {
 
     List<HolidayRequestDTO> getAllHolidayRequestsForUserBetweenSelectedDates(Long userId, LocalDate dateFrom, LocalDate dateTo);
 
-    List<HolidayRequestDTO> getAllHolidayRequestsBetweenSelectedDates(LocalDate dateFrom, LocalDate dateTo);
+    List<HolidayRequestDTO> getAllHolidayRequestsBetweenSelectedDatesPending(LocalDate dateFrom, LocalDate dateTo);
 
     HolidayRequestDTO saveHolidayRequest(HolidayRequestDTO holidayRequestDTO, Boolean firstCreate);
 

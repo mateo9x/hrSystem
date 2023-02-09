@@ -33,10 +33,11 @@ public class HolidayRequestServiceImpl implements HolidayRequestService {
     }
 
     @Override
-    public List<HolidayRequestDTO> getAllHolidayRequestsBetweenSelectedDates(LocalDate dateFrom, LocalDate dateTo) {
+    public List<HolidayRequestDTO> getAllHolidayRequestsBetweenSelectedDatesPending(LocalDate dateFrom, LocalDate dateTo) {
         return holidayRequestRepository.findAllByDateFromGreaterThanEqualAndDateFromLessThanEqual(dateFrom, dateTo)
                 .stream()
                 .map(holidayRequestMapper::toDTO)
+                .filter(holidayRequest -> holidayRequest.getHolidayRequestStatusName().equals("Wysłano"))
                 .sorted(Comparator.comparing(HolidayRequestDTO::getUserFullName))
                 .collect(Collectors.toList());
     }

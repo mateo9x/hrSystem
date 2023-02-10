@@ -1,11 +1,14 @@
-<mat-form-field>
-  <mat-label>Wyszukaj</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Szukaj..." #input>
-</mat-form-field>
+<div class="padding_10">
+  <mat-form-field>
+    <mat-label>Wyszukaj</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Szukaj..." #input>
+  </mat-form-field>
+</div>
 
 <div class="button-container">
   <button mat-raised-button (click)="editUser()"
-          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined" class="button app-button">
+          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
+          class="button app-button">
     Edytuj użytkownika
   </button>
   <button

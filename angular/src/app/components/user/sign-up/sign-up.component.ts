@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {User} from 'src/app/models/user.model';
 import {UserService} from 'src/app/services/user.service';
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
+import {SpinnerService} from "../../../services/material/spinner.service";
 
 @Component({
   selector: 'sign-up',
@@ -16,7 +17,8 @@ export class SignUpComponent implements OnInit {
   loading: boolean;
   users: User[];
 
-  constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService) {
+  constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -37,13 +39,16 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
+    this.spinnerService.setLoading(true);
     this.userService.createUser(this.user).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie', SnackBarType.SUCCESS);
+        this.spinnerService.setLoading(false);
         this.router.navigate(['']);
       },
       error: (errorResponse) => {
         this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
+        this.spinnerService.setLoading(false);
       }
     });
   }

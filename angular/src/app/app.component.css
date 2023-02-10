@@ -90,3 +90,12 @@ i:hover, a:after, a:hover {
   cursor: pointer;
   color: var(--main-color-hover) !important;
 }
+
+.spinner {
+  top: 50%;
+  left: 50%;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--main-color);
+}

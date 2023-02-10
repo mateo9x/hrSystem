@@ -5,6 +5,7 @@ import {AuthenticationService} from "./services/authentication.service";
 import {UserService} from "./services/user.service";
 import {CookieService} from "ngx-cookie-service";
 import {AnnotationForUserWebsocketService} from "./services/websocket/annotation-for-user-websocket.service";
+import {SpinnerService} from "./services/material/spinner.service";
 
 @Component({
   selector: 'app-root',
@@ -16,20 +17,27 @@ import {AnnotationForUserWebsocketService} from "./services/websocket/annotation
 export class AppComponent implements OnInit, OnDestroy {
   userLogged: User = null;
   cookieJWT: string;
+  loading = false;
 
   constructor(private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
-              private userService: UserService, private cookieService: CookieService, private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
+              private userService: UserService, private cookieService: CookieService, private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
     this.cookieJWT = this.cookieService.get('jwt');
     if (this.cookieJWT && this.cookieJWT.length > 0) {
-      this.userService.getUserByJWTToken().subscribe( {
+      this.userService.getUserByJWTToken().subscribe({
         next: (getUserByJWTTokenResponse) => {
           this.userLogged = getUserByJWTTokenResponse;
         }
       });
     }
+    this.spinnerService.loading.subscribe({
+      next: (response) => {
+        this.loading = response;
+      }
+    });
   }
 
   ngOnDestroy() {

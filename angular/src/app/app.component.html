@@ -35,6 +35,11 @@
   </div>
 </nav>
 
+<div *ngIf="loading" class="cdk-overlay-container spinner">
+  <mat-spinner>
+  </mat-spinner>
+</div>
+
 <!--<div class="footer_section">-->
 <!--  <p class="footer_text">2023</p>-->
 <!--</div>-->

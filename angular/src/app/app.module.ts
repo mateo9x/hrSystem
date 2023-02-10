@@ -67,6 +67,7 @@ import {
 import {
   AttendanceWorkReportEditDialogComponent
 } from "./components/work-time-report/attendance-work-report-edit/dialog/attendance-work-report-edit-dialog.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import {
         NgxMaskDirective,
         NgxMaskPipe,
         MatTooltipModule,
-        NgxMatSelectSearchModule
+        NgxMatSelectSearchModule,
+        MatProgressSpinnerModule
     ],
   providers: [
     provideNgxMask(),

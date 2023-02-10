@@ -20,9 +20,15 @@
 
   <div class="button-container">
     <button mat-raised-button (click)="cancel()" name="cancel" class="button app-button">Anuluj</button>
-    <button mat-raised-button (click)="save()" [disabled]="form.status !== 'VALID'" name="save"
+    <button *ngIf="attendanceWorkReport.id" mat-raised-button (click)="remove()" name="cancel" class="button app-button">Usuń obecność</button>
+    <button *ngIf="!attendanceWorkReport.id" mat-raised-button (click)="save()" [disabled]="form.status !== 'VALID'"
+            name="save"
+            class="button app-button">Zapisz
+    </button>
+    <button *ngIf="attendanceWorkReport.id" mat-raised-button (click)="update()" [disabled]="form.status !== 'VALID'"
+            name="update"
             class="button app-button">
-      Zapisz
+      Aktualizuj
     </button>
   </div>
 

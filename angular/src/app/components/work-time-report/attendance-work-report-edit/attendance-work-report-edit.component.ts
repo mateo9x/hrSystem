@@ -117,10 +117,12 @@ export class AttendanceWorkReportEditComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe({
       next: (response) => {
-        if (response && response.edit) {
-          this.updateNewAttendanceWorkReportForSelectedDateByUser(response.data);
-        } else if (response && !response.edit) {
+        if (response && this.isDialogUpdate(response)) {
+          this.updateAttendanceWorkReportForSelectedDateByUser(response.data);
+        } else if (response && this.isDialogSave(response)) {
           this.saveNewAttendanceWorkReportForSelectedDateByUser(response.data);
+        } else if (response && this.isDialogRemove(response)) {
+          this.removeAttendanceWorkReportForSelectedDateByUser(response.data);
         }
       }
     });
@@ -138,7 +140,7 @@ export class AttendanceWorkReportEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateNewAttendanceWorkReportForSelectedDateByUser(attendanceWorkReport: AttendanceWorkReportModel) {
+  updateAttendanceWorkReportForSelectedDateByUser(attendanceWorkReport: AttendanceWorkReportModel) {
     this.attendanceWorkReportService.updateAttendanceWorkReportForSelectedDateByUser(attendanceWorkReport).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Pomyślnie zaaktualizowano obecność dla użytkownika w dniu: ' + attendanceWorkReport.date, SnackBarType.SUCCESS);
@@ -148,6 +150,30 @@ export class AttendanceWorkReportEditComponent implements OnInit, OnDestroy {
         this.snackBarService.openSnackBar('Nie udało zaaktualizować się obecności dla użytkownika w dniu: ' + attendanceWorkReport.date, SnackBarType.ERROR);
       }
     });
+  }
+
+  removeAttendanceWorkReportForSelectedDateByUser(attendanceWorkReport: AttendanceWorkReportModel) {
+    this.attendanceWorkReportService.deleteAttendanceWorkReportByIdCascade(attendanceWorkReport.id).subscribe({
+      next: () => {
+        this.snackBarService.openSnackBar('Pomyślnie usunięto obecność dla użytkownika w dniu: ' + attendanceWorkReport.date, SnackBarType.SUCCESS);
+        this.getAttendanceWorkForSelectedWeek();
+      },
+      error: () => {
+        this.snackBarService.openSnackBar('Nie udało usunąć się obecności dla użytkownika w dniu: ' + attendanceWorkReport.date, SnackBarType.ERROR);
+      }
+    });
+  }
+
+  isDialogSave(data: any) {
+    return data.type === 'save';
+  }
+
+  isDialogUpdate(data: any) {
+    return data.type === 'update';
+  }
+
+  isDialogRemove(data: any) {
+    return data.type === 'remove';
   }
 
   getAttendanceWorkReportByDay(day: string) {

@@ -39,6 +39,10 @@ export class AttendanceWorkService {
     return this.http.put<AttendanceWorkReportModel>(`${this.attendanceWorkUrl}`, model);
   }
 
+  public deleteAttendanceWorkReportByIdCascade(id: number) {
+    return this.http.delete<Boolean>(`${this.attendanceWorkUrl}/${id}`);
+  }
+
   public getAllDicAttendanceWorkTypes() {
     return this.http.get<DicAttendanceWorkType[]>(`${this.dicAttendanceWorkUrl}`);
   }

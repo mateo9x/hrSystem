@@ -12,4 +12,6 @@ public interface AttendanceWorkDayService {
     AttendanceWorkDayDTO save(AttendanceWorkDayDTO attendanceWorkDayDTO);
 
     Boolean deleteById(Long id);
+
+    List<AttendanceWorkDayDTO> findAllByAttendanceWorkReportId(Long attendanceWorkReportId);
 }

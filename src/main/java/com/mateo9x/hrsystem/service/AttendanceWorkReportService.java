@@ -16,4 +16,6 @@ public interface AttendanceWorkReportService {
     List<AttendanceWorkReportDTO> getAllUsersSavedAttendanceWorkReportForToday();
 
     List<AttendanceWorkReportDTO> getAllSavedAttendanceWorksForUserBetweenSelectedDates(Long userId, LocalDate dateFrom, LocalDate dateTo);
+
+    Boolean deleteAttendanceWorkReportByIdCascade(Long id);
 }

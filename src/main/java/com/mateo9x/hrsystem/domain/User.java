@@ -52,7 +52,7 @@ public class User {
     private String streetNumber;
 
     @Column(name = "postal_code")
-    @Size(min= 6, max=6)
+    @Size(min = 5, max = 5)
     private String postalCode;
 
     @Column(name = "city")

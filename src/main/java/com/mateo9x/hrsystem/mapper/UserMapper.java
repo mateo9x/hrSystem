@@ -31,6 +31,7 @@ public class UserMapper {
                 .city(userDTO.getCity())
                 .phoneNumber(userDTO.getPhoneNumber())
                 .resetToken(userDTO.getResetToken())
+                .theme(userDTO.getTheme())
                 .build();
     }
 
@@ -52,6 +53,7 @@ public class UserMapper {
                 .city(user.getCity())
                 .phoneNumber(user.getPhoneNumber())
                 .resetToken(user.getResetToken())
+                .theme(user.getTheme())
                 .build();
     }
 

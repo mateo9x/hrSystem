@@ -32,8 +32,11 @@ public class UserServiceImpl implements UserService {
             throw new UserException("Użytkownik z podanym adresem e-mail już istnieje!");
         }
         if (firstCreate) {
+            userDTO.setTheme("default");
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             mailService.sendNewUserMail(userDTO);
+        } else {
+            userDTO.setTheme(userDTO.getTheme());
         }
         User savedUser = userRepository.save(userMapper.toEntity(userDTO));
         return userMapper.toDTO(savedUser);

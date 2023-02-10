@@ -4,7 +4,35 @@
 }
 
 html, body { height: 100%; }
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+  font-family: 'impact';
+  src: url('assets/fonts/impact.ttf');
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: var(--main-color) !important;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--main-color) !important;
+}
+
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+  border-color: var(--main-color) !important;
+  background-color: var(--main-color) !important;
+}
+
+::ng-deep .mdc-text-field .mdc-text-field__input {
+  border-color: var(--main-color) !important;
+}
+
+.mdc-text-field--filled .mdc-line-ripple:after {
+  border-color: var(--main-color) !important;
+}
+
 button {
   background-color: var(--main-color);
   border: none;
@@ -97,18 +125,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .snack-bar-success, .snack-bar-success button {
+  border-radius: 10px !important;
   background-color: #49830a !important;
   --mdc-snackbar-container-color: #49830a !important;
   color: white !important;
 }
 
 .snack-bar-warn, .snack-bar-warn button {
+  border-radius: 10px !important;
   background-color: #d7a80e !important;
   --mdc-snackbar-container-color: #d7a80e !important;
   color: white !important;
 }
 
 .snack-bar-error, .snack-bar-error button {
+  border-radius: 10px !important;
   background-color: #771313 !important;
   --mdc-snackbar-container-color: #771313 !important;
   color: white !important;

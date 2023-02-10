@@ -62,4 +62,7 @@ public class User {
     @Size(min = 9, max = 9)
     private String phoneNumber;
 
+    @Column(name = "theme")
+    private String theme;
+
 }

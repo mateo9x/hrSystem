@@ -13,4 +13,5 @@ export class User {
   city?: string;
   phoneNumber?: string;
   resetToken?: string;
+  theme?: string;
 }

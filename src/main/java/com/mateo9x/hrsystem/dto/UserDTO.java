@@ -46,4 +46,6 @@ public class UserDTO {
 
     @Size(min = 9, max = 9)
     private String phoneNumber;
+
+    private String theme;
 }

@@ -68,6 +68,7 @@ import {
   AttendanceWorkReportEditDialogComponent
 } from "./components/work-time-report/attendance-work-report-edit/dialog/attendance-work-report-edit-dialog.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ProfilePreferencesComponent} from "./components/user/profile/preferences/profile-preferences.component";
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ProfileComponent,
     ProfileDataComponent,
     ProfilePasswordComponent,
+    ProfilePreferencesComponent,
     HolidayRequestComponent,
     HolidayRequestAddDialogComponent,
     HolidayRequestConfirmationComponent,

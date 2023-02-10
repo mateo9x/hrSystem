@@ -6,6 +6,7 @@ import {UserService} from "./services/user.service";
 import {CookieService} from "ngx-cookie-service";
 import {AnnotationForUserWebsocketService} from "./services/websocket/annotation-for-user-websocket.service";
 import {SpinnerService} from "./services/material/spinner.service";
+import {getThemeByValue, ThemeService} from "./services/theme/theme.service";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
               private userService: UserService, private cookieService: CookieService, private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService, private themeService: ThemeService) {
   }
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.userService.getUserByJWTToken().subscribe({
         next: (getUserByJWTTokenResponse) => {
           this.userLogged = getUserByJWTTokenResponse;
+          this.themeService.setStyle(getThemeByValue(this.userLogged.theme));
         }
       });
     }

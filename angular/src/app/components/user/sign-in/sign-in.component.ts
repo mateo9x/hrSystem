@@ -5,6 +5,7 @@ import {AppComponent} from "../../../app.component";
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {AuthenticationRequest, AuthenticationService} from "../../../services/authentication.service";
 import {CookieService} from "ngx-cookie-service";
+import {getThemeByValue, ThemeService} from "../../../services/theme/theme.service";
 
 @Component({
   selector: 'sign-in',
@@ -18,7 +19,7 @@ export class SignInComponent implements OnInit {
   constructor(private userService: UserService, private router: Router,
               @Inject(AppComponent) private appComponent: AppComponent,
               private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
-              private cookieService: CookieService) {
+              private cookieService: CookieService, private themeService: ThemeService) {
   }
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export class SignInComponent implements OnInit {
                 this.cookieService.set('user', JSON.stringify(getUserByJWTTokenResponse));
                 this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
                 this.appComponent.userLogged = getUserByJWTTokenResponse;
+                this.themeService.setStyle(getThemeByValue(getUserByJWTTokenResponse.theme));
                 this.router.navigate(['']);
               }
             })

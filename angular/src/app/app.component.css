@@ -1,14 +1,11 @@
 .banner_bg_main {
   width: 100%;
-  height:50px;
-  max-height:50px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  border-bottom: 2px solid var(--main-color-hover);
+  height: 50px;
 }
 
 .header_section {
   width: 100%;
+  height: 100%;
   background-color: var(--main-color);
   max-height: 50px;
   display: grid;
@@ -17,13 +14,20 @@
 }
 
 .header_left_section {
+  display: grid;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-family: 'impact', Impact, serif;
   text-align: center;
+  font-size: 26px;
 }
 
-img {
-  position: relative;
+.header_left_section:hover {
   cursor: pointer;
-}
+  color: var(--main-color-hover);
+ }
 
 .header_right_section {
   text-align: right;

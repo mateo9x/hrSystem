@@ -30,6 +30,7 @@ export class AttendanceWorkReportEditDialogComponent implements OnInit {
       this.editForm = true;
     }
     this.day.setValue(this.attendanceWorkReport.date);
+    this.day.disable();
   }
 
   save() {

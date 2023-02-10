@@ -45,4 +45,11 @@ public class AttendanceWorkDayServiceImpl implements AttendanceWorkDayService {
         attendanceWorkDayRepository.deleteById(id);
         return attendanceWorkDayRepository.findById(id).isEmpty();
     }
+
+    @Override
+    public List<AttendanceWorkDayDTO> findAllByAttendanceWorkReportId(Long attendanceWorkReportId) {
+        return attendanceWorkDayRepository.findAllByAttendanceWorkReportId(attendanceWorkReportId).stream()
+                .map(attendanceWorkDayMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 }

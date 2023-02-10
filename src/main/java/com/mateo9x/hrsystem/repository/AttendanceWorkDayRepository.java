@@ -14,4 +14,7 @@ public interface AttendanceWorkDayRepository extends JpaRepository<AttendanceWor
 
     @Query(value = "select awd from AttendanceWorkDay awd join AttendanceWorkReport awr on awd.attendanceWorkReport.id = awr.id join User u on awr.user.id = u.id where u.id = :userId and (awr.date >= :dateFrom and awr.date <= :dateTo)")
     List<AttendanceWorkDay> findAllForUserBetweenSelectedDates(@Param("userId") Long userId, @Param("dateFrom") LocalDate dateFrom, @Param("dateTo") LocalDate dateTo);
+
+    @Query(value = "select awd from AttendanceWorkDay awd join AttendanceWorkReport awr on awd.attendanceWorkReport.id = awr.id where awr.id = :attendanceWorkReportId")
+    List<AttendanceWorkDay> findAllByAttendanceWorkReportId(@Param("attendanceWorkReportId") Long attendanceWorkReportId);
 }

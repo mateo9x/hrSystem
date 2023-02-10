@@ -37,6 +37,12 @@ public class AttendanceWorkReportController {
         return ResponseEntity.ok(attendanceWorkReportService.saveAttendanceWorkReport(attendanceWorkReportDTO));
     }
 
+    @DeleteMapping("/attendance-works/{id}")
+    public ResponseEntity<Boolean> deleteAttendanceWorkReportByIdCascade(@PathVariable Long id) {
+        log.info("REST request to delete attendance work report cascade by id: {}", id);
+        return ResponseEntity.ok(attendanceWorkReportService.deleteAttendanceWorkReportByIdCascade(id));
+    }
+
     @PostMapping("/attendance-works/selected-date-by-user")
     public ResponseEntity<AttendanceWorkReportDTO> saveAttendanceWorkReportForSelectedDateByUser(@RequestBody @Valid AttendanceWorkReportDTO attendanceWorkReportDTO) {
         log.info("REST request to save attendance work report");

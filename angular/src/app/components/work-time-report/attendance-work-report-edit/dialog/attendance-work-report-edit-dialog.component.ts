@@ -35,7 +35,18 @@ export class AttendanceWorkReportEditDialogComponent implements OnInit {
   save() {
     this.attendanceWorkReport.date = this.day.value;
     this.attendanceWorkReport.remoteWork = this.selectedTypeOfWork.value;
-    this.dialogRef.close({data: this.attendanceWorkReport, edit: this.editForm});
+    this.dialogRef.close({data: this.attendanceWorkReport, type: 'save'});
+  }
+
+  update() {
+    this.attendanceWorkReport.date = this.day.value;
+    this.attendanceWorkReport.remoteWork = this.selectedTypeOfWork.value;
+    this.dialogRef.close({data: this.attendanceWorkReport, type: 'update'});
+  }
+
+  remove() {
+    this.attendanceWorkReport.date = this.day.value;
+    this.dialogRef.close({data: this.attendanceWorkReport, type: 'remove'});
   }
 
   cancel() {

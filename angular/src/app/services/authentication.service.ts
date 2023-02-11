@@ -37,8 +37,15 @@ export class AuthenticationService {
               this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
               this.router.navigate(['']);
             }
-          })
-        }
+          });
+        },
+        error: (error) => {
+          if (error.message) {
+            this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR);
+          } else {
+            this.snackBarService.openSnackBar('Autoryzacja nie udana', SnackBarType.ERROR);
+          }
+      }
       });
     }
   }

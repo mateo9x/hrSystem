@@ -1,6 +1,6 @@
 create table holiday_request_statuses
 (
-    id            bigint       not null,
+    id            serial       not null,
     name         varchar(50) not null,
     CONSTRAINT holiday_request_statuses_pk PRIMARY KEY (id)
 );
@@ -15,7 +15,7 @@ values
 
 create table holiday_request_types
 (
-    id            bigint       not null,
+    id            serial       not null,
     name         varchar(50) not null,
     CONSTRAINT holiday_request_types_pk PRIMARY KEY (id)
 );

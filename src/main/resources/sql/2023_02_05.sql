@@ -1,6 +1,6 @@
 create table dic_attendance_work_types
 (
-    id            bigint       not null,
+    id            serial       not null,
     name         varchar(255) not null,
     CONSTRAINT dic_attendance_work_types_pk PRIMARY KEY (id)
 );

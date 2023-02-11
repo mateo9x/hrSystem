@@ -1,6 +1,6 @@
 create table roles
 (
-    id            bigint       not null,
+    id            serial       not null,
     label         varchar(100) not null,
     value         varchar(100) not null,
     CONSTRAINT roles_pk PRIMARY KEY (id)

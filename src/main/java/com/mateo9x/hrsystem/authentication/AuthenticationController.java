@@ -57,7 +57,8 @@ public class AuthenticationController {
     public ResponseEntity<UserDTO> getUserByJWTToken(HttpServletRequest request) {
         log.info("REST request to get user by jwt token");
         AtomicReference<String> email = new AtomicReference<>();
-        Optional<Cookie> optionalCookie = Arrays.stream(request.getCookies()).filter(cookie -> JWT_COOKIE.equals(cookie.getName()))
+        Optional<Cookie> optionalCookie = Arrays.stream(request.getCookies())
+                .filter(cookie -> JWT_COOKIE.equals(cookie.getName()))
                 .filter(cookie -> isNotBlank(cookie.getValue()))
                 .findFirst();
 

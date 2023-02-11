@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
 import {UserEditDialogComponent} from "./user-edit-dialog/user-edit-dialog.component";
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
@@ -25,8 +24,7 @@ export class UsersComponent implements OnInit {
     {label: 'Pesel', value: 'pesel'}
   ];
   displayedColumnsKeys = this.displayedColumns.map(col => col.value);
-  selectedRow: any
-  selection = new SelectionModel<any>(false, null);
+  selectedRow: any;
 
   constructor(private userService: UserService, private dialog: MatDialog,
               private snackBarService: SnackBarService) {
@@ -59,6 +57,10 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  isRowSelected() {
+    return this.dataSource && this.dataSource.data.length === 0 || this.selectedRow === undefined;
+  }
+
   editUser() {
     let dialogRef = this.dialog.open(UserEditDialogComponent, {
       data: Object.assign({}, this.selectedRow)
@@ -66,6 +68,7 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (closingMessage) => {
         if (closingMessage) {
+          this.selectedRow = undefined;
           this.snackBarService.openSnackBar(closingMessage.message, closingMessage.type);
           this.getUsers();
         }
@@ -80,6 +83,7 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (closingMessage) => {
         if (closingMessage.accept) {
+          this.selectedRow = undefined;
           this.deleteUser(user.id);
         }
       }

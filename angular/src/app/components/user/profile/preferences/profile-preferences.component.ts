@@ -37,26 +37,22 @@ export class ProfilePreferencesComponent implements OnInit {
   }
 
   changeTheme() {
-    this.user.theme = this.selectedTheme.value;
     this.themeService.setStyle(getThemeByValue(this.selectedTheme.value));
     this.themeSaved = false;
   }
 
   setSelectedTheme() {
-    this.selectedTheme.setValue(this.user.theme);
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      this.selectedTheme.setValue(theme);
+    }
     this.themeSaved = true;
   }
 
   save() {
-    this.userService.updateUser(this.user).subscribe({
-      next: () => {
-        this.themeSaved = true;
-        this.snackBarService.openSnackBar('Preferencje zapisane pomyślnie', SnackBarType.SUCCESS);
-      },
-      error: () => {
-        this.snackBarService.openSnackBar('Nie udało zapisać się preferencji', SnackBarType.ERROR);
-      }
-    });
+    localStorage.setItem('theme', this.selectedTheme.value);
+    this.themeSaved = true;
+    this.snackBarService.openSnackBar('Preferencje zapisane pomyślnie', SnackBarType.SUCCESS);
   }
 
 }

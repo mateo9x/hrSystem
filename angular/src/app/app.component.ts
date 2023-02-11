@@ -23,12 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.setTheme();
     this.userSubscription = this.authenticationService.userLogged.subscribe({
       next: (response) => {
        this.userLogged = response;
-       if (response) {
-         this.themeService.setStyle(getThemeByValue(response.theme));
-       }
       }
     });
     this.prepareSpinner();
@@ -47,8 +45,13 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  setTheme() {
+    const theme = localStorage.getItem('theme');
+    this.themeService.setStyle(getThemeByValue(theme));
+  }
+
   logOut() {
-    this.authenticationService.logoutUser();
+    this.authenticationService.logoutUser(false);
   }
 
 }

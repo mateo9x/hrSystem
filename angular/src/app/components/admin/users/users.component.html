@@ -7,13 +7,13 @@
 
 <div class="button-container">
   <button mat-raised-button (click)="editUser()"
-          [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
+          [disabled]="isRowSelected()"
           class="button app-button">
     Edytuj użytkownika
   </button>
   <button
     mat-raised-button
-    [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
+    [disabled]="isRowSelected()"
     (click)="deleteUserConfirmation(selectedRow)"
     class="button app-button">
     Usuń użytkownika

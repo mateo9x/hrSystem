@@ -5,20 +5,18 @@
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Imię</mat-label>
-      <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Z]+[a-zA-Z]{1,13}" type="text" required
-             onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
+      <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
              #firstName="ngModel">
-      <span class="error-span" *ngIf="firstName.errors">Imię musi zaczynać się z dużej litery i być bez cyfr.</span>
+      <span class="error-span" *ngIf="firstName.errors">Imię musi składać się tylko z liter</span>
     </mat-form-field>
   </div>
 
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Nazwisko</mat-label>
-      <input matInput [(ngModel)]="user.lastName" name="lastName" type="text" pattern="[A-Z]+[a-zA-Z]{1,35}" required
-             onkeypress='return event.charCode > 64 && event.charCode < 91 || event.charCode > 96 && event.charCode < 123 || event.charCode == 8'
+      <input matInput [(ngModel)]="user.lastName" name="lastName" type="text" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" required
              #lastName="ngModel">
-      <span class="error-span" *ngIf="lastName.errors">Nazwisko musi zaczynać się z dużej litery i być bez cyfr.</span>
+      <span class="error-span" *ngIf="lastName.errors">Nazwisko musi składać się tylko z liter</span>
     </mat-form-field>
   </div>
 

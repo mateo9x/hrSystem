@@ -19,7 +19,7 @@ public class UserSecurity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (user.getRoles() != null) {
-            return Arrays.stream(user.getRoles().split(","))
+            return Arrays.stream(user.getRoles().split(";"))
                     .map(SimpleGrantedAuthority::new)
                     .toList();
         }

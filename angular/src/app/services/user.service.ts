@@ -30,8 +30,8 @@ export class UserService {
     return this.http.put<boolean>(`${this.userUrl}/password`, request);
   }
 
-  public updateUserPasswordByToken(user: User) {
-    return this.http.put<boolean>(`${this.userUrl}/password/token`, user);
+  public updateUserPasswordByTokenProcedure(data: any) {
+    return this.http.put<boolean>(`${this.userUrl}/password/token`, data);
   }
 
   public resetPassword(mail: String) {

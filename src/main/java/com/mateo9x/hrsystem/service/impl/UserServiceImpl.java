@@ -69,16 +69,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean updateUserPasswordFromToken(UserDTO userDTO) {
-        Optional<User> userSavedOnBaseOptional = userRepository.findByResetToken(userDTO.getResetToken());
+    public Boolean updateUserPasswordByTokenProcedure(String password, String token) {
+        Optional<User> userSavedOnBaseOptional = userRepository.findByResetToken(token);
         if (userSavedOnBaseOptional.isPresent()) {
-            User userSavedOnBase = userSavedOnBaseOptional.get();
-            if (!doesBothPasswordMatches(userDTO, userSavedOnBase)) {
-                userSavedOnBase.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-                userSavedOnBase.setResetToken(null);
-                userRepository.save(userSavedOnBase);
-                return true;
-            }
+            User user = userSavedOnBaseOptional.get();
+            user.setPassword(passwordEncoder.encode(password));
+            user.setResetToken(null);
+            userRepository.save(user);
+            return true;
         }
         return false;
     }

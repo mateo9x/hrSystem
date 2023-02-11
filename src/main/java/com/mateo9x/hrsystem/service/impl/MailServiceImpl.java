@@ -21,7 +21,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendResetPasswordToken(UserDTO userDTO) {
-        String url = additionalAppProperties.getFrontendUrl() + "/#/new-password?" + userDTO.getResetToken();
+        String url = additionalAppProperties.getFrontendUrl() + "/new-password?" + userDTO.getResetToken();
         String userFullName = userDTO.getFirstName() + " " + userDTO.getLastName();
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@hrsystem.pl");

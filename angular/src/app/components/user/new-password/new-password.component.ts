@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {UserService} from "../../../services/user.service";
-import {User} from "../../../models/user.model";
 
 @Component({
   selector: 'new-password',
@@ -11,23 +10,24 @@ import {User} from "../../../models/user.model";
 })
 export class NewPasswordComponent implements OnInit {
 
-  user: User = new User;
+  password: string;
+  password2: string;
   token: string;
 
   constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
-    this.token = this.router.routerState.snapshot.url;
-    this.token = this.token.substring(14, this.token.length - 1);
+    const url = this.router.routerState.snapshot.url;
+    this.token = url.substring(14, url.length - 1);
   }
 
   savePassword() {
-    this.user.resetToken = this.token;
-    if (this.user.password) {
+    if (this.password) {
       this.userService.getByUserToken(this.token).subscribe((response) => {
-        if (response !== null) {
-          this.userService.updateUserPasswordByToken(this.user).subscribe((response) => {
+        if (response) {
+          const request = {newPassword: this.password, token: this.token};
+          this.userService.updateUserPasswordByTokenProcedure(request).subscribe((response) => {
             if (response) {
               this.snackBarService.openSnackBar('Hasło zaaktualizowane pomyślnie', SnackBarType.SUCCESS);
               this.router.navigate(['']);

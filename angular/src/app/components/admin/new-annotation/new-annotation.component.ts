@@ -40,6 +40,10 @@ export class NewAnnotationComponent implements OnInit, OnDestroy {
   }
 
   startSubscriptions() {
+    this.startUserInputFilterSubscription();
+  }
+
+  startUserInputFilterSubscription() {
     this.usersFilter = this.usersFilterCtrl.valueChanges.subscribe({
       next: (valueChange) => {
         const filterValue = valueChange.toString().toLowerCase().trim();

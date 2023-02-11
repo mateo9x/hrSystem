@@ -24,7 +24,7 @@ export class AppInterceptor implements HttpInterceptor {
       document.cookie = null;
       newRequest = request.clone({
         withCredentials: true
-      })
+      });
     }
     return next.handle(newRequest).pipe(catchError((err, caught) => {
       if (err.status === 401 || err.status === 403) {

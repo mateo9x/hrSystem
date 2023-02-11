@@ -1,4 +1,4 @@
-<div class="padding_10">
+<div>
   <mat-form-field>
     <mat-label>Wyszukaj</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Szukaj..." #input>
@@ -32,8 +32,8 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumnsKeys" (click)="selectRow(row)" class="table-row"
       [ngClass]="{ 'selected-row': row === selectedRow }"></tr>
 
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">Nie znaleziono żadnych danych użytkownika po szukanej frazie: "{{input.value}}"
+  <tr class="no-data-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">Brak użytkowników
     </td>
   </tr>
 </table>

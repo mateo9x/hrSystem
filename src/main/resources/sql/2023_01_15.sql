@@ -1,6 +1,6 @@
 create table users
 (
-    id            bigint       not null,
+    id            serial       not null,
     email         varchar(100) not null,
     password      varchar(100) not null,
     first_name    varchar(100) null,

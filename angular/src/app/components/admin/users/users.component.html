@@ -14,7 +14,7 @@
   <button
     mat-raised-button
     [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
-    (click)="deleteUser(selectedRow)"
+    (click)="deleteUserConfirmation(selectedRow)"
     class="button app-button">
     Usuń użytkownika
   </button>

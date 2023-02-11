@@ -46,10 +46,6 @@ export class UserService {
     return this.http.get<any>(`${this.userUrl}/email/exists/${email}`);
   }
 
-  public getUserByJWTToken() {
-    return this.http.get<User>(`${this.userUrl}/jwt-token`);
-  }
-
   public getAllUsers() {
     return this.http.get<User[]>(`${this.userUrl}`);
   }

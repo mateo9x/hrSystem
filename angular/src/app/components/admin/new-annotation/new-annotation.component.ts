@@ -8,6 +8,7 @@ import {AnnotationForUsersRequest} from "../../../models/annotation-for-user.mod
 import {AnnotationForUserService} from "../../../services/annotation-for-user.service";
 import {AnnotationForUserWebsocketService} from "../../../services/websocket/annotation-for-user-websocket.service";
 import {Subscription} from "rxjs";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'new-annotation',
@@ -22,9 +23,9 @@ export class NewAnnotationComponent implements OnInit, OnDestroy {
   newAnnotationForm: FormGroup;
   usersFilter: Subscription;
 
-  constructor(private userService: UserService, private snackBarService: SnackBarService,
-              private newAnnotationFormService: NewAnnotationFormService, private annotationForUserService: AnnotationForUserService,
-              private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
+  constructor(private authenticationService: AuthenticationService, private userService: UserService,
+              private snackBarService: SnackBarService, private newAnnotationFormService: NewAnnotationFormService,
+              private annotationForUserService: AnnotationForUserService, private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
     this.newAnnotationForm = this.newAnnotationFormService.getFormGroup();
   }
 
@@ -49,7 +50,7 @@ export class NewAnnotationComponent implements OnInit, OnDestroy {
   }
 
   getUserLogged() {
-    this.userService.getUserByJWTToken().subscribe({
+    this.authenticationService.getUserByCookieJWT().subscribe({
       next: (response) => {
         this.userLogged = response;
       }

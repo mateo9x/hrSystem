@@ -1,21 +1,15 @@
 package com.mateo9x.hrsystem.controller;
 
-import com.mateo9x.hrsystem.config.JwtUtils;
 import com.mateo9x.hrsystem.dto.NewUserPasswordDTO;
 import com.mateo9x.hrsystem.dto.UserDTO;
 import com.mateo9x.hrsystem.service.UserService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @RequestMapping("/api")
 @AllArgsConstructor
@@ -24,7 +18,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class UserController {
 
     private final UserService userService;
-    private final JwtUtils jwtUtils;
 
     @PostMapping("/users/create-user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody @Valid UserDTO userDTO) {
@@ -42,21 +35,6 @@ public class UserController {
     public ResponseEntity<Boolean> doesUserWithEmailExists(@PathVariable String email) {
         log.info("REST request to check if user exists by email: {}", email);
         return ResponseEntity.ok(userService.doesUserWithEmailExists(email));
-    }
-
-    @GetMapping("/users/jwt-token")
-    public ResponseEntity<UserDTO> getUserByJWTToken(HttpServletRequest request) {
-        log.info("REST request to get user by jwt token");
-        String email = null;
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals("jwt") && isNotBlank(cookie.getValue())) {
-                email = jwtUtils.extractEmailFromToken(cookie.getValue());
-            }
-        }
-        if (isNotBlank(email)) {
-            return ResponseEntity.ok(userService.findByEmail(email));
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/users/reset-password/{email}")

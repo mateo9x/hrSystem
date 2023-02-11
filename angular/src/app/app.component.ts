@@ -1,11 +1,9 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {SnackBarService, SnackBarType} from "./services/material/snackbar.service";
 import {User} from "./models/user.model";
 import {AuthenticationService} from "./services/authentication.service";
-import {UserService} from "./services/user.service";
-import {CookieService} from "ngx-cookie-service";
-import {AnnotationForUserWebsocketService} from "./services/websocket/annotation-for-user-websocket.service";
 import {SpinnerService} from "./services/material/spinner.service";
+import {AnnotationForUserWebsocketService} from "./services/websocket/annotation-for-user-websocket.service";
+import {Subscription} from "rxjs";
 import {getThemeByValue, ThemeService} from "./services/theme/theme.service";
 
 @Component({
@@ -16,25 +14,32 @@ import {getThemeByValue, ThemeService} from "./services/theme/theme.service";
 
 @HostListener('mouseover', ['$event'])
 export class AppComponent implements OnInit, OnDestroy {
-  userLogged: User = null;
-  cookieJWT: string;
+  userSubscription: Subscription;
+  userLogged: User;
   loading = false;
 
-  constructor(private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
-              private userService: UserService, private cookieService: CookieService, private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
-              private spinnerService: SpinnerService, private themeService: ThemeService) {
+  constructor(private authenticationService: AuthenticationService, private spinnerService: SpinnerService,
+              private annotationForUserWebsocketService: AnnotationForUserWebsocketService, private themeService: ThemeService) {
   }
 
   ngOnInit() {
-    this.cookieJWT = this.cookieService.get('jwt');
-    if (this.cookieJWT && this.cookieJWT.length > 0) {
-      this.userService.getUserByJWTToken().subscribe({
-        next: (getUserByJWTTokenResponse) => {
-          this.userLogged = getUserByJWTTokenResponse;
-          this.themeService.setStyle(getThemeByValue(this.userLogged.theme));
-        }
-      });
-    }
+    this.userSubscription = this.authenticationService.userLogged.subscribe({
+      next: (response) => {
+       this.userLogged = response;
+       if (response) {
+         this.themeService.setStyle(getThemeByValue(response.theme));
+       }
+      }
+    });
+    this.prepareSpinner();
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+    this.annotationForUserWebsocketService.disconnect();
+  }
+
+  prepareSpinner() {
     this.spinnerService.loading.subscribe({
       next: (response) => {
         this.loading = response;
@@ -42,25 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.annotationForUserWebsocketService.disconnect();
-  }
-
   logOut() {
-    this.authenticationService.logoutUser().subscribe({
-      next: (userLoggedOut) => {
-        if (userLoggedOut) {
-          this.cookieService.delete('jwt');
-          this.cookieService.delete('user');
-          this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS);
-          this.userLogged = null;
-          this.annotationForUserWebsocketService.disconnect();
-        }
-      },
-      error: () => {
-        this.snackBarService.openSnackBar('Wylogowanie nie powiodło się', SnackBarType.ERROR);
-      }
-    })
+    this.authenticationService.logoutUser();
   }
 
 }

@@ -34,7 +34,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
-    console.log(this.selectedRow)
   }
 
   getUsers() {
@@ -74,23 +73,27 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  deleteUser(user: User) {
+  deleteUserConfirmation(user: User) {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: this.prepareConfirmationDialogData(user)
     });
     dialogRef.afterClosed().subscribe({
       next: (closingMessage) => {
         if (closingMessage.accept) {
-          this.userService.deleteUser(user.id).subscribe({
-            next: () => {
-              this.snackBarService.openSnackBar('Użytkownik pomyślnie usunięty', SnackBarType.SUCCESS);
-              this.getUsers();
-            },
-            error: () => {
-              this.snackBarService.openSnackBar('Próba usunięcia użytkownika nie powiodła się', SnackBarType.ERROR);
-            }
-          })
+          this.deleteUser(user.id);
         }
+      }
+    });
+  }
+
+  deleteUser(id: number) {
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.snackBarService.openSnackBar('Użytkownik pomyślnie usunięty', SnackBarType.SUCCESS);
+        this.getUsers();
+      },
+      error: () => {
+        this.snackBarService.openSnackBar('Próba usunięcia użytkownika nie powiodła się', SnackBarType.ERROR);
       }
     });
   }

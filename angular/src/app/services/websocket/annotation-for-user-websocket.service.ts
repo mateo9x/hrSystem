@@ -17,9 +17,9 @@ export class AnnotationForUserWebsocketService {
     this.stompClient.debug = () => {};
     this.stompClient.connect({}, function (frame) {
       _this.sendMessage(userId);
-      _this.stompClient.subscribe('/ws/annotations', function(hello){
-        if (JSON.parse(hello.body)) {
-          _this.showMessage(JSON.parse(hello.body));
+      _this.stompClient.subscribe('/ws/annotations', function (data) {
+        if (JSON.parse(data.body)) {
+          _this.showMessage(JSON.parse(data.body));
         }
       });
     });

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 
@@ -23,6 +24,7 @@ import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
+    private static final String JWT_COOKIE = "jwt";
     private final UserDetailsService userDetailsService;
     private final JwtUtils jwtUtils;
 
@@ -33,10 +35,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String jwtToken = null;
 
         if (isNotEmpty(request.getCookies())) {
-            for (Cookie cookie : request.getCookies()) {
-                if (cookie.getName().equals("jwt")) {
-                    jwtToken = cookie.getValue();
-                }
+            Cookie jwtCookie = Arrays.stream(request.getCookies())
+                    .filter(cookie -> JWT_COOKIE.equals(cookie.getName()))
+                    .findFirst()
+                    .orElse(null);
+            if (jwtCookie != null) {
+                jwtToken = jwtCookie.getValue();
             }
         }
 

@@ -24,17 +24,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setTheme();
-    this.userSubscription = this.authenticationService.userLogged.subscribe({
-      next: (response) => {
-       this.userLogged = response;
-      }
-    });
+    this.getUser();
     this.prepareSpinner();
   }
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
     this.annotationForUserWebsocketService.disconnect();
+  }
+
+  getUser() {
+    this.userSubscription = this.authenticationService.userLogged.subscribe({
+      next: (response) => {
+        this.userLogged = response;
+      }
+    });
   }
 
   prepareSpinner() {

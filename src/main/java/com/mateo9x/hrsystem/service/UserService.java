@@ -17,7 +17,7 @@ public interface UserService {
 
     UserDTO findByResetToken(String token);
 
-    Boolean updateUserPasswordFromToken(UserDTO userDTO);
+    Boolean updateUserPasswordByTokenProcedure(String password, String token);
 
     List<UserDTO> getAllUsers();
 

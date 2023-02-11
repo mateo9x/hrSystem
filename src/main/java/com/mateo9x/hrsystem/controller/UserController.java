@@ -51,9 +51,9 @@ public class UserController {
     }
 
     @PutMapping("/users/password/token")
-    public ResponseEntity<Boolean> updateUserPasswordByToken(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<Boolean> updateUserPasswordByTokenProcedure(@Valid @RequestBody NewUserPasswordDTO newUserPasswordDTO) {
         log.info("REST request to update user password by token");
-        return ResponseEntity.ok(userService.updateUserPasswordFromToken(userDTO));
+        return ResponseEntity.ok(userService.updateUserPasswordByTokenProcedure(newUserPasswordDTO.getNewPassword(), newUserPasswordDTO.getToken()));
     }
 
     @GetMapping("/users")

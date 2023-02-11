@@ -32,6 +32,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-text-field--filled .mdc-line-ripple:after {
   border-color: var(--main-color) !important;
 }
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: var(--main-color) !important;
+}
 
 button {
   background-color: var(--main-color);

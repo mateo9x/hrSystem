@@ -13,7 +13,6 @@ import {SpinnerService} from "../../../services/material/spinner.service";
 export class SignUpComponent implements OnInit {
 
   user: User = new User();
-  cols: any[];
   loading: boolean;
   users: User[];
 

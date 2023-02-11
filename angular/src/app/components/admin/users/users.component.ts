@@ -9,6 +9,7 @@ import {
   ConfirmationDialogModel
 } from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
 import {User} from "../../../models/user.model";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'users',
@@ -27,7 +28,7 @@ export class UsersComponent implements OnInit {
   selectedRow: any;
 
   constructor(private userService: UserService, private dialog: MatDialog,
-              private snackBarService: SnackBarService) {
+              private snackBarService: SnackBarService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -37,7 +38,12 @@ export class UsersComponent implements OnInit {
   getUsers() {
     this.userService.getAllUsers().subscribe({
       next: (users) => {
-        this.dataSource = new MatTableDataSource(users);
+        this.authenticationService.getUserByCookieJWT().subscribe({
+          next: (response) => {
+            const usersFiltered = users.filter(user => user.id !== response.id);
+            this.dataSource = new MatTableDataSource(usersFiltered);
+          }
+        });
       }
     });
   }

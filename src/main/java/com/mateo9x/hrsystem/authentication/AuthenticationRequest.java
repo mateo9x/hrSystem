@@ -1,14 +1,13 @@
 package com.mateo9x.hrsystem.authentication;
 
-import lombok.Getter;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Value;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Value
+@NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 public class AuthenticationRequest {
-    private String email;
-    private String password;
-    private Boolean rememberMe;
+    String email;
+    String password;
+    Boolean rememberMe;
 }

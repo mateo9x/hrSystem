@@ -29,11 +29,8 @@
       <div class="input-data">
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
-                 required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
-          <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+          <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email" disabled/>
         </mat-form-field>
-
       </div>
 
       <div class="input-data">

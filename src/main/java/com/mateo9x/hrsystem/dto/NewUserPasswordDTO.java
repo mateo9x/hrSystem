@@ -1,13 +1,13 @@
 package com.mateo9x.hrsystem.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
+@NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 public class NewUserPasswordDTO {
-    private Long userId;
-    private String newPassword;
+    Long userId;
+    String newPassword;
+    String token;
 }

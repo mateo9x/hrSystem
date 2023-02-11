@@ -7,7 +7,7 @@
       <mat-label>Imię</mat-label>
       <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
              #firstName="ngModel">
-      <span class="error-span" *ngIf="firstName.errors">Imię mmusi składać się tylko z liter</span>
+      <span class="error-span" *ngIf="firstName.errors">Imię musi składać się tylko z liter</span>
     </mat-form-field>
 
   </div>

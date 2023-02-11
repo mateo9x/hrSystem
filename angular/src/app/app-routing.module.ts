@@ -27,20 +27,20 @@ import {
 } from "./components/work-time-report/attendance-work-report-edit/attendance-work-report-edit.component";
 
 const routes: Routes = [
-  { path: '', component: InfoComponent },
-  { path: 'sign-in', component: SignInComponent, canActivate: [AnonymousGuard] },
-  { path: 'sign-up', component: SignUpComponent, canActivate: [AnonymousGuard] },
-  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AnonymousGuard] },
-  { path: 'new-password', component: NewPasswordComponent, canActivate: [AnonymousGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [LoginGuard] },
-  { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard] },
-  { path: 'attendance-work-report-edit', component: AttendanceWorkReportEditComponent, canActivate: [LoginGuard] },
-  { path: 'attendance-work-week', component: AttendanceWorkWeekComponent, canActivate: [LoginGuard] },
-  { path: 'holiday-request', component: HolidayRequestComponent, canActivate: [LoginGuard] },
-  { path: 'holiday-request-confirmation', component: HolidayRequestConfirmationComponent, canActivate: [LoginGuard] },
-  { path: 'new-annotation', component: NewAnnotationComponent, canActivate: [LoginGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard], loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
-  { path: '**', component: PageNotFoundComponent }
+  { path: '', component: InfoComponent, title: 'Info' },
+  { path: 'sign-in', component: SignInComponent, canActivate: [AnonymousGuard], title: 'Logowanie' },
+  { path: 'sign-up', component: SignUpComponent, canActivate: [AnonymousGuard], title: 'Rejestracja' },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AnonymousGuard], title: 'Resetowanie hasła' },
+  { path: 'new-password', component: NewPasswordComponent, canActivate: [AnonymousGuard], title: 'Nowe hasło' },
+  { path: 'users', component: UsersComponent, canActivate: [LoginGuard], title: 'Użytkownicy' },
+  { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard], title: 'Zgłoszenie obecności w pracy' },
+  { path: 'attendance-work-report-edit', component: AttendanceWorkReportEditComponent, canActivate: [LoginGuard], title: 'Edycja obecności w pracy' },
+  { path: 'attendance-work-week', component: AttendanceWorkWeekComponent, canActivate: [LoginGuard], title: 'Obecności w pracy' },
+  { path: 'holiday-request', component: HolidayRequestComponent, canActivate: [LoginGuard], title: 'Wnioski urlopowe' },
+  { path: 'holiday-request-confirmation', component: HolidayRequestConfirmationComponent, canActivate: [LoginGuard], title: 'Akceptacja wniosków urlopowych' },
+  { path: 'new-annotation', component: NewAnnotationComponent, canActivate: [LoginGuard], title: 'Powiadomienie użytkowników' },
+  { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard], title: 'Profil', loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
+  { path: '**', component: PageNotFoundComponent, title: 'Strona nie znaleziona' }
 ];
 
 @NgModule({

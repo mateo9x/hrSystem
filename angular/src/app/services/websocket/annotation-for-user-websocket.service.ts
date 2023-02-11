@@ -2,24 +2,25 @@ import {Injectable} from '@angular/core';
 import * as SockJS from "sockjs-client";
 import {Stomp} from "@stomp/stompjs";
 import {APP_BASE_URL} from "../../app.service";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnotationForUserWebsocketService {
   stompClient = null;
-  annotationsWebSocket: any[] = [];
+  annotationsWebSocket = new BehaviorSubject([]);
 
   public connect(userId: number) {
     const socket = new SockJS(APP_BASE_URL + '/ws');
     this.stompClient = Stomp.over(socket);
     const _this = this;
     this.stompClient.debug = () => {};
-    this.stompClient.connect({}, function (frame) {
+    this.stompClient.connect({}, function () {
       _this.sendMessage(userId);
-      _this.stompClient.subscribe('/ws/annotations', function(hello){
-        if (JSON.parse(hello.body)) {
-          _this.showMessage(JSON.parse(hello.body));
+      _this.stompClient.subscribe('/ws/annotations', function (data) {
+        if (JSON.parse(data.body)) {
+          _this.pushAnnotations(JSON.parse(data.body));
         }
       });
     });
@@ -33,8 +34,8 @@ export class AnnotationForUserWebsocketService {
     );
   }
 
-  public showMessage(data: any) {
-    this.annotationsWebSocket.push(data);
+  public pushAnnotations(data: any) {
+    this.annotationsWebSocket.next(data);
   }
 
   public disconnect() {

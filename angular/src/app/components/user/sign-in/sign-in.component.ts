@@ -1,58 +1,21 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {UserService} from "../../../services/user.service";
+import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {AppComponent} from "../../../app.component";
-import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {AuthenticationRequest, AuthenticationService} from "../../../services/authentication.service";
-import {CookieService} from "ngx-cookie-service";
-import {getThemeByValue, ThemeService} from "../../../services/theme/theme.service";
 
 @Component({
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
   request: AuthenticationRequest = new AuthenticationRequest();
-  cookieJWT: string;
 
-  constructor(private userService: UserService, private router: Router,
-              @Inject(AppComponent) private appComponent: AppComponent,
-              private snackBarService: SnackBarService, private authenticationService: AuthenticationService,
-              private cookieService: CookieService, private themeService: ThemeService) {
-  }
-
-  ngOnInit() {
-    this.cookieJWT = this.cookieService.get('jwt');
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
   }
 
   signInUser() {
     if (this.request.email && this.request.password) {
-      if (this.cookieJWT && this.cookieJWT.length > 0) {
-        this.snackBarService.openSnackBar('Jesteś już zalogowany!', SnackBarType.WARN);
-      } else {
-        this.authenticationService.signinUser(this.request).subscribe({
-          next: (successResponse) => {
-            this.cookieService.set('jwt', successResponse.token);
-            this.userService.getUserByJWTToken().subscribe({
-              next: (getUserByJWTTokenResponse) => {
-                this.cookieService.set('user', JSON.stringify(getUserByJWTTokenResponse));
-                this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
-                this.appComponent.userLogged = getUserByJWTTokenResponse;
-                this.themeService.setStyle(getThemeByValue(getUserByJWTTokenResponse.theme));
-                this.router.navigate(['']);
-              }
-            })
-          },
-          error: (errorResponse) => {
-            if (errorResponse.error) {
-              this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
-            } else {
-              this.snackBarService.openSnackBar('Uwierzytelnienie nie udane', SnackBarType.ERROR);
-            }
-          }
-        })
-      }
+        this.authenticationService.signinUser(this.request);
     }
   }
 

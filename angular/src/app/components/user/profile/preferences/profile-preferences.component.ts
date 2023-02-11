@@ -4,6 +4,7 @@ import {FormControl} from "@angular/forms";
 import {getThemeByValue, ThemeService} from "../../../../services/theme/theme.service";
 import {User} from "../../../../models/user.model";
 import {SnackBarService, SnackBarType} from "../../../../services/material/snackbar.service";
+import {AuthenticationService} from "../../../../services/authentication.service";
 
 @Component({
   selector: 'profile-preferences',
@@ -22,14 +23,15 @@ export class ProfilePreferencesComponent implements OnInit {
     {label: 'Żółty', value: 'yellow'}
   ]
 
-  constructor(private userService: UserService, private themeService: ThemeService, private snackBarService: SnackBarService) {
+  constructor(private userService: UserService, private themeService: ThemeService, private snackBarService: SnackBarService,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
-    this.userService.getUserByJWTToken().subscribe({
+    this.authenticationService.getUserByCookieJWT().subscribe({
       next: (response) => {
-       this.user = response;
-       this.setSelectedTheme();
+        this.user = response;
+        this.setSelectedTheme();
       }
     });
   }

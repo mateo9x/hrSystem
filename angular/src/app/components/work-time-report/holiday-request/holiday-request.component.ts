@@ -13,6 +13,7 @@ import {HolidayRequestService} from "../../../services/holiday-request.service";
 import {HolidayRequest} from "../../../models/holiday-request.model";
 import {HolidayRequestAddDialogComponent} from "./add-dialog/holiday-request-add-dialog.component";
 import {DateService} from "../../../services/date.service";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'holiday-request',
@@ -37,7 +38,7 @@ export class HolidayRequestComponent implements OnInit {
   selection = new SelectionModel<any>(false, null);
 
   constructor(private userService: UserService, private holidayRequestService: HolidayRequestService, private dialog: MatDialog,
-              private snackBarService: SnackBarService, private dateService: DateService) {
+              private snackBarService: SnackBarService, private dateService: DateService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -52,9 +53,9 @@ export class HolidayRequestComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getUserByJWTToken().subscribe({
-      next: (userResponse) => {
-        this.user = userResponse;
+    this.authenticationService.getUserByCookieJWT().subscribe({
+      next: (response) => {
+        this.user = response;
         this.getHolidayRequests();
       }
     });

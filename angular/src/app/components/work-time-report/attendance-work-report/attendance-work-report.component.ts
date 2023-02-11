@@ -5,6 +5,7 @@ import {UserService} from "../../../services/user.service";
 import {AttendanceWorkReportModel} from "../../../models/attendance-work-report.model";
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {User} from "../../../models/user.model";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'attendance-work-report',
@@ -23,16 +24,16 @@ export class AttendanceWorkReportComponent implements OnInit {
   ];
 
   constructor(private attendanceWorkReportService: AttendanceWorkService, private userService: UserService,
-              private snackBarService: SnackBarService) {
+              private snackBarService: SnackBarService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
-    this.userService.getUserByJWTToken().subscribe({
-      next: (userResponse) => {
-        if (userResponse) {
-          this.user = userResponse;
-          this.userAlreadySavedTodayAttendanceWorkReport.userId = userResponse.id;
-          this.attendanceWorkReportService.getUserSavedAttendanceWorkReportForToday(userResponse.id).subscribe({
+    this.authenticationService.getUserByCookieJWT().subscribe({
+      next: (response) => {
+        if (response) {
+          this.user = response;
+          this.userAlreadySavedTodayAttendanceWorkReport.userId = response.id;
+          this.attendanceWorkReportService.getUserSavedAttendanceWorkReportForToday(response.id).subscribe({
             next: (userSavedAttendanceWorkReport) => {
               if (userSavedAttendanceWorkReport) {
                 this.attendanceExists = true;

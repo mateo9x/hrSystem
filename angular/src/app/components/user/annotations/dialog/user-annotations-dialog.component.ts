@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {AnnotationForUser} from "../../../../models/annotation-for-user.model";
 import {AnnotationForUserService} from "../../../../services/annotation-for-user.service";
 import {AnnotationForUserWebsocketService} from "../../../../services/websocket/annotation-for-user-websocket.service";
@@ -13,19 +13,13 @@ import {
   templateUrl: './user-annotations-dialog.component.html',
   styleUrls: ['./user-annotations-dialog.component.scss']
 })
-export class UserAnnotationsDialogComponent implements OnChanges {
+export class UserAnnotationsDialogComponent {
   @Input() annotations: any[] = [];
   @Input() userId: number;
 
   constructor(private annotationForUserService: AnnotationForUserService,
               private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
               private dialog: MatDialog) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.annotations.currentValue) {
-      this.annotations = this.annotations[this.annotations.length - 1];
-    }
   }
 
   deleteAnnotation(selectedAnnotation: AnnotationForUser) {

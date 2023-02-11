@@ -19,7 +19,7 @@ export class UserAnnotationsComponent implements OnChanges {
   @HostListener('document:click', ['$event'])
   clickOut(event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
-      const annotationsModified = this.annotations[this.annotations.length - 1].filter(annotation => annotation.readedChanged);
+      const annotationsModified = this.annotations.filter(annotation => annotation.readedChanged);
       if (annotationsModified.length > 0 && this.annotationDialogOpened) {
         const ids = annotationsModified.map(annotation => annotation.id);
         this.annotationForUserService.updateAnnotationsReadedValues(ids).subscribe();
@@ -32,7 +32,14 @@ export class UserAnnotationsComponent implements OnChanges {
     this.userId = changes.userId.currentValue;
     if (this.userId) {
       this.annotationForUserWebsocketService.connect(this.userId);
-      this.annotations = this.annotationForUserWebsocketService.annotationsWebSocket;
+      this.annotationForUserWebsocketService.annotationsWebSocket.subscribe({
+        next: (annotations) => {
+          this.annotations = annotations;
+        },
+        error: () => {
+          this.annotations = [];
+        }
+      });
     }
   }
 
@@ -41,7 +48,7 @@ export class UserAnnotationsComponent implements OnChanges {
   }
 
   atLeastOneAnnotationNotReaded() {
-    const annotationNotReaded = this.annotations[this.annotations.length - 1].find(annotation => !annotation.readed);
+    const annotationNotReaded = this.annotations.find(annotation => !annotation.readed);
     return !!annotationNotReaded;
   }
 

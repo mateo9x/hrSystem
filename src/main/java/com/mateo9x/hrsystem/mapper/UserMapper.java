@@ -3,7 +3,6 @@ package com.mateo9x.hrsystem.mapper;
 import com.mateo9x.hrsystem.domain.User;
 import com.mateo9x.hrsystem.dto.UserDTO;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -31,7 +30,6 @@ public class UserMapper {
                 .city(userDTO.getCity())
                 .phoneNumber(userDTO.getPhoneNumber())
                 .resetToken(userDTO.getResetToken())
-                .theme(userDTO.getTheme())
                 .build();
     }
 
@@ -53,7 +51,6 @@ public class UserMapper {
                 .city(user.getCity())
                 .phoneNumber(user.getPhoneNumber())
                 .resetToken(user.getResetToken())
-                .theme(user.getTheme())
                 .build();
     }
 

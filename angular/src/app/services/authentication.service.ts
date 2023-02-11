@@ -6,7 +6,6 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.model";
 import {SnackBarService, SnackBarType} from "./material/snackbar.service";
 import {AnnotationForUserWebsocketService} from "./websocket/annotation-for-user-websocket.service";
-import {getThemeByValue, ThemeService} from "./theme/theme.service";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -18,8 +17,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private cookieService: CookieService,
               private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
-              private snackBarService: SnackBarService, private themeService: ThemeService,
-              private router: Router) {
+              private snackBarService: SnackBarService, private router: Router) {
     if (this.cookieService.get('user')) {
       this.userLogged.next(JSON.parse(this.cookieService.get('user')));
     }
@@ -36,7 +34,6 @@ export class AuthenticationService {
             next: (userByJWT) => {
               this.setUserLogged(userByJWT);
               this.setCookies(jwt, userByJWT, authenticationRequest.rememberMe);
-              this.setUserTheme(userByJWT.theme);
               this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
               this.router.navigate(['']);
             }
@@ -46,18 +43,27 @@ export class AuthenticationService {
     }
   }
 
-  public logoutUser() {
+  public logoutUser(logoutError: boolean) {
     this.http.post<any>(`${APP_BASE_URL}/logout-user`, {}).subscribe({
       next: (response) => {
         if (response) {
           this.clearCookies();
           this.setUserLogged(null);
           this.disconnectAnnotationWebSocket();
-          this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS);
+          if (logoutError) {
+            this.snackBarService.openSnackBar('Sesja wygasła - zaloguj się ponownie by kontynuować', SnackBarType.WARN);
+            document.cookie = null;
+            window.location.reload();
+            this.router.navigate(['']);
+          } else {
+            this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS);
+          }
         }
       },
       error: () => {
-        this.snackBarService.openSnackBar('Wylogowanie nie powiodło się', SnackBarType.ERROR);
+        if (!logoutError) {
+          this.snackBarService.openSnackBar('Wylogowanie nie powiodło się', SnackBarType.ERROR);
+        }
       }
     });
   }
@@ -77,10 +83,6 @@ export class AuthenticationService {
 
   private disconnectAnnotationWebSocket() {
     this.annotationForUserWebsocketService.disconnect();
-  }
-
-  private setUserTheme(theme: string) {
-    this.themeService.setStyle(getThemeByValue(theme));
   }
 
   private setCookies(jwt: string, user: User, rememberMe: boolean) {

@@ -3,12 +3,12 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
 import {CookieService} from "ngx-cookie-service";
 import {catchError} from "rxjs";
-import {Router} from "@angular/router";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor(private cookieService: CookieService, private router: Router) {
+  constructor(private cookieService: CookieService, private authenticationService: AuthenticationService) {
   }
 
   intercept(request: HttpRequest<any>,
@@ -28,10 +28,7 @@ export class AppInterceptor implements HttpInterceptor {
     }
     return next.handle(newRequest).pipe(catchError((err, caught) => {
       if (err.status === 401 || err.status === 403) {
-        document.cookie = null;
-        this.cookieService.delete('jwt');
-        this.cookieService.delete('user');
-        this.router.navigate(['']);
+        this.authenticationService.logoutUser(true);
       }
       throw err;
     }));

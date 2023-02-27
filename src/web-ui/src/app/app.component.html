@@ -1,0 +1,44 @@
+<div class="banner_bg_main">
+
+  <div class="header_section">
+    <div class="header_left_section" routerLink="" routerLinkActive="active" >HR System
+    </div>
+
+    <div class="header_right_section">
+      <user-annotations class="padding_10" *ngIf="userLogged" [userId]="userLogged.id"></user-annotations>
+      <a *ngIf="!userLogged" routerLink="sign-in" routerLinkActive="active">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <span class="padding_10">Zaloguj się</span></a>
+
+      <a *ngIf="userLogged" routerLink="profile" routerLinkActive="active">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <span class="padding_10">Profil</span></a>
+
+      <a *ngIf="userLogged" routerLink="" routerLinkActive="active" (click)="logOut()">
+        <i class="fa fa-power-off" aria-hidden="true"></i>
+        <span class="padding_10">Wyloguj się</span></a>
+    </div>
+  </div>
+
+  <div class="banner_section layout_padding"></div>
+
+</div>
+
+<nav class="main-container">
+  <div class="side-menu">
+    <side-menu [userLogged]="userLogged"></side-menu>
+  </div>
+
+  <div class="router_section">
+    <router-outlet></router-outlet>
+  </div>
+</nav>
+
+<div *ngIf="loading" class="cdk-overlay-container spinner">
+  <mat-spinner>
+  </mat-spinner>
+</div>
+
+<!--<div class="footer_section">-->
+<!--  <p class="footer_text">2023</p>-->
+<!--</div>-->

@@ -1,0 +1,193 @@
+:root {
+  --main-color: #3f51b5;
+  --main-color-hover: #2b3983;
+}
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+  font-family: 'impact';
+  src: url('src/assets/fonts/impact.ttf');
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: var(--main-color) !important;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--main-color) !important;
+}
+
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+  border-color: var(--main-color) !important;
+  background-color: var(--main-color) !important;
+}
+
+::ng-deep .mdc-text-field .mdc-text-field__input {
+  border-color: var(--main-color) !important;
+}
+
+.mdc-text-field--filled .mdc-line-ripple:after {
+  border-color: var(--main-color) !important;
+}
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: var(--main-color) !important;
+}
+
+button {
+  background-color: var(--main-color);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.app-button {
+  background-color: var(--main-color) !important;
+  color: white !important;
+}
+
+.app-button:hover {
+  cursor: pointer !important;
+  background-color: var(--main-color-hover) !important;
+}
+
+.app-button[disabled] {
+  background-color: #b7b4b4 !important;
+}
+
+::ng-deep .mat-month-view > button {
+  background-color: white !important;
+  color: black !important;
+}
+
+a {
+  display:inline-block;
+}
+
+a:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: var(--main-color);
+  content: "";
+  transition: width 0.2s;
+}
+
+a:hover {
+  color: #0d0d0d;
+}
+
+a:hover:after{
+  width: 100%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*.cdk-overlay-container {*/
+/*  left: auto !important;*/
+/*  right: 0!important;*/
+/*  width: 80% !important;*/
+/*}*/
+
+.button-container {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.button + .button {
+  margin-left: 8px;
+}
+
+.selected-row, .selected-cell, .selected-row:hover, .selected-cell:hover {
+  color: white !important;
+}
+
+.selected-row {
+  background-color: var(--main-color) !important;
+}
+
+.selected-row:hover {
+  background-color: var(--main-color-hover) !important;
+}
+
+.table-row:hover {
+  background-color: var(--main-color-hover) !important;
+  cursor: pointer;
+}
+
+.snack-bar-success, .snack-bar-success button {
+  border-radius: 10px !important;
+  background-color: #49830a !important;
+  --mdc-snackbar-container-color: #49830a !important;
+  color: white !important;
+}
+
+.snack-bar-warn, .snack-bar-warn button {
+  border-radius: 10px !important;
+  background-color: #d7a80e !important;
+  --mdc-snackbar-container-color: #d7a80e !important;
+  color: white !important;
+}
+
+.snack-bar-error, .snack-bar-error button {
+  border-radius: 10px !important;
+  background-color: #771313 !important;
+  --mdc-snackbar-container-color: #771313 !important;
+  color: white !important;
+}
+
+.error-span {
+  color:red;
+  font-size:12px;
+}
+
+.white-icon {
+  color:white;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color-hover);
+}
+
+.padding_20 {
+  padding: 20px;
+}
+
+.column-row {
+  background-color:rgba(0,0,0,.03) !important;
+}
+.column-row:hover {
+  background-color:rgba(0,0,0,.03) !important;
+}
+
+.column-row:hover > td {
+  color: black !important;
+}

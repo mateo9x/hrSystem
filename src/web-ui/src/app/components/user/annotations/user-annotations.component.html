@@ -1,0 +1,10 @@
+<i class="fa fa-bell white-icon" *ngIf="annotations.length > 0 && atLeastOneAnnotationNotReaded();else notEvenOneAnnotationUnreaded" (click)="toggleAnnotationDialog()"></i>
+<ng-template #notEvenOneAnnotationUnreaded>
+  <i class="fa fa-bell-slash white-icon"  (click)="toggleAnnotationDialog()"></i>
+</ng-template>
+<user-annotations-dialog
+  *ngIf="annotationDialogOpened"
+  [annotations]="annotations"
+  [userId]="userId"
+  class="user-annotation-dialog">
+</user-annotations-dialog>

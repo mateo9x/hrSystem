@@ -1,0 +1,21 @@
+<table>
+
+  <ng-container *ngIf="userLogged;else lockTemplate">
+    <ng-container *ngFor="let tab of tabs;let i = index">
+      <tr class="main-row">
+        <div>{{tab.label}}</div>
+        <mat-icon (click)="expandRow(tab)">{{tab.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+      </tr>
+      <ng-container *ngFor="let subTab of tabs[i].childs">
+        <tr *ngIf="tab.expanded" class="expanded-row">
+          <div (click)="openSelectedRoutingComponent(subTab)">{{subTab.label}}</div>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #lockTemplate>
+    <span class="material-icons lock-div" *ngIf="!userLogged" (click)="showInfoSideMenuDialog()">lock</span>
+  </ng-template>
+
+</table>

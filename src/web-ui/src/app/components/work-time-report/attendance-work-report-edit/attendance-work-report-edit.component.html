@@ -1,0 +1,62 @@
+<form [formGroup]="form" class="card-header">
+
+  <h1>Edycja obecności w pracy</h1>
+
+  <div class="date-container">
+    <mat-icon class="arrows" (click)="previousWeek()" matTooltip="Poprzedni tydzień">arrow_left</mat-icon>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz datę od</mat-label>
+      <input matInput [matDatepicker]="pickerFrom" formControlName="dateFromForm">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz datę do</mat-label>
+      <input matInput [matDatepicker]="pickerTo" formControlName="dateToForm">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz użytkownika</mat-label>
+      <mat-select formControlName="selectedUser">
+        <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}} ({{user.email}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-icon class="arrows" (click)="nextWeek()" matTooltip="Następny tydzień">arrow_right</mat-icon>
+
+  </div>
+
+</form>
+
+<table>
+  <ng-container *ngIf="selectedUser.value; else noData">
+
+    <tr>
+      <ng-container *ngFor="let data of tableData; let i = index">
+        <th class="card-header">
+          <div>{{ data.label | titlecase }}</div>
+          <div style="font-weight:normal">({{ data.day }})</div>
+        </th>
+      </ng-container>
+    </tr>
+
+    <tr>
+      <ng-container *ngFor="let data of tableData; let i = index">
+        <td (click)="openWorkReportDialog(data.day)">{{ data.attendanceWorkReport ? getAttendanceWorkReportStatus(data.attendanceWorkReport) : 'Obecność nie potwierdzona' }}</td>
+      </ng-container>
+    </tr>
+
+  </ng-container>
+
+  <ng-template #noData>
+    <tr class="no-data-row">
+      <td class="padding_20"><strong>Wybierz użytkownika, a następnie kliknij przycisk "Szukaj"</strong></td>
+    </tr>
+  </ng-template>
+
+</table>

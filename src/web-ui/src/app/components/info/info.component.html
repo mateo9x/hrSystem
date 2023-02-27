@@ -1,0 +1,37 @@
+<div class="container">
+  <h5>Aplikacja HR System.<br></h5>
+
+  Aplikacja powstała w celu rozwoju kompetencji developerskich, a dodatkowo poznania Angular Material'a. Dotychczas
+  styczność tylko z PrimeNG :) Aplikacja porusza tematy kadrowo/HR-owe.
+
+  <h6>Główne funkcjonalności aplikacji:</h6>
+  <ul>
+    <li>Zgłoszenie obecności w pracy</li>
+    <li>Powiadomienie mailowe użytkowników, że nie zgłosili obecności w pracy (o 10:00 w dniach: pon-pt)</li>
+    <li>Złożenie wniosków urlopowych</li>
+    <li>Akceptacja wniosków urlopowych i wysłanie maila do użytkownika odnośnie zmiany statusu jego wniosku urlopowego</li>
+    <li>Powiadomienia do użytkowników w aplikacji poprzez użycie WebSocket'ów</li>
+  </ul>
+
+  <h6>Podstawowe:</h6>
+  <ul>
+    <li>Logowanie i wylogowywanie z aplikacji</li>
+    <li>Rejestracja użytkowników</li>
+    <li>Reset zapomnianego hasła</li>
+    <li>Nadawanie użytkownikom uprawnień</li>
+    <li>Aktualizacja hasła, danych kontaktowych i preferencji w zakładce profilu</li>
+  </ul>
+
+  <h6>W systemie występują następujące uprawnienia użytkowników:</h6>
+  <ul>
+    <li>Administrator Aplikacji - ma dostęp do wszystkich funkcjonalności</li>
+    <li>Pracodawca - ma dostęp do zakładki "Zgłoszenie obecności w pracy", "Wnioski Urlopowe", "Akceptacja wniosków
+      urlopowych", "Powiadomienie użytkowników", "Edycja obecności w pracy" i "Obecności w pracy"
+    </li>
+    <li>Przełożony pracownika - ma dostęp do zakładki "Zgłoszenie obecności w pracy", "Wnioski Urlopowe", "Akceptacja
+      wniosków urlopowych", "Powiadomienie użytkowników", "Edycja obecności w pracy" i "Obecności w pracy"
+    </li>
+    <li>Pracownik - ma dostęp do zakładki "Zgłoszenie obecności w pracy", "Wnioski Urlopowe" i "Obecności w pracy"</li>
+    <li>Wszyscy zalogowani - mają dostęp do powiadomień dla użytkownika (WebSocket'y) oraz zakładka "Profil" wraz ze wszystkimi podzakładkami</li>
+  </ul>
+</div>

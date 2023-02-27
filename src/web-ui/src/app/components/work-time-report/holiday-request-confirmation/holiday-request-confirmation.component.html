@@ -1,0 +1,49 @@
+<div class="card-header">
+
+  <h1>Akceptacja wniosków urlopowych</h1>
+
+  <div class="date-container">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz datę od</mat-label>
+      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" [max]="dateTo">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz datę do</mat-label>
+      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" [min]="dateFrom">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="getHolidayRequests()" class="button app-button"
+            [disabled]="dateFrom > dateTo || !dateTo || !dateFrom">Szukaj
+    </button>
+
+  </div>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      [disabled]="dataSource && dataSource.data.length === 0 || selectedRow === undefined"
+      (click)="editRequest(selectedRow)"
+      class="button app-button">
+      Edytuj wniosek
+    </button>
+  </div>
+</div>
+
+<table mat-table class="lmat-elevation-z8" [dataSource]="dataSource">
+  <ng-container *ngFor="let dispCol of displayedColumns; let colIndex = index" matColumnDef="{{dispCol.value}}">
+    <th mat-header-cell *matHeaderCellDef>{{dispCol.label}}</th>
+    <td mat-cell *matCellDef="let element"
+        [ngClass]="{ 'selected-cell': element === selectedRow }">{{element[dispCol.value]}}</td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsKeys; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsKeys" (click)="selectRow(row)" class="table-row"
+      [ngClass]="{ 'selected-row': row === selectedRow }"></tr>
+
+</table>

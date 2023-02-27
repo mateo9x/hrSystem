@@ -1,8 +1,8 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!src/web-ui/src/main/**/target/
+!src/web-ui/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -26,8 +26,8 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+!src/web-ui/src/main/**/build/
+!src/web-ui/src/test/**/build/
 
 ### VS Code ###
 .vscode/
@@ -41,8 +41,10 @@ build/
 /bazel-out
 
 # dependencies
-angular/node_modules/
-angular/.angular/cache/
+src/web-ui/dist/
+src/web-ui/node/
+src/web-ui/node_modules/
+src/web-ui/.angular/cache/
 
 # profiling files
 chrome-profiler-events*.json

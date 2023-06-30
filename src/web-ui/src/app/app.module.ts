@@ -26,7 +26,13 @@ import {MatSortModule} from "@angular/material/sort";
 import {UserEditDialogComponent} from "./components/admin/users/user-edit-dialog/user-edit-dialog.component";
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "./components/dialogs/confirmation-dialog/confirmation-dialog.component";
-import {MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule} from "@angular/material/core";
+import {
+  ErrorStateMatcher,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+  MatOptionModule,
+  ShowOnDirtyErrorStateMatcher
+} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {
   AttendanceWorkReportComponent
@@ -138,6 +144,7 @@ import {ProfilePreferencesComponent} from "./components/user/profile/preferences
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     LoginGuard, ProfileGuard, AnonymousGuard, DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

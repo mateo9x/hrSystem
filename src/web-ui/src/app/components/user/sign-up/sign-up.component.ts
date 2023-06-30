@@ -1,49 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from 'src/app/models/user.model';
 import {UserService} from 'src/app/services/user.service';
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {SpinnerService} from "../../../services/material/spinner.service";
+import {SignUpFormService} from "./sign-up.form.service";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
-
-  user: User = new User();
+export class SignUpComponent {
+  form: FormGroup;
   loading: boolean;
   users: User[];
 
-  constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService,
+  constructor(public formService: SignUpFormService, private userService: UserService, private router: Router, private snackBarService: SnackBarService,
               private spinnerService: SpinnerService) {
-  }
-
-  ngOnInit() {
+    this.form = this.formService.getFormGroup();
   }
 
   clear() {
-    this.user.firstName = '';
-    this.user.lastName = '';
-    this.user.password = '';
-    this.user.password2 = '';
-    this.user.pesel = '';
-    this.user.email = '';
-    this.user.street = '';
-    this.user.streetNumber = '';
-    this.user.postalCode = '';
-    this.user.city = '';
-    this.user.phoneNumber = '';
+    this.formService.clearForm();
   }
 
   register() {
     this.spinnerService.setLoading(true);
-    this.userService.createUser(this.user).subscribe({
+    this.userService.createUser(this.formService.convertFormToUserRequest()).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie', SnackBarType.SUCCESS);
         this.spinnerService.setLoading(false);
-        this.router.navigate(['']);
+        this.router.navigate(['']).then(() => this.clear());
       },
       error: (errorResponse) => {
         this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);

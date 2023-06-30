@@ -25,6 +25,7 @@ import {
 import {
   AttendanceWorkReportEditComponent
 } from "./components/work-time-report/attendance-work-report-edit/attendance-work-report-edit.component";
+import {environment} from "../environments/environment";
 
 const routes: Routes = [
   { path: '', component: InfoComponent, title: 'Info' },
@@ -44,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, {useHash: !environment.production})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

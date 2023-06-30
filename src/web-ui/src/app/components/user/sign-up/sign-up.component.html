@@ -1,13 +1,18 @@
-<form class="form" #form="ngForm" novalidate>
+<form class="form" [formGroup]="form" novalidate>
 
   <h1 class="input-data" style="margin-bottom:3%">Rejestracja</h1>
 
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Imię</mat-label>
-      <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
-             #firstName="ngModel">
-      <span class="error-span" *ngIf="firstName.errors">Imię musi składać się tylko z liter</span>
+      <input matInput formControlName="firstName"
+             type="text"
+             onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+      <mat-error *ngIf="formService.getFirstNameControl().hasError('required')">Pole wymagane
+      </mat-error>
+      <mat-error *ngIf="formService.getFirstNameControl().hasError('pattern')">Imię musi składać się
+        tylko z liter
+      </mat-error>
     </mat-form-field>
 
   </div>
@@ -15,9 +20,13 @@
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Nazwisko</mat-label>
-      <input matInput [(ngModel)]="user.lastName" name="lastName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
-             #lastName="ngModel">
-      <span class="error-span" *ngIf="lastName.errors">Nazwisko musi składać się tylko z liter</span>
+      <input matInput formControlName="lastName" type="text"
+             onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+      <mat-error *ngIf="formService.getLastNameControl().hasError('required')">Pole wymagane
+      </mat-error>
+      <mat-error *ngIf="formService.getFirstNameControl().hasError('pattern')">Nazwisko musi składać
+        się tylko z liter
+      </mat-error>
     </mat-form-field>
 
   </div>
@@ -25,18 +34,22 @@
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
-             required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
-      <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+      <input matInput type="text" style="display:inline-block" formControlName="email"/>
+      <mat-error *ngIf="formService.getEmailControl().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="formService.getEmailControl().hasError('email')">Poprawny format adresu
+        e-mail np: mail@mail.com
+      </mat-error>
     </mat-form-field>
 
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Pesel</mat-label>
-      <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
-             required pattern="[0-9]{11}" #pesel="ngModel"/>
-      <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
+      <input matInput type="text" style="display:inline-block" formControlName="pesel"
+             onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+      <mat-error *ngIf="formService.getPeselControl().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="formService.getPeselControl().hasError('pattern')">Pesel musi zawierać 11 znaków
+      </mat-error>
     </mat-form-field>
 
   </div>
@@ -44,64 +57,83 @@
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Hasło</mat-label>
-      <input matInput type="password" name="password" style="display:inline-block" [(ngModel)]="user.password"
-             min="5" required #password="ngModel"/>
-      <span class="error-span" *ngIf="password.errors">Hasło musi mieć min 5 znaków</span>
+      <input matInput type="password" style="display:inline-block" formControlName="password"
+             min="5"/>
+      <mat-error *ngIf="formService.getPasswordControl().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="formService.getPasswordControl().hasError('minlength')">Hasło musi mieć min 5 znaków
+      </mat-error>
     </mat-form-field>
 
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Potwierdź hasło</mat-label>
-      <input matInput type="password" name="password2"
-             [(ngModel)]="user.password2" #password2="ngModel" min="5"/>
-      <span class="error-span"
-            *ngIf="password2.errors || user.password && user.password !== user.password2 ">Hasło muszą do siebie pasować</span>
+      <input matInput type="password"
+             formControlName="password2" min="5"/>
+      <mat-error *ngIf="formService.getPassword2Control().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="formService.getPassword2Control().hasError('minlength')">Hasło musi mieć min 5 znaków
+      </mat-error>
+      <mat-error
+        *ngIf="((formService.getPasswordControl().value && formService.getPassword2Control().value) && formService.getPasswordControl().value.length === formService.getPassword2Control().value.length) && formService.getPasswordControl().value !== formService.getPassword2Control().value">
+        Hasło muszą
+        do siebie pasować
+      </mat-error>
     </mat-form-field>
-
 
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Ulica</mat-label>
-      <input matInput type="text" name="street" [(ngModel)]="user.street"/>
+      <input matInput type="text" formControlName="street"/>
+      <mat-error *ngIf="formService.getStreetControl().hasError('required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Nr domu</mat-label>
-      <input matInput type="text" name="streetNumber" [(ngModel)]="user.streetNumber"/>
+      <input matInput type="text" formControlName="streetNumber"/>
+      <mat-error *ngIf="formService.getStreetNumberControl().hasError('required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Kod Pocztowy</mat-label>
-      <input matInput type="text" name="postalCode" mask="00-000" style="display:inline-block" [(ngModel)]="user.postalCode"
-              #postalCode="ngModel"/>
-      <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+      <input matInput type="text" mask="00-000" style="display:inline-block"
+             formControlName="postalCode"/>
+      <mat-error *ngIf="formService.getPostalCodeControl().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="formService.getPostalCodeControl().hasError('pattern')">Poprawny format kodu pocztowego:
+        XX-XXX
+      </mat-error>
     </mat-form-field>
 
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Miasto</mat-label>
-      <input matInput type="text" name="city" [(ngModel)]="user.city"/>
+      <input matInput type="text" formControlName="city"/>
+      <mat-error *ngIf="formService.getCityControl().hasError('required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
   <div class="input-data">
     <mat-form-field appearance="fill">
       <mat-label>Numer telefonu</mat-label>
-      <input matInput type="text" name="phoneNumber" mask="000 000 000" style="display:inline-block" [(ngModel)]="user.phoneNumber"
+      <input matInput type="text" mask="000 000 000" style="display:inline-block"
+             formControlName="phoneNumber"
              onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-             />
+      />
+      <mat-error *ngIf="formService.getPhoneNumber().hasError('required')">Pole wymagane</mat-error>
+      <mat-error
+        *ngIf="formService.getPhoneNumber().hasError('minlength') || formService.getPhoneNumber().hasError('maxlength')">
+        Wymagane 9 cyfr
+      </mat-error>
     </mat-form-field>
   </div>
   <div class="buttons">
-    <button mat-raised-button class="app-button" name="signup_submit" (click)="clear()"
+    <button mat-raised-button class="app-button" (click)="clear()"
             style="margin-right:10%">Wyczyść
     </button>
-    <button mat-raised-button class="app-button" name="clear_submit" (click)="register()"
-            [disabled]="form.invalid || user.password != user.password2">Zarejestruj
+    <button mat-raised-button class="app-button" (click)="register()" [disabled]="!formService.isFormValid()">
+      Zarejestruj
     </button>
   </div>
 </form>

@@ -90,17 +90,7 @@ export class SignUpFormService {
   }
 
   public clearForm(): void {
-    this.getFirstNameControl().reset();
-    this.getLastNameControl().reset();
-    this.getEmailControl().reset();
-    this.getPeselControl().reset();
-    this.getPasswordControl().reset();
-    this.getPassword2Control().reset();
-    this.getStreetControl().reset();
-    this.getStreetNumberControl().reset();
-    this.getPostalCodeControl().reset();
-    this.getCityControl().reset();
-    this.getPhoneNumber().reset();
+    this.form.reset();
   }
 
   public isFormValid(): boolean {

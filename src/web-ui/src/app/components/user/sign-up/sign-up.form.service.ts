@@ -7,29 +7,28 @@ import {User} from "../../../models/user.model";
 })
 export class SignUpFormService {
 
-  form: FormGroup;
+  form = this.fb.group({
+    firstName: [null, [Validators.required, Validators.maxLength(100), Validators.pattern('[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,100}')]],
+    lastName: [null, [Validators.required, Validators.maxLength(100), Validators.pattern('[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,100}')]],
+    email: [null, [Validators.required, Validators.email]],
+    pesel: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]{11}')]],
+    password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    password2: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    street: [null, [Validators.required, Validators.maxLength(100)]],
+    streetNumber: [null, [Validators.required, Validators.maxLength(10)]],
+    postalCode: [null, [Validators.required, Validators.maxLength(5)]],
+    city: [null, [Validators.required, Validators.maxLength(100)]],
+    phoneNumber: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]]
+  });
 
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      firstName: [null, [Validators.required, Validators.maxLength(100), Validators.pattern('[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,100}')]],
-      lastName: [null, [Validators.required, Validators.maxLength(100), Validators.pattern('[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,100}')]],
-      email: [null, [Validators.required, Validators.email]],
-      pesel: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]{11}')]],
-      password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      password2: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      street: [null, [Validators.required, Validators.maxLength(100)]],
-      streetNumber: [null, [Validators.required, Validators.maxLength(10)]],
-      postalCode: [null, [Validators.required, Validators.maxLength(5)]],
-      city: [null, [Validators.required, Validators.maxLength(100)]],
-      phoneNumber: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]]
-    });
   }
 
-  public getFormGroup(): FormGroup {
+  getFormGroup(): FormGroup {
     return this.form;
   }
 
-  public convertFormToUserRequest(): User {
+  convertFormToUserRequest(): User {
     let user = new User();
     user.firstName = this.getFirstNameControl().value;
     user.lastName = this.getLastNameControl().value;
@@ -45,56 +44,64 @@ export class SignUpFormService {
     return user;
   }
 
-  public getFirstNameControl(): AbstractControl {
+  getFirstNameControl(): AbstractControl {
     return this.form.get('firstName');
   }
 
-  public getLastNameControl(): AbstractControl {
+  getLastNameControl(): AbstractControl {
     return this.form.get('lastName');
   }
 
-  public getEmailControl(): AbstractControl {
+  getEmailControl(): AbstractControl {
     return this.form.get('email');
   }
 
-  public getPeselControl(): AbstractControl {
+  getPeselControl(): AbstractControl {
     return this.form.get('pesel');
   }
 
-  public getPasswordControl(): AbstractControl {
+  getPasswordControl(): AbstractControl {
     return this.form.get('password');
   }
 
-  public getPassword2Control(): AbstractControl {
+  getPassword2Control(): AbstractControl {
     return this.form.get('password2');
   }
 
-  public getStreetControl(): AbstractControl {
+  getStreetControl(): AbstractControl {
     return this.form.get('street');
   }
 
-  public getStreetNumberControl(): AbstractControl {
+  getStreetNumberControl(): AbstractControl {
     return this.form.get('streetNumber');
   }
 
-  public getPostalCodeControl(): AbstractControl {
+  getPostalCodeControl(): AbstractControl {
     return this.form.get('postalCode');
   }
 
-  public getCityControl(): AbstractControl {
+  getCityControl(): AbstractControl {
     return this.form.get('city');
   }
 
-  public getPhoneNumber(): AbstractControl {
+  getPhoneNumber(): AbstractControl {
     return this.form.get('phoneNumber');
   }
 
-  public clearForm(): void {
+  clearForm(): void {
     this.form.reset();
   }
 
-  public isFormValid(): boolean {
-    return this.form.status === 'VALID' && this.getPasswordControl().value === this.getPassword2Control().value;
+  isFormValid(): boolean {
+    return this.form.status === 'VALID' && this.getPasswordControl().value === this.getPassword2Control().value && this.doesBothPasswordMatches();
+  }
+
+  doesBothPasswordMatches(): boolean {
+    if ((this.getPasswordControl().value && this.getPassword2Control().value) && (this.getPasswordControl().value.length === this.getPassword2Control().value.length)) {
+      return this.getPasswordControl().value as string === this.getPassword2Control().value as string;
+
+    }
+    return false;
   }
 
 }

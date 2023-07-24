@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot} from '@angular/router';
-import {CookieService} from "ngx-cookie-service";
 import {SideMenuService} from "../../services/side-menu/side-menu.service";
 import {AuthenticationService} from "../../services/authentication.service";
 
@@ -10,26 +9,25 @@ export class LoginGuard implements CanActivate {
   currentRoutingPermissions: string[];
   userRoles: any[];
 
-  constructor(private cookieService: CookieService, private sideMenuService: SideMenuService,
+  constructor(private sideMenuService: SideMenuService,
               private authenticationService: AuthenticationService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
+    let result;
     this.currentRouting = route.routeConfig.path;
-    const jwt = this.cookieService.get('jwt');
-    if (!jwt) {
-      return false;
-    }
     this.fillPermissionsForCurrentRouting();
     this.authenticationService.userLogged.subscribe({
       next: (user) => {
         if (user) {
           this.userRoles = user.roles;
-          return this.doesUserIncludeAnyRoleOfTabRoles();
+          result = this.doesUserIncludeAnyRoleOfTabRoles();
+        } else {
+          result = false;
         }
-        return false;
       }
     });
+    return result;
   }
 
   protected fillPermissionsForCurrentRouting() {

@@ -93,7 +93,7 @@ export class SignUpFormService {
   }
 
   isFormValid(): boolean {
-    return this.form.status === 'VALID' && this.getPasswordControl().value === this.getPassword2Control().value && this.doesBothPasswordMatches();
+    return this.form.valid && this.getPasswordControl().value === this.getPassword2Control().value && this.doesBothPasswordMatches();
   }
 
   doesBothPasswordMatches(): boolean {

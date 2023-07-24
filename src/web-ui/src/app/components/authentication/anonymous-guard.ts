@@ -14,10 +14,10 @@ export class AnonymousGuard implements CanActivate {
     const jwt = this.cookieService.get('jwt');
     if (jwt) {
       this.router.navigate(['']).then(() => {
-        return true
+        return false
       });
     }
-    return false;
+    return true;
   }
 
 }

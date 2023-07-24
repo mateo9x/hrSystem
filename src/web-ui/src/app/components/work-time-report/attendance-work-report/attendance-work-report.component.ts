@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {AttendanceWorkService} from "../../../services/attendance-work.service";
-import {UserService} from "../../../services/user.service";
+import {AttendanceWorkApiService} from "../../../services/api/attendance-work-api.service";
+import {UserApiService} from "../../../services/api/user-api.service";
 import {AttendanceWorkReportModel} from "../../../models/attendance-work-report.model";
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {User} from "../../../models/user.model";
@@ -23,7 +23,7 @@ export class AttendanceWorkReportComponent implements OnInit {
     {label: 'Praca w biurze', value: false}
   ];
 
-  constructor(private attendanceWorkReportService: AttendanceWorkService, private userService: UserService,
+  constructor(private attendanceWorkReportService: AttendanceWorkApiService, private userService: UserApiService,
               private snackBarService: SnackBarService, private authenticationService: AuthenticationService) {
   }
 

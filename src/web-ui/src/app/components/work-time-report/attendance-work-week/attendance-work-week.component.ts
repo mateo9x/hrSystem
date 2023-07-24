@@ -5,7 +5,7 @@ import {DateService} from "../../../services/date.service";
 import previousMonday from "date-fns/previousMonday";
 import {isMonday, isSunday, nextSunday} from "date-fns";
 import {CookieService} from "ngx-cookie-service";
-import {AttendanceWorkService} from "../../../services/attendance-work.service";
+import {AttendanceWorkApiService} from "../../../services/api/attendance-work-api.service";
 import {AttendanceWorkDay, AttendanceWorkReportModel} from "../../../models/attendance-work-report.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AttendanceWorkWeekDialogComponent} from "./dialog/attendance-work-week-dialog.component";
@@ -23,7 +23,7 @@ export class AttendanceWorkWeekComponent implements OnInit {
   attendanceWorkReportsForSelectedWeek: AttendanceWorkReportModel[] = [];
   attendanceWorkDaysForSelectedWeek: AttendanceWorkDay[] = [];
 
-  constructor(private cookieService: CookieService, private attendanceWorkReportService: AttendanceWorkService,
+  constructor(private cookieService: CookieService, private attendanceWorkReportService: AttendanceWorkApiService,
               private snackBarService: SnackBarService, private dateService: DateService,
               private dialog: MatDialog) {
   }

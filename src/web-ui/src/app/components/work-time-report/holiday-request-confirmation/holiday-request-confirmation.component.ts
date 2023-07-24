@@ -3,7 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
 import {SnackBarService} from "../../../services/material/snackbar.service";
-import {HolidayRequestService} from "../../../services/holiday-request.service";
+import {HolidayRequestApiService} from "../../../services/api/holiday-request-api.service";
 import {DateService} from "../../../services/date.service";
 import {
   HolidayRequestConfirmationEditDialogComponent
@@ -32,7 +32,7 @@ export class HolidayRequestConfirmationComponent implements OnInit {
   selectedRow: any;
   selection = new SelectionModel<any>(false, null);
 
-  constructor(private holidayRequestService: HolidayRequestService, private dialog: MatDialog,
+  constructor(private holidayRequestService: HolidayRequestApiService, private dialog: MatDialog,
               private snackBarService: SnackBarService, private dateService: DateService) {
   }
 

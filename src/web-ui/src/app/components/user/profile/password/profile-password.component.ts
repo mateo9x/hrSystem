@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from 'src/app/services/user.service';
+import {UserApiService} from 'src/app/services/api/user-api.service';
 import {SnackBarService, SnackBarType} from "../../../../services/material/snackbar.service";
 import {AuthenticationService} from "../../../../services/authentication.service";
 
@@ -14,7 +14,7 @@ export class ProfilePasswordComponent implements OnInit {
   password: string;
   password2: string;
 
-  constructor(private authenticationService: AuthenticationService, private userService: UserService, private snackBarService: SnackBarService) {
+  constructor(private authenticationService: AuthenticationService, private userService: UserApiService, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {

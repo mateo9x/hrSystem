@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SideMenuModel, SideMenuService} from "../../services/side-menu/side-menu.service";
 import {Router} from "@angular/router";
-import {UserService} from "../../services/user.service";
+import {UserApiService} from "../../services/api/user-api.service";
 import {User} from "../../models/user.model";
 import {SnackBarService, SnackBarType} from "../../services/material/snackbar.service";
 
@@ -15,7 +15,7 @@ export class SideMenuComponent implements OnInit, OnChanges {
   @Input() userLogged: User;
 
   constructor(private sideMenuService: SideMenuService, private router: Router,
-              private userService: UserService, private snackBarService: SnackBarService) {
+              private userService: UserApiService, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {

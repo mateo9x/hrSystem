@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AttendanceWorkDay, DicAttendanceWorkType} from "../../../../models/attendance-work-report.model";
-import {AttendanceWorkService} from "../../../../services/attendance-work.service";
+import {AttendanceWorkApiService} from "../../../../services/api/attendance-work-api.service";
 import {AttendanceWorkWeekDialogFormService} from "./attendance-work-week-dialog.form.service";
 
 @Component({
@@ -14,7 +14,7 @@ export class AttendanceWorkWeekDialogComponent implements OnInit {
   dicAttendanceWorkTypes: DicAttendanceWorkType[] = [];
   workWeekForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AttendanceWorkWeekDialogComponent>, private attendanceWorkService: AttendanceWorkService,
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AttendanceWorkWeekDialogComponent>, private attendanceWorkService: AttendanceWorkApiService,
               @Inject(MAT_DIALOG_DATA) public attendanceWorkDay: AttendanceWorkDay, private attendanceWorkWeekDialogFormService: AttendanceWorkWeekDialogFormService) {
   }
 

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
-import {UserService} from "../../../services/user.service";
+import {UserApiService} from "../../../services/api/user-api.service";
 import {SpinnerService} from "../../../services/material/spinner.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class ResetPasswordComponent {
 
   email: string;
 
-  constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService,
+  constructor(private userService: UserApiService, private router: Router, private snackBarService: SnackBarService,
               private spinnerService: SpinnerService) {
   }
 

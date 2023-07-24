@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {UserService} from "../../../services/user.service";
+import {UserApiService} from "../../../services/api/user-api.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {UserEditDialogComponent} from "./user-edit-dialog/user-edit-dialog.component";
@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
   displayedColumnsKeys = this.displayedColumns.map(col => col.value);
   selectedRow: any;
 
-  constructor(private userService: UserService, private dialog: MatDialog,
+  constructor(private userService: UserApiService, private dialog: MatDialog,
               private snackBarService: SnackBarService, private authenticationService: AuthenticationService) {
   }
 

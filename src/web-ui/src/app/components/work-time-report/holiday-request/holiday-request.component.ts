@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {UserService} from "../../../services/user.service";
+import {UserApiService} from "../../../services/api/user-api.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
@@ -9,7 +9,7 @@ import {
   ConfirmationDialogModel
 } from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
 import {User} from "../../../models/user.model";
-import {HolidayRequestService} from "../../../services/holiday-request.service";
+import {HolidayRequestApiService} from "../../../services/api/holiday-request-api.service";
 import {HolidayRequest} from "../../../models/holiday-request.model";
 import {HolidayRequestAddDialogComponent} from "./add-dialog/holiday-request-add-dialog.component";
 import {DateService} from "../../../services/date.service";
@@ -37,7 +37,7 @@ export class HolidayRequestComponent implements OnInit {
   selectedRow: any;
   selection = new SelectionModel<any>(false, null);
 
-  constructor(private userService: UserService, private holidayRequestService: HolidayRequestService, private dialog: MatDialog,
+  constructor(private userService: UserApiService, private holidayRequestService: HolidayRequestApiService, private dialog: MatDialog,
               private snackBarService: SnackBarService, private dateService: DateService, private authenticationService: AuthenticationService) {
   }
 

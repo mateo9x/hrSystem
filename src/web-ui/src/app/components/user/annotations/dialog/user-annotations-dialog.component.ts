@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {AnnotationForUser} from "../../../../models/annotation-for-user.model";
-import {AnnotationForUserService} from "../../../../services/annotation-for-user.service";
+import {AnnotationForUserApiService} from "../../../../services/api/annotation-for-user-api.service";
 import {AnnotationForUserWebsocketService} from "../../../../services/websocket/annotation-for-user-websocket.service";
 import {MatDialog} from "@angular/material/dialog";
 import {
@@ -17,7 +17,7 @@ export class UserAnnotationsDialogComponent {
   @Input() annotations: any[] = [];
   @Input() userId: number;
 
-  constructor(private annotationForUserService: AnnotationForUserService,
+  constructor(private annotationForUserService: AnnotationForUserApiService,
               private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
               private dialog: MatDialog) {
   }

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl} from "@angular/forms";
 import {HolidayRequest, HolidayRequestStatus, HolidayRequestType} from "../../../../models/holiday-request.model";
-import {HolidayRequestService} from "../../../../services/holiday-request.service";
+import {HolidayRequestApiService} from "../../../../services/api/holiday-request-api.service";
 import {DateService} from "../../../../services/date.service";
 import {User} from "../../../../models/user.model";
 import {SnackBarType} from "../../../../services/material/snackbar.service";
@@ -20,7 +20,7 @@ export class HolidayRequestAddDialogComponent implements OnInit {
   statuses: HolidayRequestStatus[] = [];
   types: HolidayRequestType[] = [];
 
-  constructor(private dialogRef: MatDialogRef<HolidayRequestAddDialogComponent>, private holidayRequestService: HolidayRequestService,
+  constructor(private dialogRef: MatDialogRef<HolidayRequestAddDialogComponent>, private holidayRequestService: HolidayRequestApiService,
               private dateService: DateService, @Inject(MAT_DIALOG_DATA) public user: User) {
   }
 

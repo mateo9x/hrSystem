@@ -1,14 +1,14 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {APP_BASE_URL} from "../app.service";
-import {AnnotationForUser} from "../models/annotation-for-user.model";
+import {AnnotationForUser} from "../../models/annotation-for-user.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnnotationForUserService {
+export class AnnotationForUserApiService {
 
-  private attendanceWorkUrl = APP_BASE_URL + '/api/annotations-for-users';
+  private attendanceWorkUrl = environment.appBaseUrl + '/api/annotations-for-users';
 
   constructor(private http: HttpClient) {
   }

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl} from "@angular/forms";
 import {HolidayRequest, HolidayRequestStatus} from "../../../../models/holiday-request.model";
-import {HolidayRequestService} from "../../../../services/holiday-request.service";
+import {HolidayRequestApiService} from "../../../../services/api/holiday-request-api.service";
 import {SnackBarType} from "../../../../services/material/snackbar.service";
 
 @Component({
@@ -14,7 +14,7 @@ export class HolidayRequestConfirmationEditDialogComponent implements OnInit {
   selectedStatus = new FormControl('');
   statuses: HolidayRequestStatus[] = [];
 
-  constructor(private dialogRef: MatDialogRef<HolidayRequestConfirmationEditDialogComponent>, private holidayRequestService: HolidayRequestService,
+  constructor(private dialogRef: MatDialogRef<HolidayRequestConfirmationEditDialogComponent>, private holidayRequestService: HolidayRequestApiService,
               @Inject(MAT_DIALOG_DATA) public holidayRequest: HolidayRequest) {
   }
 

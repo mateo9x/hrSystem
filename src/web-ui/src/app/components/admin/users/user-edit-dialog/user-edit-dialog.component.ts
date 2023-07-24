@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {User} from "../../../../models/user.model";
-import {UserService} from "../../../../services/user.service";
+import {UserApiService} from "../../../../services/api/user-api.service";
 import {FormControl} from "@angular/forms";
 import {Role} from "../../../../models/role.model";
-import {RoleService} from "../../../../services/role.service";
+import {RoleApiService} from "../../../../services/api/role-api.service";
 import {SnackBarType} from "../../../../services/material/snackbar.service";
 
 @Component({
@@ -17,7 +17,7 @@ export class UserEditDialogComponent implements OnInit {
   roles: Role[] = [];
 
   constructor(private dialogRef: MatDialogRef<UserEditDialogComponent>, @Inject(MAT_DIALOG_DATA) public user: User,
-              private userService: UserService, private roleService: RoleService) {
+              private userService: UserApiService, private roleService: RoleApiService) {
   }
 
   ngOnInit() {

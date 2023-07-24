@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../../services/user.service";
+import {UserApiService} from "../../../../services/api/user-api.service";
 import {FormControl} from "@angular/forms";
 import {getThemeByValue, ThemeService} from "../../../../services/theme/theme.service";
 import {User} from "../../../../models/user.model";
@@ -23,7 +23,7 @@ export class ProfilePreferencesComponent implements OnInit {
     {label: 'Żółty', value: 'yellow'}
   ]
 
-  constructor(private userService: UserService, private themeService: ThemeService, private snackBarService: SnackBarService,
+  constructor(private userService: UserApiService, private themeService: ThemeService, private snackBarService: SnackBarService,
               private authenticationService: AuthenticationService) {
   }
 

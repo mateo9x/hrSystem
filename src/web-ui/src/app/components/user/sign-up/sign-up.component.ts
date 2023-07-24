@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from 'src/app/models/user.model';
-import {UserService} from 'src/app/services/user.service';
+import {UserApiService} from 'src/app/services/api/user-api.service';
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
 import {SpinnerService} from "../../../services/material/spinner.service";
 import {SignUpFormService} from "./sign-up.form.service";
@@ -17,7 +17,7 @@ export class SignUpComponent {
   loading: boolean;
   users: User[];
 
-  constructor(public formService: SignUpFormService, private userService: UserService, private router: Router, private snackBarService: SnackBarService,
+  constructor(public formService: SignUpFormService, private userService: UserApiService, private router: Router, private snackBarService: SnackBarService,
               private spinnerService: SpinnerService) {
     this.form = this.formService.getFormGroup();
   }

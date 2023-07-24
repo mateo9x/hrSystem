@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import * as SockJS from "sockjs-client";
 import {Stomp} from "@stomp/stompjs";
-import {APP_BASE_URL} from "../../app.service";
 import {BehaviorSubject} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AnnotationForUserWebsocketService {
   annotationsWebSocket = new BehaviorSubject([]);
 
   public connect(userId: number) {
-    const socket = new SockJS(APP_BASE_URL + '/ws');
+    const socket = new SockJS(environment.appBaseUrl + '/ws');
     this.stompClient = Stomp.over(socket);
     const _this = this;
     this.stompClient.debug = () => {};

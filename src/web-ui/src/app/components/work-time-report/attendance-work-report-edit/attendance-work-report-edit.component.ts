@@ -4,10 +4,10 @@ import {User} from "../../../models/user.model";
 import {DateService} from "../../../services/date.service";
 import previousMonday from "date-fns/previousMonday";
 import {isMonday, isSunday, nextSunday} from "date-fns";
-import {AttendanceWorkService} from "../../../services/attendance-work.service";
+import {AttendanceWorkApiService} from "../../../services/api/attendance-work-api.service";
 import {AttendanceWorkReportModel} from "../../../models/attendance-work-report.model";
 import {MatDialog} from "@angular/material/dialog";
-import {UserService} from "../../../services/user.service";
+import {UserApiService} from "../../../services/api/user-api.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AttendanceWorkReportEditFormService} from "./attendance-work-report-edit.form.service";
 import {Subscription} from "rxjs";
@@ -27,7 +27,7 @@ export class AttendanceWorkReportEditComponent implements OnInit, OnDestroy {
   attendanceWorkReportsForSelectedWeek: AttendanceWorkReportModel[] = [];
   selectedUserSubscription: Subscription
 
-  constructor(private userService: UserService, private attendanceWorkReportService: AttendanceWorkService,
+  constructor(private userService: UserApiService, private attendanceWorkReportService: AttendanceWorkApiService,
               private snackBarService: SnackBarService, private dateService: DateService,
               private dialog: MatDialog, private attendanceWorkReportEditFormService: AttendanceWorkReportEditFormService,
               private fb: FormBuilder) {

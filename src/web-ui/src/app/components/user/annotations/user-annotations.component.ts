@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {AnnotationForUserService} from "../../../services/annotation-for-user.service";
+import {AnnotationForUserApiService} from "../../../services/api/annotation-for-user-api.service";
 import {AnnotationForUserWebsocketService} from "../../../services/websocket/annotation-for-user-websocket.service";
 
 @Component({
@@ -12,7 +12,7 @@ export class UserAnnotationsComponent implements OnChanges {
   annotations: any[] = [];
   @Input() userId: number;
 
-  constructor(private eRef: ElementRef, private annotationForUserService: AnnotationForUserService,
+  constructor(private eRef: ElementRef, private annotationForUserService: AnnotationForUserApiService,
               private annotationForUserWebsocketService: AnnotationForUserWebsocketService) {
   }
 

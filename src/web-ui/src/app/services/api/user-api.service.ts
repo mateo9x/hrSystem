@@ -1,16 +1,16 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
-import {APP_BASE_URL} from "../app.service";
+import { User } from '../../models/user.model';
 import {Observable} from "rxjs/internal/Observable";
-import {ProfilePasswordRequest} from "../components/user/profile/password/profile-password.component";
+import {ProfilePasswordRequest} from "../../components/user/profile/password/profile-password.component";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserApiService {
 
-  private userUrl = APP_BASE_URL + '/api/users';
+  private userUrl = environment.appBaseUrl + '/api/users';
 
   constructor(private http: HttpClient) { }
 

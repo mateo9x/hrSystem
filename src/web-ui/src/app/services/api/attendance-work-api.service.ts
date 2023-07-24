@@ -1,16 +1,16 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {APP_BASE_URL} from "../app.service";
-import {AttendanceWorkDay, AttendanceWorkReportModel, DicAttendanceWorkType} from "../models/attendance-work-report.model";
+import {AttendanceWorkDay, AttendanceWorkReportModel, DicAttendanceWorkType} from "../../models/attendance-work-report.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AttendanceWorkService {
+export class AttendanceWorkApiService {
 
-  private attendanceWorkUrl = APP_BASE_URL + '/api/attendance-works';
-  private dicAttendanceWorkUrl = APP_BASE_URL + '/api/dic-attendance-work-types';
-  private attendanceWorkDaysUrl = APP_BASE_URL + '/api/attendance-work-days';
+  private attendanceWorkUrl = environment.appBaseUrl + '/api/attendance-works';
+  private dicAttendanceWorkUrl = environment.appBaseUrl + '/api/dic-attendance-work-types';
+  private attendanceWorkDaysUrl = environment.appBaseUrl + '/api/attendance-work-days';
 
   constructor(private http: HttpClient) {
   }

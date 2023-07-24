@@ -1,12 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {APP_BASE_URL} from "../app.service";
 import {CookieService} from "ngx-cookie-service";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.model";
 import {SnackBarService, SnackBarType} from "./material/snackbar.service";
 import {AnnotationForUserWebsocketService} from "./websocket/annotation-for-user-websocket.service";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +27,14 @@ export class AuthenticationService {
     if (this.cookieService.get('jwt')) {
       this.snackBarService.openSnackBar('Jesteś już zalogowany!', SnackBarType.WARN);
     } else {
-      this.http.post<any>(`${APP_BASE_URL}/authenticate`, authenticationRequest).subscribe({
+      this.http.post<any>(`${environment.appBaseUrl}/authenticate`, authenticationRequest).subscribe({
         next: (response) => {
           const jwt = response.token;
           this.getUserByCookieJWT().subscribe({
             next: (userByJWT) => {
               this.setUserLogged(userByJWT);
               this.setCookies(jwt, userByJWT, authenticationRequest.rememberMe);
-              this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS);
-              this.router.navigate(['']);
+              this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS));
             }
           });
         },
@@ -51,7 +50,7 @@ export class AuthenticationService {
   }
 
   public logoutUser(logoutError: boolean) {
-    this.http.post<any>(`${APP_BASE_URL}/logout-user`, {}).subscribe({
+    this.http.post<any>(`${environment.appBaseUrl}/logout-user`, {}).subscribe({
       next: (response) => {
         if (response) {
           this.clearCookies();
@@ -60,8 +59,7 @@ export class AuthenticationService {
           if (logoutError) {
             this.snackBarService.openSnackBar('Sesja wygasła - zaloguj się ponownie by kontynuować', SnackBarType.WARN);
             document.cookie = null;
-            window.location.reload();
-            this.router.navigate(['']);
+            this.router.navigate(['']).then(() => window.location.reload());
           } else {
             this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS);
           }
@@ -80,7 +78,7 @@ export class AuthenticationService {
   }
 
   public getUserByCookieJWT() {
-    return this.http.get<User>(`${APP_BASE_URL}/user`);
+    return this.http.get<User>(`${environment.appBaseUrl}/user`);
   }
 
   private clearCookies() {

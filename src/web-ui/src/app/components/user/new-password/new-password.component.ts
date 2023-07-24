@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SnackBarService, SnackBarType} from "../../../services/material/snackbar.service";
-import {UserService} from "../../../services/user.service";
+import {UserApiService} from "../../../services/api/user-api.service";
 
 @Component({
   selector: 'new-password',
@@ -14,7 +14,7 @@ export class NewPasswordComponent implements OnInit {
   password2: string;
   token: string;
 
-  constructor(private userService: UserService, private router: Router, private snackBarService: SnackBarService) {
+  constructor(private userService: UserApiService, private router: Router, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {

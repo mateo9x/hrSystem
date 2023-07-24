@@ -1,14 +1,14 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {APP_BASE_URL} from "../app.service";
-import {HolidayRequest, HolidayRequestStatus, HolidayRequestType} from "../models/holiday-request.model";
+import {HolidayRequest, HolidayRequestStatus, HolidayRequestType} from "../../models/holiday-request.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class HolidayRequestService {
+export class HolidayRequestApiService {
 
-  private holidayRequestTypeUrl = APP_BASE_URL + '/api/holiday-requests';
+  private holidayRequestTypeUrl = environment.appBaseUrl + '/api/holiday-requests';
 
   constructor(private http: HttpClient) {
   }

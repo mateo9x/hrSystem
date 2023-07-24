@@ -1,6 +1,8 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {AuthenticationRequest, AuthenticationService} from "../../../services/authentication.service";
+import {AuthenticationService} from "../../../services/authentication.service";
+import {FormGroup} from "@angular/forms";
+import {SignInFormService} from "./sign-in.form.service";
 
 @Component({
   selector: 'sign-in',
@@ -8,15 +10,16 @@ import {AuthenticationRequest, AuthenticationService} from "../../../services/au
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  request: AuthenticationRequest = new AuthenticationRequest();
+  form: FormGroup;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(public formService: SignInFormService,
+              private router: Router,
+              private authenticationService: AuthenticationService) {
+    this.form = this.formService.getFormGroup();
   }
 
   signInUser() {
-    if (this.request.email && this.request.password) {
-        this.authenticationService.signinUser(this.request);
-    }
+    this.authenticationService.signinUser(this.formService.convertFormToAuthenticationRequest());
   }
 
   signUp() {

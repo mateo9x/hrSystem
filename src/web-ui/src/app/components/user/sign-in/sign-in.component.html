@@ -2,22 +2,22 @@
   <div id="formContent">
     <h2 class="active"> Zaloguj się </h2>
 
-    <form class="form" #form="ngForm" novalidate>
+    <form class="form" [formGroup]="form">
       <mat-form-field class="fadeIn second" appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="request.email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <input matInput formControlName="email">
       </mat-form-field>
       <mat-form-field class="fadeIn third" appearance="fill">
         <mat-label>Hasło</mat-label>
-        <input matInput [(ngModel)]="request.password" name="password" type="password" (keyup.enter)="signInUser()" required>
+        <input matInput formControlName="password" type="password">
       </mat-form-field>
       <mat-checkbox class="fadeIn third" color="primary"
-                    [(ngModel)]="request.rememberMe" name="rememberMe">Zapamiętaj mnie!
+                    formControlName="rememberMe">Zapamiętaj mnie!
       </mat-checkbox>
     </form>
 
     <button mat-raised-button (click)="signInUser()" class="fadeIn fourth app-button" style="margin-bottom:5%"
-            [disabled]="form.invalid">
+            [disabled]="!formService.isFormValid()">
       Zaloguj się
     </button>
 

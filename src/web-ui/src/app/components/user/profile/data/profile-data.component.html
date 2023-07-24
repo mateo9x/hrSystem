@@ -3,7 +3,7 @@
   <h1 class="input-data" style="margin-bottom:3%">Dane kontaktowe</h1>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Imię</mat-label>
       <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
              #firstName="ngModel">
@@ -12,7 +12,7 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Nazwisko</mat-label>
       <input matInput [(ngModel)]="user.lastName" name="lastName" type="text" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" required
              #lastName="ngModel">
@@ -21,7 +21,7 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
              required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
@@ -31,7 +31,7 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Pesel</mat-label>
       <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
              required pattern="[0-9]{11}" #pesel="ngModel"/>
@@ -41,21 +41,21 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Ulica</mat-label>
       <input matInput type="text" name="street" [(ngModel)]="user.street"/>
     </mat-form-field>
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Nr domu</mat-label>
       <input matInput type="text" name="streetNumber" [(ngModel)]="user.streetNumber"/>
     </mat-form-field>
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Kod Pocztowy</mat-label>
       <input matInput type="text" name="postalCode" style="display:inline-block" [(ngModel)]="user.postalCode"
              mask="00-000"  #postalCode="ngModel"/>
@@ -65,14 +65,14 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Miasto</mat-label>
       <input matInput type="text" name="city" [(ngModel)]="user.city"/>
     </mat-form-field>
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Numer telefonu</mat-label>
       <input matInput type="text" name="phoneNumber" style="display:inline-block" [(ngModel)]="user.phoneNumber"
              onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="[0-9]{9}"

@@ -17,28 +17,38 @@ export class SignUpComponent {
   loading: boolean;
   users: User[];
 
-  constructor(public formService: SignUpFormService, private userService: UserApiService, private router: Router, private snackBarService: SnackBarService,
+  constructor(private formService: SignUpFormService,
+              private userService: UserApiService,
+              private router: Router,
+              private snackBarService: SnackBarService,
               private spinnerService: SpinnerService) {
     this.form = this.formService.getFormGroup();
   }
 
   clear() {
-    this.formService.clearForm();
+    this.formService.clearForm(this.form);
   }
 
   register() {
-    this.spinnerService.setLoading(true);
-    this.userService.createUser(this.formService.convertFormToUserRequest()).subscribe({
-      next: () => {
-        this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie', SnackBarType.SUCCESS);
-        this.spinnerService.setLoading(false);
-        this.router.navigate(['']).then(() => this.clear());
-      },
-      error: (errorResponse) => {
-        this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
-        this.spinnerService.setLoading(false);
-      }
-    });
+    this.form.markAllAsTouched();
+    if (this.formService.isFormValid(this.form)) {
+      this.spinnerService.setLoading(true);
+      this.userService.createUser(this.formService.convertFormToUserRequest(this.form)).subscribe({
+        next: () => {
+          this.snackBarService.openSnackBar('Utworzono użytkownika pomyślnie', SnackBarType.SUCCESS);
+          this.spinnerService.setLoading(false);
+          this.router.navigate(['']).then(() => this.clear());
+        },
+        error: (errorResponse) => {
+          this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
+          this.spinnerService.setLoading(false);
+        }
+      });
+    }
+  }
+
+  hasFormError(controlName: string, errorName: string): boolean {
+    return this.form.get(controlName).hasError(errorName);
   }
 
 }

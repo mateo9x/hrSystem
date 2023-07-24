@@ -4,7 +4,7 @@
 
   <div class="input-data">
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Typ pracy</mat-label>
       <mat-select [formControl]="selectedWorkType" required>
         <mat-option *ngFor="let workType of workTypes" [value]="workType.value">{{workType.label}}</mat-option>

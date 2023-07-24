@@ -4,14 +4,14 @@
 
   <div class="date-container">
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Wybierz datę od</mat-label>
       <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" [max]="dateTo">
       <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
       <mat-datepicker #pickerFrom></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Wybierz datę do</mat-label>
       <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" [min]="dateFrom">
       <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>

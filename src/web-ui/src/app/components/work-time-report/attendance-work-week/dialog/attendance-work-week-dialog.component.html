@@ -3,14 +3,14 @@
   <h1 class="input-data">{{ attendanceWorkDay.id ? 'Edytuj' : 'Dodaj' }} szczegóły pracy</h1>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Dzień pracy</mat-label>
       <input matInput formControlName="day"/>
     </mat-form-field>
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Rodzaj pracy</mat-label>
       <mat-select formControlName="selectedDicAttendanceWorkType">
         <mat-option *ngFor="let type of dicAttendanceWorkTypes" [value]="type.id">{{type.name}}</mat-option>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Ilość godzin</mat-label>
       <input matInput formControlName="hours" type="number"/>
       <span class="error-span"
@@ -30,7 +30,7 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Komentarz</mat-label>
       <textarea matInput
                 cdkTextareaAutosize

@@ -1,7 +1,7 @@
 .form {
   box-sizing: border-box;
-  padding: 40px;
-  margin:auto;
+  padding: 20px;
+  margin: auto;
 }
 
 .left-right-column-container {
@@ -9,14 +9,15 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.left-column,.right-column {
+.left-column, .right-column {
   display: grid;
   grid-template-rows: auto;
+  gap: 10px;
 }
 
 .input-data {
   margin: auto auto 20px;
-  max-width:80%;
+  max-width: 90%;
   display: grid;
   grid-template-columns: auto;
   grid-gap: 20px;

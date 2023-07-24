@@ -12,14 +12,17 @@ import {SignInFormService} from "./sign-in.form.service";
 export class SignInComponent {
   form: FormGroup;
 
-  constructor(public formService: SignInFormService,
+  constructor(private formService: SignInFormService,
               private router: Router,
               private authenticationService: AuthenticationService) {
     this.form = this.formService.getFormGroup();
   }
 
   signInUser() {
-    this.authenticationService.signinUser(this.formService.convertFormToAuthenticationRequest());
+    this.form.markAllAsTouched();
+    if (this.formService.isFormValid(this.form)) {
+      this.authenticationService.signinUser(this.formService.convertFormToAuthenticationRequest(this.form));
+    }
   }
 
   signUp() {
@@ -28,6 +31,10 @@ export class SignInComponent {
 
   resetPassword() {
     this.router.navigate(['reset-password']);
+  }
+
+  hasFormError(controlName: string, errorName: string): boolean {
+    return this.form.get(controlName).hasError(errorName);
   }
 
 }

@@ -1,4 +1,4 @@
-<form class="form" #form="ngForm" novalidate>
+<form class="form" [formGroup]="form">
 
   <h1 class="input-data">Edycja użytkownika</h1>
 
@@ -7,47 +7,53 @@
     <div class="left-column">
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Imię</mat-label>
-          <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
-                 #firstName="ngModel">
-          <span class="error-span" *ngIf="firstName.errors">Imię musi składać się tylko z liter</span>
+          <input matInput formControlName="firstName" maxlength="100"/>
+          <mat-error *ngIf="hasFormError('firstName', 'required')">Pole wymagane</mat-error>
+          <mat-error *ngIf="hasFormError('firstName', 'pattern')">Imię musi składać się
+            tylko z liter
+          </mat-error>
         </mat-form-field>
 
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Nazwisko</mat-label>
-          <input matInput [(ngModel)]="user.lastName" name="lastName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
-                 #lastName="ngModel">
-          <span class="error-span" *ngIf="lastName.errors">Nazwisko musi składać się tylko z liter</span>
+          <input matInput formControlName="lastName" maxlength="100"/>
+          <mat-error *ngIf="hasFormError('lastName', 'required')">Pole wymagane</mat-error>
+          <mat-error *ngIf="hasFormError('lastName', 'pattern')">Imię musi składać się
+            tylko z liter
+          </mat-error>
         </mat-form-field>
 
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email" disabled/>
+          <input matInput formControlName="email"/>
+          <mat-error *ngIf="hasFormError('email', 'required')">Pole wymagane</mat-error>
+          <mat-error *ngIf="hasFormError('email', 'email')">Niepoprawny format adresu email</mat-error>
         </mat-form-field>
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Pesel</mat-label>
-          <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
-                 required pattern="[0-9]{11}" #pesel="ngModel"/>
-          <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
+          <input matInput formControlName="pesel" maxlength="11"/>
+          <mat-error *ngIf="hasFormError('pesel', 'required')">Pole wymagane</mat-error>
+          <mat-error *ngIf="hasFormError('pesel', 'pattern')">Pesel musi zawierać 11 znaków</mat-error>
         </mat-form-field>
 
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill" >
+        <mat-form-field>
           <mat-label>Role użytkownika</mat-label>
-          <mat-select [formControl]="selectedRoles" multiple>
-            <mat-option *ngFor="let role of roles" [value]="role.value" >{{role.label}}</mat-option>
+          <mat-select formControlName="selectedRoles" multiple>
+            <mat-option *ngFor="let role of roles" [value]="role.value">{{role.label}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -56,42 +62,44 @@
     <div class="right-column">
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Ulica</mat-label>
-          <input matInput type="text" name="street" [(ngModel)]="user.street"/>
+          <input matInput formControlName="street" maxlength="100"/>
+          <mat-error *ngIf="hasFormError('street', 'required')">Pole wymagane</mat-error>
         </mat-form-field>
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Nr domu</mat-label>
-          <input matInput type="text" name="streetNumber" [(ngModel)]="user.streetNumber"/>
+          <input matInput formControlName="streetNumber" maxlength="10"/>
+          <mat-error *ngIf="hasFormError('streetNumber', 'required')">Pole wymagane</mat-error>
         </mat-form-field>
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Kod Pocztowy</mat-label>
-          <input matInput type="text" name="postalCode" mask="00-000" style="display:inline-block" [(ngModel)]="user.postalCode"
-                 #postalCode="ngModel"/>
-          <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+          <input matInput mask="00-000" formControlName="postalCode" maxlength="6"/>
+          <mat-error *ngIf="hasFormError('postalCode', 'required')">Pole wymagane</mat-error>
         </mat-form-field>
 
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Miasto</mat-label>
-          <input matInput type="text" name="city" [(ngModel)]="user.city"/>
+          <input matInput formControlName="city" maxlength="100"/>
+          <mat-error *ngIf="hasFormError('city', 'required')">Pole wymagane</mat-error>
         </mat-form-field>
       </div>
 
       <div class="input-data">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Numer telefonu</mat-label>
-          <input matInput type="text" name="phoneNumber" mask="000 000 000" style="display:inline-block" [(ngModel)]="user.phoneNumber"
-                 onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                 #phoneNumber="ngModel"/>
+          <input matInput mask="000 000 000" formControlName="phoneNumber" maxlength="11"
+                 onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+          <mat-error *ngIf="hasFormError('phoneNumber', 'required')">Pole wymagane</mat-error>
         </mat-form-field>
       </div>
 
@@ -101,7 +109,8 @@
 
   <div class="button-container">
     <button mat-raised-button (click)="cancel()" name="cancel" class="button app-button">Anuluj</button>
-    <button mat-raised-button (click)="saveUser()" [disabled]="form.invalid" name="save" class="button app-button">
+    <button mat-raised-button (click)="updateUser()"
+            class="button app-button">
       Zapisz
     </button>
   </div>

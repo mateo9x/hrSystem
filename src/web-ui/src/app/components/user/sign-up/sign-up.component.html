@@ -3,14 +3,13 @@
   <h1 class="input-data" style="margin-bottom:3%">Rejestracja</h1>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Imię</mat-label>
       <input matInput formControlName="firstName"
-             type="text"
              onkeypress='return !(event.charCode >= 48 && event.charCode <= 57)' maxlength="100">
-      <mat-error *ngIf="formService.getFirstNameControl().hasError('required')">Pole wymagane
+      <mat-error *ngIf="hasFormError('firstName','required')">Pole wymagane
       </mat-error>
-      <mat-error *ngIf="formService.getFirstNameControl().hasError('pattern')">Imię musi składać się
+      <mat-error *ngIf="hasFormError('firstName','pattern')">Imię musi składać się
         tylko z liter
       </mat-error>
     </mat-form-field>
@@ -18,13 +17,13 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Nazwisko</mat-label>
-      <input matInput formControlName="lastName" type="text"
+      <input matInput formControlName="lastName"
              onkeypress='return !(event.charCode >= 48 && event.charCode <= 57)' maxlength="100">
-      <mat-error *ngIf="formService.getLastNameControl().hasError('required')">Pole wymagane
+      <mat-error *ngIf="hasFormError('lastName','required')">Pole wymagane
       </mat-error>
-      <mat-error *ngIf="formService.getFirstNameControl().hasError('pattern')">Nazwisko musi składać
+      <mat-error *ngIf="hasFormError('lastName','pattern')">Nazwisko musi składać
         się tylko z liter
       </mat-error>
     </mat-form-field>
@@ -32,49 +31,49 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="text" style="display:inline-block" formControlName="email"/>
-      <mat-error *ngIf="formService.getEmailControl().hasError('required')">Pole wymagane</mat-error>
-      <mat-error *ngIf="formService.getEmailControl().hasError('email')">Poprawny format adresu
+      <input matInput formControlName="email"/>
+      <mat-error *ngIf="hasFormError('email','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('email','email')">Poprawny format adresu
         e-mail np: mail@mail.com
       </mat-error>
     </mat-form-field>
 
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Pesel</mat-label>
-      <input matInput type="text" style="display:inline-block" formControlName="pesel" maxlength="11"
+      <input matInput formControlName="pesel" maxlength="11"
              onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-      <mat-error *ngIf="formService.getPeselControl().hasError('required')">Pole wymagane</mat-error>
-      <mat-error *ngIf="formService.getPeselControl().hasError('pattern')">Pesel musi zawierać 11 znaków
+      <mat-error *ngIf="hasFormError('pesel','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('pesel','pattern')">Pesel musi zawierać 11 znaków
       </mat-error>
     </mat-form-field>
 
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Hasło</mat-label>
-      <input matInput type="password" style="display:inline-block" formControlName="password"
+      <input matInput type="password" formControlName="password"
              maxlength="100"/>
-      <mat-error *ngIf="formService.getPasswordControl().hasError('required')">Pole wymagane</mat-error>
-      <mat-error *ngIf="formService.getPasswordControl().hasError('minlength')">Hasło musi mieć min 5 znaków
+      <mat-error *ngIf="hasFormError('password','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('password','minlength')">Hasło musi mieć min 5 znaków
       </mat-error>
     </mat-form-field>
 
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Potwierdź hasło</mat-label>
       <input matInput type="password"
              formControlName="password2" maxlength="100"/>
-      <mat-error *ngIf="formService.getPassword2Control().hasError('required')">Pole wymagane</mat-error>
-      <mat-error *ngIf="formService.getPassword2Control().hasError('minlength')">Hasło musi mieć min 5 znaków
+      <mat-error *ngIf="hasFormError('password2','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('password2','minlength')">Hasło musi mieć min 5 znaków
       </mat-error>
       <mat-error
-        *ngIf="formService.getPassword2Control().hasError('passwordDoesntMatch')">
+        *ngIf="hasFormError('password2','passwordDoesntMatch')">
         Hasło muszą
         do siebie pasować
       </mat-error>
@@ -82,48 +81,48 @@
 
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Ulica</mat-label>
       <input matInput type="text" formControlName="street" maxlength="100"/>
-      <mat-error *ngIf="formService.getStreetControl().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('street','required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Nr domu</mat-label>
       <input matInput type="text" formControlName="streetNumber" maxlength="100"/>
-      <mat-error *ngIf="formService.getStreetNumberControl().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('streetNumber','required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Kod Pocztowy</mat-label>
-      <input matInput type="text" mask="00-000" style="display:inline-block"
+      <input matInput mask="00-000"
              formControlName="postalCode"/>
-      <mat-error *ngIf="formService.getPostalCodeControl().hasError('required')">Pole wymagane</mat-error>
-      <mat-error *ngIf="formService.getPostalCodeControl().hasError('pattern')">Poprawny format kodu pocztowego:
+      <mat-error *ngIf="hasFormError('postalCode','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('postalCode','pattern')">Poprawny format kodu pocztowego:
         XX-XXX
       </mat-error>
     </mat-form-field>
 
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Miasto</mat-label>
-      <input matInput type="text" formControlName="city" maxlength="100"/>
-      <mat-error *ngIf="formService.getCityControl().hasError('required')">Pole wymagane</mat-error>
+      <input matInput formControlName="city" maxlength="100"/>
+      <mat-error *ngIf="hasFormError('city','required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Numer telefonu</mat-label>
       <input matInput type="text" mask="000 000 000" style="display:inline-block"
              formControlName="phoneNumber"
              onkeypress='return event.charCode >= 48 && event.charCode <= 57'
       />
-      <mat-error *ngIf="formService.getPhoneNumber().hasError('required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('phoneNumber','required')">Pole wymagane</mat-error>
       <mat-error
-        *ngIf="formService.getPhoneNumber().hasError('minlength') || formService.getPhoneNumber().hasError('maxlength')">
+        *ngIf="hasFormError('phoneNumber','minlength') || hasFormError('phoneNumber','maxlength')">
         Wymagane 9 cyfr
       </mat-error>
     </mat-form-field>
@@ -132,7 +131,7 @@
     <button mat-raised-button class="app-button" (click)="clear()"
             style="margin-right:10%">Wyczyść
     </button>
-    <button mat-raised-button class="app-button" (click)="register()" [disabled]="!formService.isFormValid()">
+    <button mat-raised-button class="app-button" (click)="register()">
       Zarejestruj
     </button>
   </div>

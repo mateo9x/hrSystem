@@ -3,7 +3,7 @@
   <h1 class="input-data">Edytuj wniosek urlopowy</h1>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Status wniosku</mat-label>
       <mat-select [formControl]="selectedStatus">
         <mat-option *ngFor="let status of statuses" [value]="status.id">{{status.name}}</mat-option>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="input-data">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Komentarz</mat-label>
       <textarea matInput
                 cdkTextareaAutosize

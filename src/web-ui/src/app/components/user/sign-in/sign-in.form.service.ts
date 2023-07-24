@@ -6,40 +6,39 @@ import {AuthenticationRequest} from "../../../services/authentication.service";
   providedIn: 'root'
 })
 export class SignInFormService {
-  form = this.fb.group({
-    email: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    rememberMe: [false, [Validators.required]]
-  });
 
   constructor(private fb: FormBuilder) {
   }
 
   getFormGroup(): FormGroup {
-    return this.form;
+    return this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      rememberMe: [false, [Validators.required]]
+    });
   }
 
-  convertFormToAuthenticationRequest(): AuthenticationRequest {
+  convertFormToAuthenticationRequest(form: FormGroup): AuthenticationRequest {
     let request = new AuthenticationRequest();
-    request.email = this.getEmailControl().value;
-    request.password = this.getPasswordControl().value;
-    request.rememberMe = this.getRememberMeControl().value;
+    request.email = this.getEmailControl(form).value;
+    request.password = this.getPasswordControl(form).value;
+    request.rememberMe = this.getRememberMeControl(form).value;
     return request;
   }
 
-  isFormValid() {
-    return this.form.valid;
+  isFormValid(form: FormGroup) {
+    return form.valid;
   }
 
-  getEmailControl(): AbstractControl {
-    return this.form.get('email');
+  getEmailControl(form: FormGroup): AbstractControl {
+    return form.get('email');
   }
 
-  getPasswordControl(): AbstractControl {
-    return this.form.get('password');
+  getPasswordControl(form: FormGroup): AbstractControl {
+    return form.get('password');
   }
 
-  getRememberMeControl(): AbstractControl {
-    return this.form.get('rememberMe');
+  getRememberMeControl(form: FormGroup): AbstractControl {
+    return form.get('rememberMe');
   }
 }

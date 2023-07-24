@@ -3673,10 +3673,6 @@ input[type="button"].btn-block {
   border-color: #80bdff;
 }
 
-.custom-file-input:lang(en) ~ .custom-file-label::after {
-  content: "Browse";
-}
-
 .custom-file-label {
   position: absolute;
   top: 0;

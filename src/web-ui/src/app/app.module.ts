@@ -75,6 +75,7 @@ import {
 } from "./components/work-time-report/attendance-work-report-edit/dialog/attendance-work-report-edit-dialog.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {ProfilePreferencesComponent} from "./components/user/profile/preferences/profile-preferences.component";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -107,31 +108,32 @@ import {ProfilePreferencesComponent} from "./components/user/profile/preferences
     AttendanceWorkReportEditComponent,
     AttendanceWorkReportEditDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        MatInputModule,
-        MatButtonModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatSnackBarModule,
-        MatTableModule,
-        MatIconModule,
-        MatSortModule,
-        MatDialogModule,
-        MatOptionModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        NgxMaskDirective,
-        NgxMaskPipe,
-        MatTooltipModule,
-        NgxMatSelectSearchModule,
-        MatProgressSpinnerModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatIconModule,
+    MatSortModule,
+    MatDialogModule,
+    MatOptionModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    MatTooltipModule,
+    NgxMatSelectSearchModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule
+  ],
   providers: [
     provideNgxMask(),
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
@@ -145,6 +147,7 @@ import {ProfilePreferencesComponent} from "./components/user/profile/preferences
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     LoginGuard, ProfileGuard, AnonymousGuard, DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

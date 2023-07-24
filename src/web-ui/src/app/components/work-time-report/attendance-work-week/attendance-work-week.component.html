@@ -5,14 +5,14 @@
   <div class="date-container">
     <mat-icon class="arrows" (click)="previousWeek()" matTooltip="Poprzedni tydzień">arrow_left</mat-icon>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Wybierz datę od</mat-label>
       <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" disabled>
       <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
       <mat-datepicker #pickerFrom></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Wybierz datę do</mat-label>
       <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" disabled>
       <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>

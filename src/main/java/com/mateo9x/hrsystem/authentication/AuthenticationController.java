@@ -34,7 +34,7 @@ public class AuthenticationController {
     private final JwtUtils jwtUtils;
 
     @PostMapping("authenticate")
-    public ResponseEntity<JWTToken> authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response) {
+    public ResponseEntity<JWTResponse> authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response) {
         log.info("REST request to authenthicate user: {}", request.getEmail());
         Pair<String, Cookie> result = authenticationService.authenticateUser(request);
         String jwt = result.getValue0();
@@ -42,7 +42,7 @@ public class AuthenticationController {
         if (jwt == null) {
             throw new AuthenthicationException("Uwierzytelnienie nie powiodło się");
         }
-        return ResponseEntity.ok(new JWTToken(jwt));
+        return ResponseEntity.ok(new JWTResponse(jwt));
     }
 
     @PostMapping("logout-user")
@@ -72,7 +72,7 @@ public class AuthenticationController {
     }
 
     @Value
-    static class JWTToken {
+    static class JWTResponse {
         String token;
     }
 }

@@ -1,27 +1,30 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot} from '@angular/router';
-import {CookieService} from "ngx-cookie-service";
 import {User} from "../../models/user.model";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Injectable()
 export class ProfileGuard implements CanActivate {
-  user: User;
   userRoles: any[];
 
-  constructor(protected cookieService: CookieService) {
+  constructor(protected authenticationService: AuthenticationService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
-    const cookieUser = this.cookieService.get('user');
-    if (cookieUser.length === 0) {
-      return false;
-    }
-    this.user = JSON.parse(cookieUser);
-    this.userRoles = this.user.roles;
-    return this.doesUserHasAnyRoles();
+    let result;
+    this.authenticationService.userLogged.subscribe({
+      next: (user) => {
+        if (user) {
+          result = this.doesUserHasAnyRoles(user);
+        } else {
+          result = false;
+        }
+      }
+    })
+    return result;
   }
 
-  protected doesUserHasAnyRoles(): boolean {
-    return this.userRoles.length > 0;
+  protected doesUserHasAnyRoles(user: User): boolean {
+    return user.roles.length > 0;
   }
 }

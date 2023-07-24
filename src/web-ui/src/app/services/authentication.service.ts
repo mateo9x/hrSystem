@@ -21,7 +21,7 @@ export class AuthenticationService {
   }
 
   public signinUser(authenticationRequest: AuthenticationRequest) {
-    this.http.post<any>(`${environment.appBaseUrl}/authenticate`, authenticationRequest).subscribe({
+    this.http.post<JWTResponse>(`${environment.appBaseUrl}/authenticate`, authenticationRequest).subscribe({
       next: (response) => {
         const jwt = response.token;
         this.getUserByCookieJWT().subscribe({
@@ -104,4 +104,8 @@ export class AuthenticationRequest {
   email: string;
   password: string;
   rememberMe = false;
+}
+
+export interface JWTResponse {
+  token: string;
 }

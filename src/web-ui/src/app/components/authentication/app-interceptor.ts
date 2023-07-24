@@ -26,7 +26,7 @@ export class AppInterceptor implements HttpInterceptor {
         withCredentials: true
       });
     }
-    return next.handle(newRequest).pipe(catchError((err, caught) => {
+    return next.handle(newRequest).pipe(catchError((err) => {
       if (err.status === 401 || err.status === 403) {
         this.authenticationService.logoutUser(true);
       }

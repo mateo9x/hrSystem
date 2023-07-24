@@ -18,35 +18,28 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private cookieService: CookieService,
               private annotationForUserWebsocketService: AnnotationForUserWebsocketService,
               private snackBarService: SnackBarService, private router: Router) {
-    if (this.cookieService.get('user')) {
-      this.userLogged.next(JSON.parse(this.cookieService.get('user')));
-    }
   }
 
   public signinUser(authenticationRequest: AuthenticationRequest) {
-    if (this.cookieService.get('jwt')) {
-      this.snackBarService.openSnackBar('Jesteś już zalogowany!', SnackBarType.WARN);
-    } else {
-      this.http.post<any>(`${environment.appBaseUrl}/authenticate`, authenticationRequest).subscribe({
-        next: (response) => {
-          const jwt = response.token;
-          this.getUserByCookieJWT().subscribe({
-            next: (userByJWT) => {
-              this.setUserLogged(userByJWT);
-              this.setCookies(jwt, userByJWT, authenticationRequest.rememberMe);
-              this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS));
-            }
-          });
-        },
-        error: (error) => {
-          if (error.message) {
-            this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR);
-          } else {
-            this.snackBarService.openSnackBar('Autoryzacja nie udana', SnackBarType.ERROR);
+    this.http.post<any>(`${environment.appBaseUrl}/authenticate`, authenticationRequest).subscribe({
+      next: (response) => {
+        const jwt = response.token;
+        this.getUserByCookieJWT().subscribe({
+          next: (userByJWT) => {
+            this.setUserLogged(userByJWT);
+            this.setCookies(jwt, userByJWT, authenticationRequest.rememberMe);
+            this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS));
           }
+        });
+      },
+      error: (error) => {
+        if (error.message) {
+          this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR);
+        } else {
+          this.snackBarService.openSnackBar('Autoryzacja nie udana', SnackBarType.ERROR);
+        }
       }
-      });
-    }
+    });
   }
 
   public logoutUser(logoutError: boolean) {
@@ -83,7 +76,6 @@ export class AuthenticationService {
 
   private clearCookies() {
     this.cookieService.delete('jwt');
-    this.cookieService.delete('user');
   }
 
   private disconnectAnnotationWebSocket() {
@@ -93,7 +85,17 @@ export class AuthenticationService {
   private setCookies(jwt: string, user: User, rememberMe: boolean) {
     // 1 day or 1 hour cookie expire
     this.cookieService.set('jwt', jwt, rememberMe ? 1 : 0.0416666666666667);
-    this.cookieService.set('user', JSON.stringify(user), rememberMe ? 1 : 0.0416666666666667);
+  }
+
+  logUserOnInit() {
+    const jwt = this.cookieService.get('jwt');
+    if (jwt) {
+      this.getUserByCookieJWT().subscribe({
+        next: (user) => {
+          this.setUserLogged(user);
+        }
+      })
+    }
   }
 
 }

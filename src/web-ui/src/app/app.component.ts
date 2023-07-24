@@ -14,7 +14,7 @@ import {getThemeByValue, ThemeService} from "./services/theme/theme.service";
 
 @HostListener('mouseover', ['$event'])
 export class AppComponent implements OnInit, OnDestroy {
-  userSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
   userLogged: User;
   loading = false;
 
@@ -23,30 +23,35 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.logUserOnInit();
     this.setTheme();
     this.getUser();
     this.prepareSpinner();
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
     this.annotationForUserWebsocketService.disconnect();
   }
 
+  logUserOnInit() {
+    this.authenticationService.logUserOnInit();
+  }
+
   getUser() {
-    this.userSubscription = this.authenticationService.userLogged.subscribe({
+    this.subscriptions.add(this.authenticationService.userLogged.subscribe({
       next: (response) => {
         this.userLogged = response;
       }
-    });
+    }));
   }
 
   prepareSpinner() {
-    this.spinnerService.loading.subscribe({
+    this.subscriptions.add(this.spinnerService.loading.subscribe({
       next: (response) => {
         this.loading = response;
       }
-    });
+    }));
   }
 
   setTheme() {

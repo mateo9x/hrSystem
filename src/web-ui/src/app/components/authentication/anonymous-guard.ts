@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot} from '@angular/router';
+import {CanActivate, Router} from '@angular/router';
 import {CookieService} from "ngx-cookie-service";
 import {User} from "../../models/user.model";
 
@@ -7,12 +7,17 @@ import {User} from "../../models/user.model";
 export class AnonymousGuard implements CanActivate {
   user: User;
 
-  constructor(protected cookieService: CookieService) {
+  constructor(private cookieService: CookieService, private router: Router) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot) {
-    const cookieUser = this.cookieService.get('user');
-    return cookieUser.length <= 0;
+  canActivate() {
+    const jwt = this.cookieService.get('jwt');
+    if (jwt) {
+      this.router.navigate(['']).then(() => {
+        return true
+      });
+    }
+    return false;
   }
 
 }

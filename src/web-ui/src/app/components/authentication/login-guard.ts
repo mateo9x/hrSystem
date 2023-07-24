@@ -1,29 +1,35 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot} from '@angular/router';
 import {CookieService} from "ngx-cookie-service";
-import {User} from "../../models/user.model";
 import {SideMenuService} from "../../services/side-menu/side-menu.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
   currentRouting: string;
   currentRoutingPermissions: string[];
-  user: User;
   userRoles: any[];
 
-  constructor(protected cookieService: CookieService, protected sideMenuService: SideMenuService) {
+  constructor(private cookieService: CookieService, private sideMenuService: SideMenuService,
+              private authenticationService: AuthenticationService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
     this.currentRouting = route.routeConfig.path;
-    const cookieUser = this.cookieService.get('user');
-    if (cookieUser.length === 0) {
+    const jwt = this.cookieService.get('jwt');
+    if (!jwt) {
       return false;
     }
     this.fillPermissionsForCurrentRouting();
-    this.user = JSON.parse(cookieUser);
-    this.userRoles = this.user.roles;
-    return this.doesUserIncludeAnyRoleOfTabRoles();
+    this.authenticationService.userLogged.subscribe({
+      next: (user) => {
+        if (user) {
+          this.userRoles = user.roles;
+          return this.doesUserIncludeAnyRoleOfTabRoles();
+        }
+        return false;
+      }
+    });
   }
 
   protected fillPermissionsForCurrentRouting() {

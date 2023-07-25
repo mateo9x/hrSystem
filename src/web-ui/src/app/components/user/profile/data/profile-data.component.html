@@ -1,88 +1,107 @@
-<form class="form" #form="ngForm" novalidate>
+<form class="form" [formGroup]="form">
 
   <h1 class="input-data" style="margin-bottom:3%">Dane kontaktowe</h1>
 
   <div class="input-data">
     <mat-form-field>
       <mat-label>Imię</mat-label>
-      <input matInput [(ngModel)]="user.firstName" name="firstName" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" type="text" required
-             #firstName="ngModel">
-      <span class="error-span" *ngIf="firstName.errors">Imię musi składać się tylko z liter</span>
+      <input matInput formControlName="firstName"
+             onkeypress='return !(event.charCode >= 48 && event.charCode <= 57)' maxlength="100">
+      <mat-error *ngIf="hasFormError('firstName','required')">Pole wymagane
+      </mat-error>
+      <mat-error *ngIf="hasFormError('firstName','pattern')">Imię musi składać się
+        tylko z liter
+      </mat-error>
     </mat-form-field>
+
   </div>
 
   <div class="input-data">
     <mat-form-field>
       <mat-label>Nazwisko</mat-label>
-      <input matInput [(ngModel)]="user.lastName" name="lastName" type="text" pattern="[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,20}" required
-             #lastName="ngModel">
-      <span class="error-span" *ngIf="lastName.errors">Nazwisko musi składać się tylko z liter</span>
+      <input matInput formControlName="lastName"
+             onkeypress='return !(event.charCode >= 48 && event.charCode <= 57)' maxlength="100">
+      <mat-error *ngIf="hasFormError('lastName','required')">Pole wymagane
+      </mat-error>
+      <mat-error *ngIf="hasFormError('lastName','pattern')">Nazwisko musi składać
+        się tylko z liter
+      </mat-error>
     </mat-form-field>
+
   </div>
 
   <div class="input-data">
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="text" name="email" style="display:inline-block" [(ngModel)]="user.email"
-             required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #mail="ngModel"/>
-      <span class="error-span" *ngIf="mail.errors">Poprawny format adresu e-mail np: mail@mail.com</span>
+      <input matInput formControlName="email"/>
+      <mat-error *ngIf="hasFormError('email','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('email','email')">Poprawny format adresu
+        e-mail np: mail@mail.com
+      </mat-error>
     </mat-form-field>
 
   </div>
-
   <div class="input-data">
     <mat-form-field>
       <mat-label>Pesel</mat-label>
-      <input matInput type="text" name="pesel" style="display:inline-block" [(ngModel)]="user.pesel"
-             required pattern="[0-9]{11}" #pesel="ngModel"/>
-      <span class="error-span" *ngIf="pesel.errors">Pesel musi zawierać 11 znaków</span>
+      <input matInput formControlName="pesel" maxlength="11"
+             onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+      <mat-error *ngIf="hasFormError('pesel','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('pesel','pattern')">Pesel musi zawierać 11 znaków
+      </mat-error>
     </mat-form-field>
-
   </div>
 
   <div class="input-data">
     <mat-form-field>
       <mat-label>Ulica</mat-label>
-      <input matInput type="text" name="street" [(ngModel)]="user.street"/>
+      <input matInput type="text" formControlName="street" maxlength="100"/>
+      <mat-error *ngIf="hasFormError('street','required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
-
   <div class="input-data">
     <mat-form-field>
       <mat-label>Nr domu</mat-label>
-      <input matInput type="text" name="streetNumber" [(ngModel)]="user.streetNumber"/>
+      <input matInput type="text" formControlName="streetNumber" maxlength="100"/>
+      <mat-error *ngIf="hasFormError('streetNumber','required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
-
   <div class="input-data">
     <mat-form-field>
       <mat-label>Kod Pocztowy</mat-label>
-      <input matInput type="text" name="postalCode" style="display:inline-block" [(ngModel)]="user.postalCode"
-             mask="00-000"  #postalCode="ngModel"/>
-      <span class="error-span" *ngIf="postalCode.errors">Kod pocztowy musi zawierać 6 znaków</span>
+      <input matInput mask="00-000"
+             formControlName="postalCode"/>
+      <mat-error *ngIf="hasFormError('postalCode','required')">Pole wymagane</mat-error>
+      <mat-error *ngIf="hasFormError('postalCode','pattern')">Poprawny format kodu pocztowego:
+        XX-XXX
+      </mat-error>
     </mat-form-field>
 
   </div>
-
   <div class="input-data">
     <mat-form-field>
       <mat-label>Miasto</mat-label>
-      <input matInput type="text" name="city" [(ngModel)]="user.city"/>
+      <input matInput formControlName="city" maxlength="100"/>
+      <mat-error *ngIf="hasFormError('city','required')">Pole wymagane</mat-error>
     </mat-form-field>
   </div>
-
   <div class="input-data">
     <mat-form-field>
       <mat-label>Numer telefonu</mat-label>
-      <input matInput type="text" name="phoneNumber" style="display:inline-block" [(ngModel)]="user.phoneNumber"
-             onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="[0-9]{9}"
-             mask="000 000 000" />
+      <input matInput type="text" mask="000 000 000" style="display:inline-block"
+             formControlName="phoneNumber"
+             onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+      />
+      <mat-error *ngIf="hasFormError('phoneNumber','required')">Pole wymagane</mat-error>
+      <mat-error
+        *ngIf="hasFormError('phoneNumber','minlength') || hasFormError('phoneNumber','maxlength')">
+        Wymagane 9 cyfr
+      </mat-error>
     </mat-form-field>
   </div>
 
   <div class="buttons">
-    <button mat-raised-button class="app-button" name="clear_submit" (click)="updateUserData()"
-            [disabled]="form.invalid">Aktualizuj dane
+    <button mat-raised-button class="app-button" name="clear_submit" (click)="updateUserData()">Aktualizuj dane
     </button>
   </div>
 </form>

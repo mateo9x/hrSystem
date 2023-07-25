@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from 'src/app/models/user.model';
 import {UserApiService} from 'src/app/services/api/user-api.service';
 import {SnackBarService, SnackBarType} from "../../../../services/material/snackbar.service";
 import {AuthenticationService} from "../../../../services/authentication.service";
+import {FormGroup} from "@angular/forms";
+import {ProfileDataFormService} from "./profile-data.form.service";
+import {User} from "../../../../models/user.model";
 
 @Component({
   selector: 'profile-data',
@@ -10,34 +12,45 @@ import {AuthenticationService} from "../../../../services/authentication.service
   styleUrls: ['./profile-data.component.scss']
 })
 export class ProfileDataComponent implements OnInit {
+  form: FormGroup;
+  user: User;
 
-  user: User = new User();
-  users: User[];
-
-  constructor(private authenticationService: AuthenticationService, private userService: UserApiService, private snackBarService: SnackBarService) {
+  constructor(private formService: ProfileDataFormService,
+              private authenticationService: AuthenticationService,
+              private userService: UserApiService,
+              private snackBarService: SnackBarService) {
+    this.form = this.formService.getFormGroup();
   }
 
   ngOnInit() {
     this.authenticationService.getUserByCookieJWT().subscribe({
-      next: (response) => {
-        this.user = response;
+      next: (user) => {
+        this.user = user;
+        this.formService.prepareForm(this.form, user);
       },
       error: () => {
-        this.user = new User();
         this.snackBarService.openSnackBar('Nie udało się wczytać danych użytkownika', SnackBarType.ERROR);
       }
     });
   }
 
   updateUserData() {
-    this.userService.updateUser(this.user).subscribe({
-      next: () => {
-        this.snackBarService.openSnackBar('Dane zaaktualizowane pomyślnie', SnackBarType.SUCCESS);
-      },
-      error: (errorResponse) => {
-        this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
-      }
-    });
+    this.form.markAllAsTouched();
+    if (this.formService.isFormValid(this.form)) {
+      this.userService.updateUser(this.formService.convertFormToUserRequest(this.form, this.user)).subscribe({
+        next: () => {
+          this.snackBarService.openSnackBar('Dane zaaktualizowane pomyślnie', SnackBarType.SUCCESS);
+        },
+        error: (errorResponse) => {
+          this.snackBarService.openSnackBar(errorResponse.error.message, SnackBarType.ERROR);
+        }
+      });
+    }
   }
+
+  hasFormError(controlName: string, errorName: string): boolean {
+    return this.form.get(controlName).hasError(errorName);
+  }
+
 
 }

@@ -6,7 +6,6 @@ Application uses JWT Token to authenticate.
 User authenthicated has access to secured endpoints.
 
 ### Features on:
-
 ### TODO:
 
 ## Technologies

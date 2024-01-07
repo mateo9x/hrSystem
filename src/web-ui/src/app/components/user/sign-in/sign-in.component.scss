@@ -1,10 +1,16 @@
+form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 h2 {
   text-align: center;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  display:inline-block;
+  display: inline-block;
   margin: 40px 8px 10px 8px;
   color: #cccccc;
 }
@@ -27,15 +33,18 @@ h2 {
   width: 90%;
   max-width: 450px;
   position: relative;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
+  margin-top: 10px;
   border-top: 1px solid #dce8f1;
-  padding: 25px;
+  padding: 10px;
   text-align: center;
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
@@ -43,7 +52,7 @@ h2 {
 
 h2.active {
   color: #0d0d0d;
-  margin-bottom:10%;
+  margin-bottom: 10%;
 }
 
 .fadeInDown {
@@ -81,23 +90,46 @@ h2.active {
   }
 }
 
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .fadeIn {
-  opacity:0;
-  -webkit-animation:fadeIn ease-in 1;
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
 
-  -webkit-animation-fill-mode:forwards;
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
 }
 
 .fadeIn.first {
@@ -119,7 +151,7 @@ h2.active {
 }
 
 .fadeIn.fourth {
-  margin-top:5%;
+  margin-top: 5%;
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
@@ -132,7 +164,7 @@ h2.active {
 }
 
 #icon {
-  width:60%;
+  width: 60%;
 }
 
 * {

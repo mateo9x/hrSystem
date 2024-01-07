@@ -9,7 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
   font-family: 'impact';
-  src: url('src/assets/fonts/impact.ttf');
+  src: url('assets/fonts/impact.ttf');
 }
 
 .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
@@ -190,4 +190,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .column-row:hover > td {
   color: black !important;
+}
+
+.nav-link {
+  color: black;
+  text-underline: none;
+}
+.nav-link:hover {
+  color: black;
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
 }

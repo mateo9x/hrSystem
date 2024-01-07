@@ -1,6 +1,4 @@
 <table>
-
-  <ng-container *ngIf="userLogged;else lockTemplate">
     <ng-container *ngFor="let tab of tabs;let i = index">
       <tr class="main-row">
         <div>{{tab.label}}</div>
@@ -12,10 +10,4 @@
         </tr>
       </ng-container>
     </ng-container>
-  </ng-container>
-
-  <ng-template #lockTemplate>
-    <span class="material-icons lock-div" *ngIf="!userLogged" (click)="showInfoSideMenuDialog()">lock</span>
-  </ng-template>
-
 </table>

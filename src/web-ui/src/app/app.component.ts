@@ -9,7 +9,7 @@ import {getThemeByValue, ThemeService} from "./services/theme/theme.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 
 @HostListener('mouseover', ['$event'])

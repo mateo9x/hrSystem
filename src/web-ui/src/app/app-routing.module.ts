@@ -29,10 +29,12 @@ import {environment} from "../environments/environment";
 
 const routes: Routes = [
   { path: '', component: InfoComponent, title: 'Info' },
+  { path: '', component: SignInComponent, outlet: 'nonAuthenticated', canActivate: [AnonymousGuard], title: 'Logowanie' },
+  { path: 'sign-in', component: SignInComponent, outlet: 'nonAuthenticated', canActivate: [AnonymousGuard], title: 'Logowanie' },
   { path: 'sign-in', component: SignInComponent, canActivate: [AnonymousGuard], title: 'Logowanie' },
-  { path: 'sign-up', component: SignUpComponent, canActivate: [AnonymousGuard], title: 'Rejestracja' },
-  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AnonymousGuard], title: 'Resetowanie hasła' },
-  { path: 'new-password', component: NewPasswordComponent, canActivate: [AnonymousGuard], title: 'Nowe hasło' },
+  { path: 'sign-up', component: SignUpComponent, outlet: 'nonAuthenticated', canActivate: [AnonymousGuard], title: 'Rejestracja' },
+  { path: 'reset-password', component: ResetPasswordComponent, outlet: 'nonAuthenticated', canActivate: [AnonymousGuard], title: 'Resetowanie hasła' },
+  { path: 'new-password', component: NewPasswordComponent, outlet: 'nonAuthenticated', canActivate: [AnonymousGuard], title: 'Nowe hasło' },
   { path: 'users', component: UsersComponent, canActivate: [LoginGuard], title: 'Użytkownicy' },
   { path: 'attendance-work-report', component: AttendanceWorkReportComponent, canActivate: [LoginGuard], title: 'Zgłoszenie obecności w pracy' },
   { path: 'attendance-work-report-edit', component: AttendanceWorkReportEditComponent, canActivate: [LoginGuard], title: 'Edycja obecności w pracy' },

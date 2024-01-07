@@ -1,9 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SideMenuModel, SideMenuService} from "../../services/side-menu/side-menu.service";
 import {Router} from "@angular/router";
-import {UserApiService} from "../../services/api/user-api.service";
 import {User} from "../../models/user.model";
-import {SnackBarService, SnackBarType} from "../../services/material/snackbar.service";
 
 @Component({
   selector: 'side-menu',
@@ -14,8 +12,7 @@ export class SideMenuComponent implements OnInit, OnChanges {
   tabs: SideMenuModel[] = [];
   @Input() userLogged: User;
 
-  constructor(private sideMenuService: SideMenuService, private router: Router,
-              private userService: UserApiService, private snackBarService: SnackBarService) {
+  constructor(private sideMenuService: SideMenuService, private router: Router) {
   }
 
   ngOnInit() {
@@ -41,10 +38,6 @@ export class SideMenuComponent implements OnInit, OnChanges {
     }
   }
 
-  showInfoSideMenuDialog() {
-    this.snackBarService.openSnackBar('W celu uzyskania dostępu do funkcjonalności aplikacji - zaloguj się', SnackBarType.WARN);
-  }
-
   filterTabsForUserRoles(tabs: SideMenuModel[]) {
     let tabsFiltered: any[] = [];
     if (this.userLogged.roles.length > 0) {
@@ -57,7 +50,6 @@ export class SideMenuComponent implements OnInit, OnChanges {
         });
       });
     }
-    //filtered main tabs
     this.tabs = tabsFiltered;
     this.filterSubTabsForUserRoles();
   }

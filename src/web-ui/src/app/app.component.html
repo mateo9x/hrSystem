@@ -24,15 +24,22 @@
 
 </div>
 
-<nav class="main-container">
-  <div class="side-menu">
-    <side-menu [userLogged]="userLogged"></side-menu>
-  </div>
+  <ng-container *ngIf="userLogged; else nonAuthenticated">
+    <nav class="main-container">
+    <div class="side-menu">
+      <side-menu [userLogged]="userLogged"></side-menu>
+    </div>
 
-  <div class="router_section">
-    <router-outlet></router-outlet>
-  </div>
-</nav>
+    <div class="router_section">
+      <router-outlet></router-outlet>
+    </div>
+    </nav>
+  </ng-container>
+  <ng-template #nonAuthenticated>
+    <div class="router_section">
+      <router-outlet name="nonAuthenticated"></router-outlet>
+    </div>
+  </ng-template>
 
 <div *ngIf="loading" class="cdk-overlay-container spinner">
   <mat-spinner>

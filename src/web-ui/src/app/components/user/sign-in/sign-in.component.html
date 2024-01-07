@@ -13,9 +13,12 @@
         <input matInput formControlName="password" type="password"/>
         <mat-error *ngIf="hasFormError('password','required')">Pole wymagane</mat-error>
       </mat-form-field>
-      <mat-checkbox class="fadeIn third" color="primary"
-                    formControlName="rememberMe">Zapamiętaj mnie!
-      </mat-checkbox>
+      <div class="fadeIn third checkbox-container">
+        <mat-label>Zapamiętaj mnie!</mat-label>
+        <mat-checkbox color="primary"
+                      formControlName="rememberMe">
+        </mat-checkbox>
+      </div>
 
       <button mat-raised-button (click)="signInUser()" class="fadeIn fourth app-button">
         Zaloguj się
@@ -23,10 +26,12 @@
     </form>
 
     <div id="formFooter">
-      <button mat-raised-button (click)="signUp()" class="fadeIn fourth app-button">Zarejestruj się
+      <button mat-raised-button [routerLink]="[{ outlets: { nonAuthenticated: ['sign-up'] } }]"
+              class="fadeIn fourth app-button">Zarejestruj się
       </button>
       <br>
-      <a (click)="resetPassword()" class="fadeIn fourth underlineHover">Nie pamiętasz hasła?</a>
+      <a [routerLink]="[{ outlets: { nonAuthenticated: ['reset-password'] } }]"
+         class="nav-link fadeIn fourth underlineHover">Nie pamiętasz hasła?</a>
     </div>
 
   </div>
